@@ -1,0 +1,333 @@
+/**
+ * APT Tracker - MITRE ATT&CK Intelligence Aggregator
+ * Cloudflare Worker for threat intelligence aggregation and trends analysis
+ */
+
+import { XMLParser } from 'fast-xml-parser';
+import { 
+  fetchAllFeeds, 
+  normalizeItems, 
+  deduplicateItems, 
+  extractTags,
+  sanitizeHtml 
+} from './lib/feeds.js';
+import { updateTrendsBucket, getTrendsBuckets } from './lib/trends.js';
+import { discoverNewSources } from './lib/discovery.js';
+import { 
+  getSources, 
+  addApprovedSource, 
+  addCandidateSource,
+  blockDomain 
+} from './lib/sources.js';
+import { logStructured, createHealthCheck } from './lib/utils.js';
+
+/**
+ * Main request handler
+ */
+export default {
+  async fetch(request, env, ctx) {
+    const url = new URL(request.url);
+    const path = url.pathname;
+
+    // CORS preflight
+    if (request.method === 'OPTIONS') {
+      return handleCORS(request, env);
+    }
+
+    try {
+      // Route requests
+      if (path === '/api/threats') {
+        return await handleThreats(request, env, ctx);
+      } else if (path === '/api/trends') {
+        return await handleTrends(request, env, ctx);
+      } else if (path === '/api/sources') {
+        return await handleSources(request, env, ctx);
+      } else if (path === '/api/sources/approve') {
+        return await handleApproveSource(request, env, ctx);
+      } else if (path === '/api/sources/block') {
+        return await handleBlockSource(request, env, ctx);
+      } else if (path === '/api/discovery/refresh') {
+        return await handleDiscovery(request, env, ctx);
+      } else if (path === '/api/healthz') {
+        return await handleHealth(request, env, ctx);
+      } else {
+        return jsonResponse({ error: 'Not found' }, 404, env);
+      }
+    } catch (error) {
+      logStructured('error', 'Request failed', { 
+        path, 
+        error: error.message,
+        stack: error.stack 
+      });
+      return jsonResponse({ error: 'Internal server error' }, 500, env);
+    }
+  },
+};
+
+/**
+ * Handle /api/threats endpoint
+ */
+async function handleThreats(request, env, ctx) {
+  const url = new URL(request.url);
+  const limit = Math.min(parseInt(url.searchParams.get('limit') || '60'), 100);
+  const after = url.searchParams.get('after');
+  const tag = url.searchParams.get('tag');
+  const q = url.searchParams.get('q');
+
+  const startTime = Date.now();
+  
+  try {
+    // Get approved sources
+    const sources = await getSources(env);
+    const feedUrls = [
+      ...env.DEFAULT_FEEDS.split(',').map(f => f.trim()),
+      ...sources.approved
+    ];
+
+    logStructured('info', 'Fetching threats', { 
+      feedCount: feedUrls.length,
+      filters: { limit, after, tag, q }
+    });
+
+    // Fetch all feeds
+    const rawItems = await fetchAllFeeds(feedUrls, env);
+    
+    // Normalize and tag
+    let items = normalizeItems(rawItems);
+    
+    // Deduplicate
+    items = deduplicateItems(items);
+    
+    // Sort by date (most recent first)
+    items.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+    
+    // Apply filters
+    if (after) {
+      const afterDate = new Date(after);
+      items = items.filter(item => new Date(item.pubDate) > afterDate);
+    }
+    
+    if (tag) {
+      items = items.filter(item => item.tags.includes(tag.toUpperCase()));
+    }
+    
+    if (q) {
+      const query = q.toLowerCase();
+      items = items.filter(item => 
+        item.title.toLowerCase().includes(query) ||
+        (item.description && item.description.toLowerCase().includes(query))
+      );
+    }
+    
+    // Limit results
+    items = items.slice(0, limit);
+    
+    // Update trends (async, don't wait)
+    ctx.waitUntil(updateTrendsBucket(items, env));
+    
+    const duration = Date.now() - startTime;
+    logStructured('info', 'Threats fetched', { 
+      itemCount: items.length,
+      duration 
+    });
+
+    return jsonResponse({
+      updated: new Date().toISOString(),
+      count: items.length,
+      items
+    }, 200, env);
+    
+  } catch (error) {
+    logStructured('error', 'Failed to fetch threats', { 
+      error: error.message 
+    });
+    throw error;
+  }
+}
+
+/**
+ * Handle /api/trends endpoint
+ */
+async function handleTrends(request, env, ctx) {
+  try {
+    const buckets = await getTrendsBuckets(env, 24); // Last 24 hours
+    
+    return jsonResponse({
+      buckets,
+      period: '24h'
+    }, 200, env);
+    
+  } catch (error) {
+    logStructured('error', 'Failed to fetch trends', { 
+      error: error.message 
+    });
+    throw error;
+  }
+}
+
+/**
+ * Handle /api/sources endpoint
+ */
+async function handleSources(request, env, ctx) {
+  try {
+    const sources = await getSources(env);
+    
+    // Get recently approved (last 7 days)
+    const sevenDaysAgo = Date.now() - (7 * 24 * 60 * 60 * 1000);
+    const recentlyApproved = sources.approved.filter(s => 
+      s.approvedAt && new Date(s.approvedAt) > sevenDaysAgo
+    );
+    
+    return jsonResponse({
+      approved: sources.approved,
+      candidates: sources.candidates,
+      recentlyApproved
+    }, 200, env);
+    
+  } catch (error) {
+    logStructured('error', 'Failed to fetch sources', { 
+      error: error.message 
+    });
+    throw error;
+  }
+}
+
+/**
+ * Handle /api/sources/approve endpoint
+ */
+async function handleApproveSource(request, env, ctx) {
+  if (request.method !== 'POST') {
+    return jsonResponse({ error: 'Method not allowed' }, 405, env);
+  }
+  
+  try {
+    const body = await request.json();
+    const { url } = body;
+    
+    if (!url || !url.startsWith('http')) {
+      return jsonResponse({ error: 'Invalid URL' }, 400, env);
+    }
+    
+    await addApprovedSource(url, env);
+    
+    logStructured('info', 'Source approved', { url });
+    
+    return jsonResponse({ success: true, url }, 200, env);
+    
+  } catch (error) {
+    logStructured('error', 'Failed to approve source', { 
+      error: error.message 
+    });
+    throw error;
+  }
+}
+
+/**
+ * Handle /api/sources/block endpoint
+ */
+async function handleBlockSource(request, env, ctx) {
+  if (request.method !== 'POST') {
+    return jsonResponse({ error: 'Method not allowed' }, 405, env);
+  }
+  
+  try {
+    const body = await request.json();
+    const { url, domain } = body;
+    
+    const targetDomain = domain || (url ? new URL(url).hostname : null);
+    
+    if (!targetDomain) {
+      return jsonResponse({ error: 'Invalid domain or URL' }, 400, env);
+    }
+    
+    await blockDomain(targetDomain, env);
+    
+    logStructured('info', 'Domain blocked', { domain: targetDomain });
+    
+    return jsonResponse({ success: true, domain: targetDomain }, 200, env);
+    
+  } catch (error) {
+    logStructured('error', 'Failed to block domain', { 
+      error: error.message 
+    });
+    throw error;
+  }
+}
+
+/**
+ * Handle /api/discovery/refresh endpoint
+ */
+async function handleDiscovery(request, env, ctx) {
+  if (request.method !== 'POST') {
+    return jsonResponse({ error: 'Method not allowed' }, 405, env);
+  }
+  
+  try {
+    const candidates = await discoverNewSources(env);
+    
+    logStructured('info', 'Discovery completed', { 
+      candidatesFound: candidates.length 
+    });
+    
+    return jsonResponse({ 
+      success: true, 
+      candidatesFound: candidates.length,
+      candidates 
+    }, 200, env);
+    
+  } catch (error) {
+    logStructured('error', 'Discovery failed', { 
+      error: error.message 
+    });
+    throw error;
+  }
+}
+
+/**
+ * Handle /api/healthz endpoint
+ */
+async function handleHealth(request, env, ctx) {
+  try {
+    const health = await createHealthCheck(env);
+    const status = health.status === 'healthy' ? 200 : 503;
+    
+    return jsonResponse(health, status, env);
+    
+  } catch (error) {
+    return jsonResponse({ 
+      status: 'unhealthy', 
+      error: error.message 
+    }, 503, env);
+  }
+}
+
+/**
+ * Handle CORS preflight
+ */
+function handleCORS(request, env) {
+  const headers = {
+    'Access-Control-Allow-Origin': env.ALLOWED_ORIGIN || '*',
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Max-Age': '86400',
+  };
+  
+  return new Response(null, { status: 204, headers });
+}
+
+/**
+ * Create JSON response with security headers
+ */
+function jsonResponse(data, status, env) {
+  const headers = {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': env.ALLOWED_ORIGIN || '*',
+    'Content-Security-Policy': "default-src 'none'",
+    'X-Content-Type-Options': 'nosniff',
+    'Referrer-Policy': 'no-referrer-when-downgrade',
+    'Cache-Control': 'public, max-age=300', // 5 minutes
+  };
+  
+  return new Response(JSON.stringify(data), { status, headers });
+}
+
