@@ -3,7 +3,7 @@
  */
 
 // Configuration
-const API_BASE = 'https://YOUR_WORKER_URL'; // Update this after deploying the worker
+const API_BASE = 'https://apt-tracker-mitre-aiq-intel.craig-glatt.workers.dev';
 const THREATS_POLL_INTERVAL = 3 * 60 * 1000; // 3 minutes
 const TRENDS_POLL_INTERVAL = 5 * 60 * 1000; // 5 minutes
 
