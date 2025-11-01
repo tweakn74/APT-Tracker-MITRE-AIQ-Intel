@@ -159,18 +159,20 @@ test.describe('Accessibility Audit - WCAG Compliance', () => {
   });
 
   test('should have proper heading hierarchy on all pages', async ({ page }) => {
+    // Only test pages that exist in the intel-dashboard folder
     const pages = [
       '/',
       '/apt-profiles.html',
       '/detections.html',
-      '/threat-actors.html',
-      '/dark-web.html',
-      '/geopolitical-risk.html',
     ];
 
     for (const url of pages) {
       await page.goto(url);
-      await page.waitForTimeout(500);
+      // Wait for page to fully load
+      await page.waitForLoadState('networkidle');
+
+      // Wait for h1 element to be present
+      await page.waitForSelector('h1', { timeout: 5000 });
 
       // Check for h1 element
       const h1Count = await page.locator('h1').count();

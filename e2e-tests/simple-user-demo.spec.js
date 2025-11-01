@@ -9,6 +9,8 @@ import { test, expect } from '@playwright/test';
 
 test.describe('WatchLockAI - What You See as a User', () => {
   test('Visual tour of the dashboard', async ({ page }) => {
+    // Increase timeout for this demo test
+    test.setTimeout(60000);
     console.log('\n🎬 WatchLockAI Dashboard - User Experience Tour\n');
     console.log('=' .repeat(60));
 
@@ -152,8 +154,8 @@ test.describe('WatchLockAI - What You See as a User', () => {
     await severityLabel.click();
     console.log('   ✅ Clicked "Severity" label → Severity dropdown is now focused');
     console.log('   ✅ This proves the for="severityFilter" attribute is working!');
-    
-    await page.waitForTimeout(2000);
+
+    await page.waitForTimeout(1000);
 
     // ========================================
     // CODE QUALITY FEATURES

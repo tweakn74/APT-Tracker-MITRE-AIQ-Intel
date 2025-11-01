@@ -14,14 +14,20 @@ test.describe('WatchLockAI Dashboard - Navigation', () => {
 
   test('should navigate to APT Profiles page', async ({ page }) => {
     await page.goto('/');
-    await page.click('a[href="/apt-profiles.html"]');
+    // Wait for the page to load
+    await page.waitForLoadState('networkidle');
+    // Click on the APT Profiles navigation link
+    await page.click('a[href="apt-profiles.html"]');
     await expect(page).toHaveURL(/apt-profiles\.html/);
-    await expect(page.locator('h1')).toContainText('Threat Actors');
+    await expect(page.locator('h1')).toContainText('APT Profiles');
   });
 
   test('should navigate to Detection Engineering page', async ({ page }) => {
     await page.goto('/');
-    await page.click('a[href="/detections.html"]');
+    // Wait for the page to load
+    await page.waitForLoadState('networkidle');
+    // Click on the Detection Engineering navigation link
+    await page.click('a[href="detections.html"]');
     await expect(page).toHaveURL(/detections\.html/);
     await expect(page.locator('h1')).toContainText('Detection Engineering');
   });

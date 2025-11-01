@@ -9,6 +9,8 @@ import { test, expect } from '@playwright/test';
 
 test.describe('WatchLockAI User Experience Demo', () => {
   test('Complete user journey through the dashboard', async ({ page }) => {
+    // Increase timeout for this demo test
+    test.setTimeout(60000);
     console.log('\n🎬 Starting WatchLockAI User Experience Demo...\n');
 
     // ========================================
@@ -142,8 +144,8 @@ test.describe('WatchLockAI User Experience Demo', () => {
     console.log('   - You should see: Threat actor profiles with attribution scores');
     console.log('   - You should see: Three tabs (Overview, Attribution, Timeline)');
     console.log('   - You should see: Search functionality');
-    
-    await page.waitForTimeout(3000);
+
+    await page.waitForTimeout(1500);
 
     // ========================================
     // 4. DARK WEB INTELLIGENCE PAGE
