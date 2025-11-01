@@ -256,19 +256,22 @@ export function extractTags(text) {
  */
 export function sanitizeHtml(html) {
   if (!html) return '';
-  
+
+  // Convert to string if not already
+  const str = typeof html === 'string' ? html : String(html);
+
   // Strip all HTML tags except safe ones
-  let text = html.replace(/<script[^>]*>.*?<\/script>/gi, '');
+  let text = str.replace(/<script[^>]*>.*?<\/script>/gi, '');
   text = text.replace(/<style[^>]*>.*?<\/style>/gi, '');
   text = text.replace(/<[^>]+>/g, '');
-  
+
   // Decode HTML entities
   text = text.replace(/&lt;/g, '<');
   text = text.replace(/&gt;/g, '>');
   text = text.replace(/&amp;/g, '&');
   text = text.replace(/&quot;/g, '"');
   text = text.replace(/&#39;/g, "'");
-  
+
   return text.trim();
 }
 

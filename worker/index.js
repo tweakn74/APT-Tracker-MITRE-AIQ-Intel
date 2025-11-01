@@ -54,12 +54,21 @@ export default {
         return jsonResponse({ error: 'Not found' }, 404, env);
       }
     } catch (error) {
-      logStructured('error', 'Request failed', { 
-        path, 
+      console.error('Request failed:', {
+        path,
         error: error.message,
-        stack: error.stack 
+        stack: error.stack
       });
-      return jsonResponse({ error: 'Internal server error' }, 500, env);
+      logStructured('error', 'Request failed', {
+        path,
+        error: error.message,
+        stack: error.stack
+      });
+      return jsonResponse({
+        error: 'Internal server error',
+        message: error.message,
+        path
+      }, 500, env);
     }
   },
 };
@@ -79,9 +88,10 @@ async function handleThreats(request, env, ctx) {
   try {
     // Get approved sources
     const sources = await getSources(env);
+    const approvedUrls = sources.approved.map(s => typeof s === 'string' ? s : s.url);
     const feedUrls = [
       ...env.DEFAULT_FEEDS.split(',').map(f => f.trim()),
-      ...sources.approved
+      ...approvedUrls
     ];
 
     logStructured('info', 'Fetching threats', { 
@@ -174,9 +184,10 @@ async function handleSources(request, env, ctx) {
     
     // Get recently approved (last 7 days)
     const sevenDaysAgo = Date.now() - (7 * 24 * 60 * 60 * 1000);
-    const recentlyApproved = sources.approved.filter(s => 
-      s.approvedAt && new Date(s.approvedAt) > sevenDaysAgo
-    );
+    const recentlyApproved = sources.approved.filter(s => {
+      if (typeof s === 'string') return false;
+      return s.approvedAt && new Date(s.approvedAt) > sevenDaysAgo;
+    });
     
     return jsonResponse({
       approved: sources.approved,
