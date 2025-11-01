@@ -9,6 +9,8 @@ import { discoverNewSources } from './lib/discovery.js';
 import { getSources, addApprovedSource, blockDomain } from './lib/sources.js';
 import { logStructured, createHealthCheck } from './lib/utils.js';
 import { addRiskScores, filterBySeverity, sortByRiskScore } from './lib/scoring.js';
+import { deduplicateAdvanced } from './lib/deduplication.js';
+import { addCorrelationData, getCorrelationStats } from './lib/correlation.js';
 
 /**
  * Main request handler
@@ -96,8 +98,14 @@ async function handleThreats(request, env, _ctx) {
     // Normalize and tag
     let items = normalizeItems(rawItems);
 
-    // Deduplicate
+    // Basic deduplication (exact URL/title matches)
     items = deduplicateItems(items);
+
+    // Advanced deduplication (CVE, title similarity, IOC matching)
+    items = deduplicateAdvanced(items);
+
+    // Add correlation data (related threats)
+    items = addCorrelationData(items);
 
     // Add risk scores and severity
     items = addRiskScores(items);
@@ -129,6 +137,9 @@ async function handleThreats(request, env, _ctx) {
       items = filterBySeverity(items, severity.toUpperCase());
     }
 
+    // Get correlation stats before limiting
+    const correlationStats = getCorrelationStats(items);
+
     // Limit results
     items = items.slice(0, limit);
 
@@ -139,6 +150,7 @@ async function handleThreats(request, env, _ctx) {
     logStructured('info', 'Threats fetched', {
       itemCount: items.length,
       duration,
+      correlationStats,
     });
 
     return jsonResponse(
@@ -146,6 +158,7 @@ async function handleThreats(request, env, _ctx) {
         updated: new Date().toISOString(),
         count: items.length,
         items,
+        correlationStats, // Include correlation statistics in response
       },
       200,
       env
