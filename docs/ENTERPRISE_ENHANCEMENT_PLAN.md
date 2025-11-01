@@ -1,9 +1,10 @@
 # Enterprise-Grade Threat Intelligence Platform Enhancement Plan
 
-**Version**: 3.0
+**Version**: 3.1
 **Date**: 2025-11-01
-**Status**: Planning & Implementation
-**Target**: Transform APT Tracker into enterprise-grade platform rivaling Recorded Future
+**Status**: Phase 0 Complete ✅ | Phase 1 In Progress 🚀
+**Target**: Transform APT Tracker into WatchLockAI - enterprise-grade platform rivaling Recorded Future
+**Brand**: WatchLockAI (unified platform merging APT Tracker, APT-Tracker-MITRE-AIQ, and Versedetect)
 
 ---
 
@@ -725,39 +726,76 @@ Sources (12+) → Worker Fetch → Normalization → Deduplication → Correlati
 
 ---
 
-## User Decisions Made
+## ✅ CONFIRMED USER DECISIONS & DIRECTIVES
 
-Based on user requirements:
+**Date**: 2025-11-01
+**Status**: APPROVED - Ready for Implementation
+
+### Core Confirmations
 
 1. **Twitter Integration**: ✅ **Option B: Curated Community Intel (FREE)**
+   - Start with manual curation of important tweets/threads
+   - Upgrade to Option C (Hybrid) when budget and user base justify API costs
    - Must remain free until we have users
-   - Manual curation of important tweets/threads
-   - Can upgrade to API later when budget allows
+   - **UI Layout**: Right sidebar (~25% width) for community intel panel
 
-2. **Priority**: ✅ **All phases in sequence (0 → 8)**
-   - Start with Phase 0 (regression-proofing)
-   - Then Phases 1-2 (my original recommendations)
-   - Then Phases 3-8 (new requirements)
+2. **Budget**: ✅ **$0 for now**
+   - WatchLockAI remains 100% free until user adoption justifies spend
+   - Focus on free API integrations (AbuseIPDB, VirusTotal, OTX, etc.)
+   - No paid services until platform has proven user base
 
-3. **Site Merge**: ✅ **Intelligent merge of APT-Tracker-MITRE-AIQ and Versedetect**
-   - Phases 4-5 dedicated to site merge
-   - Create unified platform architecture
+3. **Implementation Priority**: ✅ **Phases 1 & 2 (Deduplication + Bubble-Up Logic)**
+   - Proceed with immediate implementation
+   - All phases in sequence (0 → 8)
+   - Phase 0 (regression-proofing) ✅ COMPLETE
 
-4. **New Features**: ✅ **Added to roadmap**
-   - Dark web intelligence (Phase 7) - VERY impressive!
-   - Universal search (Phase 6) - Recorded Future-style
-   - Free API integrations (Phase 3) - AbuseIPDB, VirusTotal, etc.
+4. **Brand**: ✅ **WatchLockAI**
+   - Unified platform merging APT Tracker, APT-Tracker-MITRE-AIQ, and Versedetect
+   - Site merger happens **after Phase 2 stabilizes**
+   - Vision: "Know the Threat + Detect the Threat + Hunt the Threat"
+
+### Engineering Directives
+
+1. **Regression Protection**: ✅ **IMPLEMENTED**
+   - Full backups and version snapshots before every commit
+   - Pre-commit lint hooks and test coverage per module ✅ DONE
+   - Backward-compatible schemas; no breaking changes without migration script
+   - Automated quality checks on every commit
+
+2. **Ongoing Sprints / Future Capabilities**:
+   - ✅ Phase 3: Free threat-intel APIs (AbuseIPDB, VirusTotal, AlienVault OTX)
+   - ✅ Phase 4-5: Site merger (APT profiles + Detection engineering)
+   - ✅ Phase 6: Universal search (Recorded Future-style)
+   - ✅ Phase 7: Dark Web Intel Module (legal, publicly available TOR & breach feeds)
+   - ✅ Phase 8: Community Intelligence (curated security researcher content)
+
+3. **UX and Productization Roadmap**:
+   - Maintain dual view: Executive Summary vs Analyst View
+   - Add export features (CSV/JSON/PDF) and analytics tabs
+   - Keep UI clean, collapsible, responsive
+   - Document in ROADMAP.md for public reference
+
+### Immediate Action
+
+✅ **Phase 0 COMPLETE**: Git hooks, linting, formatting, regression-proofing
+🚀 **Phase 1 IN PROGRESS**: Enhanced Data Aggregation & Correlation
+⏳ **Phase 2 NEXT**: Bubble-Up Logic & Critical Alerts
 
 ---
 
-## Next Immediate Steps
+## Implementation Status
 
 1. ✅ **Backup created**: `backups/backup-2025-10-31-233029/`
 2. ✅ **Sites researched**: APT-Tracker-MITRE-AIQ and Versedetect analyzed
-3. ✅ **Plan updated**: All new requirements added to roadmap
-4. ⏳ **Phase 0**: Set up Git hooks and linting (NEXT)
-5. ⏳ **Phase 1**: Implement deduplication and correlation
-6. ⏳ **Phase 2**: Implement bubble-up logic and critical alerts
+3. ✅ **Plan updated**: All new requirements added to roadmap (v3.1)
+4. ✅ **Phase 0 COMPLETE**: Git hooks, linting, formatting (commit: 093fae3)
+   - Husky pre-commit hooks installed
+   - ESLint + Prettier configured
+   - All 23 tests passing
+   - Zero linting errors
+   - Consistent code formatting
+5. 🚀 **Phase 1 STARTING**: Deduplication and correlation implementation
+6. ⏳ **Phase 2 QUEUED**: Bubble-up logic and critical alerts
 
 ---
 
@@ -788,6 +826,18 @@ Based on user requirements:
 
 ---
 
-**Ready to march ahead with Phase 0 (Git hooks & linting) and then Phases 1-2!** 🚀
+## 🎯 WatchLockAI Vision
 
-**This will be the most comprehensive, enterprise-grade, FREE threat intelligence platform available!**
+**"The most comprehensive, enterprise-grade, FREE threat intelligence platform available!"**
+
+Combining:
+
+- **Real-time threat intelligence** from 12+ authoritative sources
+- **APT actor profiles** with MITRE ATT&CK TTPs
+- **Detection engineering playbooks** for SOC teams
+- **Dark web intelligence** for early warning
+- **Free API integrations** for IOC enrichment
+- **Universal search** across all data types
+- **Community intelligence** from security researchers
+
+**Status**: Phase 0 Complete ✅ | Phase 1 In Progress 🚀 | Marching ahead to enterprise-grade platform!
