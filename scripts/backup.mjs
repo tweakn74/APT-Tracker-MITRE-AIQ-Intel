@@ -21,18 +21,21 @@ async function backup() {
     console.log('\n📦 Exporting KV data...');
     try {
       execSync('node scripts/kv_export.mjs', { stdio: 'inherit' });
-    } catch (error) {
+    } catch {
       console.warn('⚠️  KV export failed (may not be configured yet)');
     }
 
     // 2. Create code bundle
     console.log('\n📦 Creating code bundle...');
     const bundleName = `artifacts/backup-${timestamp}.zip`;
-    
+
     try {
-      execSync(`zip -r "${bundleName}" worker/ index.html app.js package.json wrangler.toml README.md -x "*.git*" "node_modules/*"`, {
-        stdio: 'inherit',
-      });
+      execSync(
+        `zip -r "${bundleName}" worker/ index.html app.js package.json wrangler.toml README.md -x "*.git*" "node_modules/*"`,
+        {
+          stdio: 'inherit',
+        }
+      );
       console.log(`✅ Code bundle created: ${bundleName}`);
     } catch (error) {
       console.error('❌ Failed to create bundle:', error.message);
@@ -53,14 +56,10 @@ async function backup() {
       },
     };
 
-    await fs.writeFile(
-      `backups/manifest-${timestamp}.json`,
-      JSON.stringify(manifest, null, 2)
-    );
+    await fs.writeFile(`backups/manifest-${timestamp}.json`, JSON.stringify(manifest, null, 2));
 
     console.log('\n✅ Backup complete!');
     console.log(`Version: ${timestamp}`);
-
   } catch (error) {
     console.error('\n❌ Backup failed:', error.message);
     process.exit(1);
@@ -68,4 +67,3 @@ async function backup() {
 }
 
 backup();
-

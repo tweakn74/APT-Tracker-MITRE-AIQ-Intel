@@ -3,28 +3,12 @@
  * Cloudflare Worker for threat intelligence aggregation and trends analysis
  */
 
-import { XMLParser } from 'fast-xml-parser';
-import {
-  fetchAllFeeds,
-  normalizeItems,
-  deduplicateItems,
-  extractTags,
-  sanitizeHtml
-} from './lib/feeds.js';
+import { fetchAllFeeds, normalizeItems, deduplicateItems } from './lib/feeds.js';
 import { updateTrendsBucket, getTrendsBuckets } from './lib/trends.js';
 import { discoverNewSources } from './lib/discovery.js';
-import {
-  getSources,
-  addApprovedSource,
-  addCandidateSource,
-  blockDomain
-} from './lib/sources.js';
+import { getSources, addApprovedSource, blockDomain } from './lib/sources.js';
 import { logStructured, createHealthCheck } from './lib/utils.js';
-import {
-  addRiskScores,
-  filterBySeverity,
-  sortByRiskScore
-} from './lib/scoring.js';
+import { addRiskScores, filterBySeverity, sortByRiskScore } from './lib/scoring.js';
 
 /**
  * Main request handler
@@ -62,18 +46,22 @@ export default {
       console.error('Request failed:', {
         path,
         error: error.message,
-        stack: error.stack
+        stack: error.stack,
       });
       logStructured('error', 'Request failed', {
         path,
         error: error.message,
-        stack: error.stack
+        stack: error.stack,
       });
-      return jsonResponse({
-        error: 'Internal server error',
-        message: error.message,
-        path
-      }, 500, env);
+      return jsonResponse(
+        {
+          error: 'Internal server error',
+          message: error.message,
+          path,
+        },
+        500,
+        env
+      );
     }
   },
 };
@@ -81,7 +69,7 @@ export default {
 /**
  * Handle /api/threats endpoint
  */
-async function handleThreats(request, env, ctx) {
+async function handleThreats(request, env, _ctx) {
   const url = new URL(request.url);
   const limit = Math.min(parseInt(url.searchParams.get('limit') || '60'), 100);
   const after = url.searchParams.get('after');
@@ -94,15 +82,12 @@ async function handleThreats(request, env, ctx) {
   try {
     // Get approved sources
     const sources = await getSources(env);
-    const approvedUrls = sources.approved.map(s => typeof s === 'string' ? s : s.url);
-    const feedUrls = [
-      ...env.DEFAULT_FEEDS.split(',').map(f => f.trim()),
-      ...approvedUrls
-    ];
+    const approvedUrls = sources.approved.map(s => (typeof s === 'string' ? s : s.url));
+    const feedUrls = [...env.DEFAULT_FEEDS.split(',').map(f => f.trim()), ...approvedUrls];
 
     logStructured('info', 'Fetching threats', {
       feedCount: feedUrls.length,
-      filters: { limit, after, tag, q, severity }
+      filters: { limit, after, tag, q, severity },
     });
 
     // Fetch all feeds
@@ -132,9 +117,10 @@ async function handleThreats(request, env, ctx) {
 
     if (q) {
       const query = q.toLowerCase();
-      items = items.filter(item =>
-        item.title.toLowerCase().includes(query) ||
-        (item.description && item.description.toLowerCase().includes(query))
+      items = items.filter(
+        item =>
+          item.title.toLowerCase().includes(query) ||
+          (item.description && item.description.toLowerCase().includes(query))
       );
     }
 
@@ -152,18 +138,21 @@ async function handleThreats(request, env, ctx) {
     const duration = Date.now() - startTime;
     logStructured('info', 'Threats fetched', {
       itemCount: items.length,
-      duration
+      duration,
     });
 
-    return jsonResponse({
-      updated: new Date().toISOString(),
-      count: items.length,
-      items
-    }, 200, env);
-    
+    return jsonResponse(
+      {
+        updated: new Date().toISOString(),
+        count: items.length,
+        items,
+      },
+      200,
+      env
+    );
   } catch (error) {
-    logStructured('error', 'Failed to fetch threats', { 
-      error: error.message 
+    logStructured('error', 'Failed to fetch threats', {
+      error: error.message,
     });
     throw error;
   }
@@ -172,18 +161,21 @@ async function handleThreats(request, env, ctx) {
 /**
  * Handle /api/trends endpoint
  */
-async function handleTrends(request, env, ctx) {
+async function handleTrends(request, env, _ctx) {
   try {
     const buckets = await getTrendsBuckets(env, 24); // Last 24 hours
-    
-    return jsonResponse({
-      buckets,
-      period: '24h'
-    }, 200, env);
-    
+
+    return jsonResponse(
+      {
+        buckets,
+        period: '24h',
+      },
+      200,
+      env
+    );
   } catch (error) {
-    logStructured('error', 'Failed to fetch trends', { 
-      error: error.message 
+    logStructured('error', 'Failed to fetch trends', {
+      error: error.message,
     });
     throw error;
   }
@@ -192,26 +184,29 @@ async function handleTrends(request, env, ctx) {
 /**
  * Handle /api/sources endpoint
  */
-async function handleSources(request, env, ctx) {
+async function handleSources(request, env, _ctx) {
   try {
     const sources = await getSources(env);
-    
+
     // Get recently approved (last 7 days)
-    const sevenDaysAgo = Date.now() - (7 * 24 * 60 * 60 * 1000);
+    const sevenDaysAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
     const recentlyApproved = sources.approved.filter(s => {
       if (typeof s === 'string') return false;
       return s.approvedAt && new Date(s.approvedAt) > sevenDaysAgo;
     });
-    
-    return jsonResponse({
-      approved: sources.approved,
-      candidates: sources.candidates,
-      recentlyApproved
-    }, 200, env);
-    
+
+    return jsonResponse(
+      {
+        approved: sources.approved,
+        candidates: sources.candidates,
+        recentlyApproved,
+      },
+      200,
+      env
+    );
   } catch (error) {
-    logStructured('error', 'Failed to fetch sources', { 
-      error: error.message 
+    logStructured('error', 'Failed to fetch sources', {
+      error: error.message,
     });
     throw error;
   }
@@ -220,28 +215,27 @@ async function handleSources(request, env, ctx) {
 /**
  * Handle /api/sources/approve endpoint
  */
-async function handleApproveSource(request, env, ctx) {
+async function handleApproveSource(request, env, _ctx) {
   if (request.method !== 'POST') {
     return jsonResponse({ error: 'Method not allowed' }, 405, env);
   }
-  
+
   try {
     const body = await request.json();
     const { url } = body;
-    
+
     if (!url || !url.startsWith('http')) {
       return jsonResponse({ error: 'Invalid URL' }, 400, env);
     }
-    
+
     await addApprovedSource(url, env);
-    
+
     logStructured('info', 'Source approved', { url });
-    
+
     return jsonResponse({ success: true, url }, 200, env);
-    
   } catch (error) {
-    logStructured('error', 'Failed to approve source', { 
-      error: error.message 
+    logStructured('error', 'Failed to approve source', {
+      error: error.message,
     });
     throw error;
   }
@@ -250,30 +244,29 @@ async function handleApproveSource(request, env, ctx) {
 /**
  * Handle /api/sources/block endpoint
  */
-async function handleBlockSource(request, env, ctx) {
+async function handleBlockSource(request, env, _ctx) {
   if (request.method !== 'POST') {
     return jsonResponse({ error: 'Method not allowed' }, 405, env);
   }
-  
+
   try {
     const body = await request.json();
     const { url, domain } = body;
-    
+
     const targetDomain = domain || (url ? new URL(url).hostname : null);
-    
+
     if (!targetDomain) {
       return jsonResponse({ error: 'Invalid domain or URL' }, 400, env);
     }
-    
+
     await blockDomain(targetDomain, env);
-    
+
     logStructured('info', 'Domain blocked', { domain: targetDomain });
-    
+
     return jsonResponse({ success: true, domain: targetDomain }, 200, env);
-    
   } catch (error) {
-    logStructured('error', 'Failed to block domain', { 
-      error: error.message 
+    logStructured('error', 'Failed to block domain', {
+      error: error.message,
     });
     throw error;
   }
@@ -282,27 +275,30 @@ async function handleBlockSource(request, env, ctx) {
 /**
  * Handle /api/discovery/refresh endpoint
  */
-async function handleDiscovery(request, env, ctx) {
+async function handleDiscovery(request, env, _ctx) {
   if (request.method !== 'POST') {
     return jsonResponse({ error: 'Method not allowed' }, 405, env);
   }
-  
+
   try {
     const candidates = await discoverNewSources(env);
-    
-    logStructured('info', 'Discovery completed', { 
-      candidatesFound: candidates.length 
-    });
-    
-    return jsonResponse({ 
-      success: true, 
+
+    logStructured('info', 'Discovery completed', {
       candidatesFound: candidates.length,
-      candidates 
-    }, 200, env);
-    
+    });
+
+    return jsonResponse(
+      {
+        success: true,
+        candidatesFound: candidates.length,
+        candidates,
+      },
+      200,
+      env
+    );
   } catch (error) {
-    logStructured('error', 'Discovery failed', { 
-      error: error.message 
+    logStructured('error', 'Discovery failed', {
+      error: error.message,
     });
     throw error;
   }
@@ -311,18 +307,21 @@ async function handleDiscovery(request, env, ctx) {
 /**
  * Handle /api/healthz endpoint
  */
-async function handleHealth(request, env, ctx) {
+async function handleHealth(request, env, _ctx) {
   try {
     const health = await createHealthCheck(env);
     const status = health.status === 'healthy' ? 200 : 503;
-    
+
     return jsonResponse(health, status, env);
-    
   } catch (error) {
-    return jsonResponse({ 
-      status: 'unhealthy', 
-      error: error.message 
-    }, 503, env);
+    return jsonResponse(
+      {
+        status: 'unhealthy',
+        error: error.message,
+      },
+      503,
+      env
+    );
   }
 }
 
@@ -336,7 +335,7 @@ function handleCORS(request, env) {
     'Access-Control-Allow-Headers': 'Content-Type',
     'Access-Control-Max-Age': '86400',
   };
-  
+
   return new Response(null, { status: 204, headers });
 }
 
@@ -352,7 +351,6 @@ function jsonResponse(data, status, env) {
     'Referrer-Policy': 'no-referrer-when-downgrade',
     'Cache-Control': 'public, max-age=300', // 5 minutes
   };
-  
+
   return new Response(JSON.stringify(data), { status, headers });
 }
-

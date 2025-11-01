@@ -5,7 +5,6 @@
  */
 
 import fs from 'fs/promises';
-import path from 'path';
 
 const CLOUDFLARE_API_TOKEN = process.env.CLOUDFLARE_API_TOKEN;
 const CLOUDFLARE_ACCOUNT_ID = process.env.CLOUDFLARE_ACCOUNT_ID;
@@ -32,17 +31,17 @@ async function exportKV() {
 
     // Get namespace ID if not provided
     let namespaceId = KV_NAMESPACE_ID;
-    
+
     if (!namespaceId) {
       console.log('Fetching KV namespaces...');
       const namespaces = await listNamespaces();
       const newsKV = namespaces.find(ns => ns.title === 'NEWS_KV');
-      
+
       if (!newsKV) {
         console.error('NEWS_KV namespace not found');
         process.exit(1);
       }
-      
+
       namespaceId = newsKV.id;
       console.log(`Found NEWS_KV namespace: ${namespaceId}`);
     }
@@ -54,7 +53,7 @@ async function exportKV() {
 
     // Export each key
     const data = {};
-    
+
     for (const key of keys) {
       console.log(`Exporting: ${key.name}`);
       const value = await getKey(namespaceId, key.name);
@@ -64,12 +63,11 @@ async function exportKV() {
     // Write to file
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
     const filename = `backups/kv-dump-${timestamp}.json`;
-    
+
     await fs.writeFile(filename, JSON.stringify(data, null, 2));
-    
+
     console.log(`✅ Export complete: ${filename}`);
     console.log(`Exported ${Object.keys(data).length} keys`);
-
   } catch (error) {
     console.error('Export failed:', error.message);
     process.exit(1);
@@ -82,7 +80,7 @@ async function exportKV() {
 async function listNamespaces() {
   const response = await fetch(API_BASE, {
     headers: {
-      'Authorization': `Bearer ${CLOUDFLARE_API_TOKEN}`,
+      Authorization: `Bearer ${CLOUDFLARE_API_TOKEN}`,
       'Content-Type': 'application/json',
     },
   });
@@ -108,7 +106,7 @@ async function listKeys(namespaceId) {
 
     const response = await fetch(url, {
       headers: {
-        'Authorization': `Bearer ${CLOUDFLARE_API_TOKEN}`,
+        Authorization: `Bearer ${CLOUDFLARE_API_TOKEN}`,
         'Content-Type': 'application/json',
       },
     });
@@ -119,7 +117,7 @@ async function listKeys(namespaceId) {
 
     const data = await response.json();
     allKeys.push(...(data.result || []));
-    
+
     cursor = data.result_info?.cursor;
   } while (cursor);
 
@@ -132,7 +130,7 @@ async function listKeys(namespaceId) {
 async function getKey(namespaceId, key) {
   const response = await fetch(`${API_BASE}/${namespaceId}/values/${encodeURIComponent(key)}`, {
     headers: {
-      'Authorization': `Bearer ${CLOUDFLARE_API_TOKEN}`,
+      Authorization: `Bearer ${CLOUDFLARE_API_TOKEN}`,
     },
   });
 
@@ -141,7 +139,7 @@ async function getKey(namespaceId, key) {
   }
 
   const contentType = response.headers.get('content-type');
-  
+
   if (contentType && contentType.includes('application/json')) {
     return await response.json();
   } else {
@@ -151,4 +149,3 @@ async function getKey(namespaceId, key) {
 
 // Run export
 exportKV();
-

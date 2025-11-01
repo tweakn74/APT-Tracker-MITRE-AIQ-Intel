@@ -86,6 +86,7 @@ APT-Tracker-MITRE-AIQ-Intel/
 ### 1. Intelligent Tagging System
 
 Automatically extracts:
+
 - **CVE IDs**: `CVE-2024-1234`
 - **MITRE ATT&CK Techniques**: `T1059`, `T1059.001`
 - **CWE IDs**: `CWE-79`, `CWE-89`
@@ -129,11 +130,13 @@ Automatically extracts:
 ### 6. CI/CD Pipeline
 
 **On Pull Request:**
+
 - Lint (ESLint)
 - Type check (TypeScript)
 - Run tests
 
 **On Merge to Main:**
+
 - All PR checks
 - Deploy worker to Cloudflare
 - Deploy frontend to GitHub Pages
@@ -143,20 +146,21 @@ Automatically extracts:
 - Upload backups
 
 **Nightly (2 AM UTC):**
+
 - Export KV data
 - Create backup snapshot
 
 ## API Endpoints
 
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/api/threats` | GET | Merged, normalized, tagged threat items |
-| `/api/trends` | GET | Hourly trend buckets (24h) |
-| `/api/sources` | GET | Approved and candidate sources |
-| `/api/sources/approve` | POST | Approve a candidate source |
-| `/api/sources/block` | POST | Block a domain |
-| `/api/discovery/refresh` | POST | Run discovery scraper |
-| `/api/healthz` | GET | Health check |
+| Endpoint                 | Method | Description                             |
+| ------------------------ | ------ | --------------------------------------- |
+| `/api/threats`           | GET    | Merged, normalized, tagged threat items |
+| `/api/trends`            | GET    | Hourly trend buckets (24h)              |
+| `/api/sources`           | GET    | Approved and candidate sources          |
+| `/api/sources/approve`   | POST   | Approve a candidate source              |
+| `/api/sources/block`     | POST   | Block a domain                          |
+| `/api/discovery/refresh` | POST   | Run discovery scraper                   |
+| `/api/healthz`           | GET    | Health check                            |
 
 ## Data Sources (Pre-configured)
 
@@ -195,13 +199,13 @@ Plus optional Twitter/X List integration.
 
 ## Performance Targets
 
-| Metric | Target | Status |
-|--------|--------|--------|
-| Build time | < 2 min | ✅ |
-| API response (cached) | < 500ms | ✅ |
-| Dashboard load | < 3s | ✅ |
-| Lighthouse Performance | >= 90 | ✅ |
-| Lighthouse Accessibility | >= 90 | ✅ |
+| Metric                   | Target  | Status |
+| ------------------------ | ------- | ------ |
+| Build time               | < 2 min | ✅     |
+| API response (cached)    | < 500ms | ✅     |
+| Dashboard load           | < 3s    | ✅     |
+| Lighthouse Performance   | >= 90   | ✅     |
+| Lighthouse Accessibility | >= 90   | ✅     |
 
 ## Security Measures
 
@@ -271,11 +275,12 @@ npm run deploy && git push
 ## Embed Snippet
 
 ```html
-<iframe 
-  src="https://tweakn74.github.io/APT-Tracker-MITRE-AIQ-Intel" 
-  width="100%" 
-  height="800" 
-  frameborder="0">
+<iframe
+  src="https://tweakn74.github.io/APT-Tracker-MITRE-AIQ-Intel"
+  width="100%"
+  height="800"
+  frameborder="0"
+>
 </iframe>
 ```
 
@@ -333,4 +338,3 @@ MIT License - Open source and free to use
 **Built with ❤️ for the cybersecurity community**
 
 **Ready to deploy and showcase before your interview! 🚀**
-

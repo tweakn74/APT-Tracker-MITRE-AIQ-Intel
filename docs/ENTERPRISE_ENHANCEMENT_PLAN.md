@@ -191,19 +191,16 @@ APT Tracker Enterprise Platform
 **High-Value Targets:**
 
 1. **Ransomware Leak Sites** (Public Tor sites)
-
    - LockBit, BlackCat/ALPHV, Cl0p, Play, BianLian, etc.
    - Victim lists, leaked data previews
    - **Value**: Early warning for organizations
 
 2. **Paste Sites** (Clearnet)
-
    - Pastebin, Ghostbin, Rentry, etc.
    - Credential dumps, database leaks
    - **Value**: Compromised credentials detection
 
 3. **Breach Compilation Sites** (Public databases)
-
    - Have I Been Pwned, DeHashed (limited free)
    - **Value**: Historical breach data
 
@@ -438,7 +435,6 @@ APT Tracker Enterprise Platform
 #### 3.1 Curated Security Researcher Content (Free - Start Here)
 
 - **Curated Accounts to Monitor**:
-
   - @vxunderground - Malware research
   - @GossiTheDog - Security researcher
   - @campuscodi - Threat intelligence
@@ -474,7 +470,6 @@ APT Tracker Enterprise Platform
 #### 3.2 NLP-Based Severity Classification
 
 - **Keyword Mapping**:
-
   - **CRITICAL**: zero-day, 0day, actively exploited, ransomware, critical RCE, patch now, emergency patch, mass exploitation, wormable
   - **HIGH**: high severity, exploit available, POC released, widespread, in the wild, proof of concept, remote code execution
   - **MEDIUM**: vulnerability disclosed, patch available, moderate risk, security advisory, CVE published
@@ -489,7 +484,6 @@ APT Tracker Enterprise Platform
 #### 3.3 UI Integration
 
 - **Layout Options**:
-
   - **Option A**: Right sidebar panel (25% width)
   - **Option B**: Bottom panel (collapsible)
   - **Option C**: Dedicated "Community Intel" tab
@@ -523,7 +517,6 @@ APT Tracker Enterprise Platform
 #### 4.1 Executive vs Analyst Views
 
 - **Executive View** (Default):
-
   - Critical alerts section only
   - Top 10 threats
   - High-level metrics (total threats, critical count, trending)
@@ -531,7 +524,6 @@ APT Tracker Enterprise Platform
   - Large, scannable cards
 
 - **Analyst View** (Toggle):
-
   - Full threat list
   - All filters available
   - Detailed metadata
@@ -738,19 +730,16 @@ Sources (12+) → Worker Fetch → Normalization → Deduplication → Correlati
 Based on user requirements:
 
 1. **Twitter Integration**: ✅ **Option B: Curated Community Intel (FREE)**
-
    - Must remain free until we have users
    - Manual curation of important tweets/threads
    - Can upgrade to API later when budget allows
 
 2. **Priority**: ✅ **All phases in sequence (0 → 8)**
-
    - Start with Phase 0 (regression-proofing)
    - Then Phases 1-2 (my original recommendations)
    - Then Phases 3-8 (new requirements)
 
 3. **Site Merge**: ✅ **Intelligent merge of APT-Tracker-MITRE-AIQ and Versedetect**
-
    - Phases 4-5 dedicated to site merge
    - Create unified platform architecture
 

@@ -16,13 +16,13 @@ export async function fetchAllFeeds(feedUrls, env) {
   const items = [];
   const maxConcurrent = 5;
   const timeout = 10000; // 10 seconds
-  
+
   // Process feeds in batches
   for (let i = 0; i < feedUrls.length; i += maxConcurrent) {
     const batch = feedUrls.slice(i, i + maxConcurrent);
     const promises = batch.map(url => fetchFeed(url, env, timeout));
     const results = await Promise.allSettled(promises);
-    
+
     results.forEach((result, idx) => {
       if (result.status === 'fulfilled') {
         items.push(...result.value);
@@ -30,13 +30,13 @@ export async function fetchAllFeeds(feedUrls, env) {
         console.error(`Feed failed: ${batch[idx]}`, result.reason);
       }
     });
-    
+
     // Small delay between batches
     if (i + maxConcurrent < feedUrls.length) {
       await sleep(100);
     }
   }
-  
+
   return items;
 }
 
@@ -48,34 +48,33 @@ async function fetchFeed(url, env, timeout, retries = 2) {
     try {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), timeout);
-      
+
       const response = await fetch(url, {
         signal: controller.signal,
         headers: {
           'User-Agent': 'APT-Tracker-MITRE-AIQ-Intel/1.0 (Threat Intelligence Aggregator)',
-          'Accept': 'application/rss+xml, application/atom+xml, application/json, text/xml, */*',
+          Accept: 'application/rss+xml, application/atom+xml, application/json, text/xml, */*',
         },
         cf: {
           cacheTtl: 300, // 5 minutes
           cacheEverything: true,
         },
       });
-      
+
       clearTimeout(timeoutId);
-      
+
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}`);
       }
-      
+
       const contentType = response.headers.get('content-type') || '';
       const text = await response.text();
-      
+
       if (contentType.includes('json')) {
         return parseJsonFeed(text, url);
       } else {
         return parseXmlFeed(text, url);
       }
-      
     } catch (error) {
       if (attempt === retries) {
         throw error;
@@ -92,15 +91,15 @@ async function fetchFeed(url, env, timeout, retries = 2) {
  */
 function parseXmlFeed(xml, sourceUrl) {
   const items = [];
-  
+
   try {
     const parsed = xmlParser.parse(xml);
-    
+
     // RSS 2.0
     if (parsed.rss && parsed.rss.channel) {
       const channel = parsed.rss.channel;
       const feedItems = Array.isArray(channel.item) ? channel.item : [channel.item].filter(Boolean);
-      
+
       feedItems.forEach(item => {
         items.push({
           title: item.title || 'Untitled',
@@ -112,16 +111,15 @@ function parseXmlFeed(xml, sourceUrl) {
         });
       });
     }
-    
+
     // Atom
     else if (parsed.feed) {
       const feed = parsed.feed;
       const feedItems = Array.isArray(feed.entry) ? feed.entry : [feed.entry].filter(Boolean);
-      
+
       feedItems.forEach(entry => {
-        const link = entry.link ? 
-          (Array.isArray(entry.link) ? entry.link[0] : entry.link) : {};
-        
+        const link = entry.link ? (Array.isArray(entry.link) ? entry.link[0] : entry.link) : {};
+
         items.push({
           title: entry.title || 'Untitled',
           link: link['@_href'] || link.href || sourceUrl,
@@ -135,7 +133,7 @@ function parseXmlFeed(xml, sourceUrl) {
   } catch (error) {
     console.error('XML parse error:', error);
   }
-  
+
   return items;
 }
 
@@ -144,10 +142,10 @@ function parseXmlFeed(xml, sourceUrl) {
  */
 function parseJsonFeed(json, sourceUrl) {
   const items = [];
-  
+
   try {
     const data = JSON.parse(json);
-    
+
     // CISA KEV format
     if (data.vulnerabilities && Array.isArray(data.vulnerabilities)) {
       data.vulnerabilities.forEach(vuln => {
@@ -162,7 +160,7 @@ function parseJsonFeed(json, sourceUrl) {
         });
       });
     }
-    
+
     // Generic JSON feed
     else if (data.items && Array.isArray(data.items)) {
       data.items.forEach(item => {
@@ -179,7 +177,7 @@ function parseJsonFeed(json, sourceUrl) {
   } catch (error) {
     console.error('JSON parse error:', error);
   }
-  
+
   return items;
 }
 
@@ -195,15 +193,15 @@ export function normalizeItems(items) {
     } catch {
       pubDate = new Date().toISOString();
     }
-    
+
     // Extract and sanitize
     const title = sanitizeHtml(item.title || 'Untitled');
     const description = sanitizeHtml(item.description || '');
     const link = normalizeUrl(item.link);
-    
+
     // Extract tags
     const tags = item.tags || extractTags(title + ' ' + description);
-    
+
     return {
       title,
       link,
@@ -220,34 +218,33 @@ export function normalizeItems(items) {
  */
 export function extractTags(text) {
   const tags = new Set();
-  const upperText = text.toUpperCase();
-  
+
   // CVE pattern
   const cveMatches = text.match(/CVE-\d{4}-\d{4,}/gi);
   if (cveMatches) {
     cveMatches.forEach(cve => tags.add(cve.toUpperCase()));
   }
-  
+
   // MITRE ATT&CK technique IDs (T####.### or T####)
   const attackMatches = text.match(/T\d{4}(\.\d{3})?/gi);
   if (attackMatches) {
     attackMatches.forEach(tid => tags.add(tid.toUpperCase()));
   }
-  
+
   // CWE pattern
   const cweMatches = text.match(/CWE-\d+/gi);
   if (cweMatches) {
     cweMatches.forEach(cwe => tags.add(cwe.toUpperCase()));
   }
-  
+
   // Keywords
   if (/ransom/i.test(text)) tags.add('RANSOMWARE');
-  if (/zero[- ]day|0[- ]day/i.test(text)) tags.add('ZERO-DAY');
+  if (/zero[- ]?day|0[- ]?day/i.test(text)) tags.add('ZERO-DAY');
   if (/apt\d+|apt-\d+|advanced persistent threat/i.test(text)) tags.add('APT');
   if (/malware/i.test(text)) tags.add('MALWARE');
   if (/phishing/i.test(text)) tags.add('PHISHING');
   if (/exploit/i.test(text)) tags.add('EXPLOIT');
-  
+
   return Array.from(tags);
 }
 
@@ -281,11 +278,11 @@ export function sanitizeHtml(html) {
 function normalizeUrl(url) {
   try {
     const parsed = new URL(url);
-    
+
     // Remove tracking parameters
     const trackingParams = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
     trackingParams.forEach(param => parsed.searchParams.delete(param));
-    
+
     return parsed.toString();
   } catch {
     return url;
@@ -297,10 +294,10 @@ function normalizeUrl(url) {
  */
 export function deduplicateItems(items) {
   const seen = new Map();
-  
+
   items.forEach(item => {
     const key = item.link || hashString(item.title);
-    
+
     if (!seen.has(key)) {
       seen.set(key, item);
     } else {
@@ -311,7 +308,7 @@ export function deduplicateItems(items) {
       }
     }
   });
-  
+
   return Array.from(seen.values());
 }
 
@@ -322,7 +319,7 @@ function hashString(str) {
   let hash = 0;
   for (let i = 0; i < str.length; i++) {
     const char = str.charCodeAt(i);
-    hash = ((hash << 5) - hash) + char;
+    hash = (hash << 5) - hash + char;
     hash = hash & hash;
   }
   return hash.toString(36);
@@ -334,4 +331,3 @@ function hashString(str) {
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
-

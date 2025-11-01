@@ -15,7 +15,7 @@ let filterState = {
   threatType: 'ALL',
   timeWindow: 'ALL',
   actionability: 'ALL',
-  search: ''
+  search: '',
 };
 
 /**
@@ -28,11 +28,7 @@ async function init() {
   setupFilters();
 
   // Initial load
-  await Promise.all([
-    loadThreats(),
-    loadTrends(),
-    loadSources(),
-  ]);
+  await Promise.all([loadThreats(), loadTrends(), loadSources()]);
 
   // Set up polling
   setInterval(loadThreats, THREATS_POLL_INTERVAL);
@@ -46,7 +42,7 @@ async function init() {
 function setupFilters() {
   // Filter buttons
   document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
+    btn.addEventListener('click', e => {
       const filterType = e.target.dataset.filter;
       const filterValue = e.target.dataset.value;
 
@@ -68,7 +64,7 @@ function setupFilters() {
   // Search box
   const searchBox = document.getElementById('searchBox');
   let searchTimeout;
-  searchBox.addEventListener('input', (e) => {
+  searchBox.addEventListener('input', e => {
     clearTimeout(searchTimeout);
     searchTimeout = setTimeout(() => {
       filterState.search = e.target.value;
@@ -87,19 +83,39 @@ function updateActiveFilters() {
 
   // Add filter pills
   if (filterState.severity !== 'ALL') {
-    pills.push({ type: 'severity', value: filterState.severity, label: `Severity: ${filterState.severity}` });
+    pills.push({
+      type: 'severity',
+      value: filterState.severity,
+      label: `Severity: ${filterState.severity}`,
+    });
   }
   if (filterState.threatType !== 'ALL') {
-    pills.push({ type: 'threatType', value: filterState.threatType, label: `Type: ${filterState.threatType}` });
+    pills.push({
+      type: 'threatType',
+      value: filterState.threatType,
+      label: `Type: ${filterState.threatType}`,
+    });
   }
   if (filterState.timeWindow !== 'ALL') {
-    pills.push({ type: 'timeWindow', value: filterState.timeWindow, label: `Time: ${filterState.timeWindow}` });
+    pills.push({
+      type: 'timeWindow',
+      value: filterState.timeWindow,
+      label: `Time: ${filterState.timeWindow}`,
+    });
   }
   if (filterState.actionability !== 'ALL') {
-    pills.push({ type: 'actionability', value: filterState.actionability, label: `Filter: ${filterState.actionability}` });
+    pills.push({
+      type: 'actionability',
+      value: filterState.actionability,
+      label: `Filter: ${filterState.actionability}`,
+    });
   }
   if (filterState.search) {
-    pills.push({ type: 'search', value: filterState.search, label: `Search: "${filterState.search}"` });
+    pills.push({
+      type: 'search',
+      value: filterState.search,
+      label: `Search: "${filterState.search}"`,
+    });
   }
 
   if (pills.length === 0) {
@@ -108,19 +124,27 @@ function updateActiveFilters() {
   }
 
   container.style.display = 'flex';
-  container.innerHTML = pills.map(pill => `
+  container.innerHTML =
+    pills
+      .map(
+        pill => `
     <span class="filter-pill">
       ${escapeHtml(pill.label)}
       <span class="filter-pill-remove" onclick="removeFilter('${pill.type}')">&times;</span>
     </span>
-  `).join('') + `
+  `
+      )
+      .join('') +
+    `
     <button class="clear-filters-btn" onclick="clearAllFilters()">Clear All</button>
   `;
 }
 
 /**
  * Remove a specific filter
+ * Currently unused but kept for future use
  */
+// eslint-disable-next-line no-unused-vars
 function removeFilter(filterType) {
   if (filterType === 'search') {
     filterState.search = '';
@@ -141,14 +165,16 @@ function removeFilter(filterType) {
 
 /**
  * Clear all filters
+ * Currently unused but kept for future use
  */
+// eslint-disable-next-line no-unused-vars
 function clearAllFilters() {
   filterState = {
     severity: 'ALL',
     threatType: 'ALL',
     timeWindow: 'ALL',
     actionability: 'ALL',
-    search: ''
+    search: '',
   };
 
   // Reset all buttons
@@ -219,9 +245,7 @@ async function loadThreats() {
 
     // Client-side filters
     if (filterState.threatType !== 'ALL') {
-      items = items.filter(item =>
-        item.tags && item.tags.includes(filterState.threatType)
-      );
+      items = items.filter(item => item.tags && item.tags.includes(filterState.threatType));
     }
 
     if (filterState.actionability !== 'ALL') {
@@ -250,11 +274,11 @@ async function loadThreats() {
       // Update aria-live region
       container.setAttribute('aria-live', 'polite');
     } else {
-      container.innerHTML = '<div class="empty-state"><p>No threats found matching filters</p></div>';
+      container.innerHTML =
+        '<div class="empty-state"><p>No threats found matching filters</p></div>';
       status.textContent = 'No Data';
       status.className = 'status';
     }
-
   } catch (error) {
     console.error('Failed to load threats:', error);
     container.innerHTML = `<div class="error-state"><p>Failed to load threats: ${escapeHtml(error.message)}</p></div>`;
@@ -267,39 +291,45 @@ async function loadThreats() {
  * Render threats list
  */
 function renderThreats(items, container) {
-  const listHtml = items.map(item => {
-    const isHighPriority = item.tags && item.tags.includes('HIGH-PRIORITY');
-    const priorityClass = isHighPriority ? 'high-priority' : '';
+  const listHtml = items
+    .map(item => {
+      const isHighPriority = item.tags && item.tags.includes('HIGH-PRIORITY');
+      const priorityClass = isHighPriority ? 'high-priority' : '';
 
-    // Severity badge
-    const severityHtml = item.severity ?
-      `<span class="severity-badge severity-${item.severity.toLowerCase()}">${item.severity}</span>` : '';
+      // Severity badge
+      const severityHtml = item.severity
+        ? `<span class="severity-badge severity-${item.severity.toLowerCase()}">${item.severity}</span>`
+        : '';
 
-    // Risk score
-    const riskScoreHtml = item.riskScore !== undefined ?
-      `<span class="risk-score" style="color: ${getSeverityColor(item.severity)}">${item.riskScore}</span>` : '';
+      // Risk score
+      const riskScoreHtml =
+        item.riskScore !== undefined
+          ? `<span class="risk-score" style="color: ${getSeverityColor(item.severity)}">${item.riskScore}</span>`
+          : '';
 
-    const tagsHtml = (item.tags || []).map(tag => {
-      let tagClass = 'tag';
-      let tagHtml = escapeHtml(tag);
+      const tagsHtml = (item.tags || [])
+        .map(tag => {
+          let tagClass = 'tag';
+          let tagHtml = escapeHtml(tag);
 
-      // Make CVE tags clickable links to Tenable CVE database
-      if (tag.startsWith('CVE-')) {
-        tagClass += ' cve';
-        const cveUrl = `https://www.tenable.com/cve/${tag}`;
-        tagHtml = `<a href="${cveUrl}" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">${escapeHtml(tag)}</a>`;
-      } else if (tag.startsWith('T')) {
-        tagClass += ' attack';
-      } else if (tag === 'HIGH-PRIORITY') {
-        tagClass += ' high-priority';
-      }
+          // Make CVE tags clickable links to Tenable CVE database
+          if (tag.startsWith('CVE-')) {
+            tagClass += ' cve';
+            const cveUrl = `https://www.tenable.com/cve/${tag}`;
+            tagHtml = `<a href="${cveUrl}" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">${escapeHtml(tag)}</a>`;
+          } else if (tag.startsWith('T')) {
+            tagClass += ' attack';
+          } else if (tag === 'HIGH-PRIORITY') {
+            tagClass += ' high-priority';
+          }
 
-      return `<span class="${tagClass}">${tagHtml}</span>`;
-    }).join('');
+          return `<span class="${tagClass}">${tagHtml}</span>`;
+        })
+        .join('');
 
-    const localTime = formatLocalTime(item.pubDate);
+      const localTime = formatLocalTime(item.pubDate);
 
-    return `
+      return `
       <div class="threat-item ${priorityClass}">
         <div class="threat-title">
           ${severityHtml}
@@ -315,7 +345,8 @@ function renderThreats(items, container) {
         ${tagsHtml ? `<div class="threat-tags">${tagsHtml}</div>` : ''}
       </div>
     `;
-  }).join('');
+    })
+    .join('');
 
   container.innerHTML = `<div class="threats-list">${listHtml}</div>`;
 }
@@ -325,11 +356,16 @@ function renderThreats(items, container) {
  */
 function getSeverityColor(severity) {
   switch (severity) {
-    case 'CRITICAL': return '#d32f2f';
-    case 'HIGH': return '#f57c00';
-    case 'MEDIUM': return '#fbc02d';
-    case 'LOW': return '#388e3c';
-    default: return '#757575';
+    case 'CRITICAL':
+      return '#d32f2f';
+    case 'HIGH':
+      return '#f57c00';
+    case 'MEDIUM':
+      return '#fbc02d';
+    case 'LOW':
+      return '#388e3c';
+    default:
+      return '#757575';
   }
 }
 
@@ -338,19 +374,19 @@ function getSeverityColor(severity) {
  */
 async function loadTrends() {
   const status = document.getElementById('trends-status');
-  
+
   try {
     status.textContent = 'Loading...';
     status.className = 'status loading';
-    
+
     const response = await fetch(`${API_BASE}/api/trends`);
-    
+
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}`);
     }
-    
+
     const data = await response.json();
-    
+
     if (data.buckets && data.buckets.length > 0) {
       renderTrends(data.buckets);
       status.textContent = 'Live';
@@ -359,7 +395,6 @@ async function loadTrends() {
       status.textContent = 'No Data';
       status.className = 'status';
     }
-    
   } catch (error) {
     console.error('Failed to load trends:', error);
     status.textContent = 'Error';
@@ -373,16 +408,16 @@ async function loadTrends() {
 function renderTrends(buckets) {
   // Prepare data
   const labels = buckets.map(b => formatChartTime(b.bucket));
-  
+
   // Aggregate sources
   const sourcesData = aggregateTopN(buckets, 'sources', 5);
   const tagsData = aggregateTopN(buckets, 'tags', 5);
-  
+
   // Render sources chart
   if (threatsChart) {
     threatsChart.destroy();
   }
-  
+
   const sourcesCtx = document.getElementById('sources-chart').getContext('2d');
   threatsChart = new Chart(sourcesCtx, {
     type: 'line',
@@ -398,12 +433,12 @@ function renderTrends(buckets) {
     },
     options: getChartOptions(),
   });
-  
+
   // Render tags chart
   if (tagsChart) {
     tagsChart.destroy();
   }
-  
+
   const tagsCtx = document.getElementById('tags-chart').getContext('2d');
   tagsChart = new Chart(tagsCtx, {
     type: 'line',
@@ -432,19 +467,19 @@ function aggregateTopN(buckets, field, n) {
       totals[name] = (totals[name] || 0) + count;
     });
   });
-  
+
   // Get top N
   const topN = Object.entries(totals)
     .sort((a, b) => b[1] - a[1])
     .slice(0, n)
     .map(([name]) => name);
-  
+
   // Build datasets
   const datasets = {};
   topN.forEach(name => {
     datasets[name] = buckets.map(bucket => bucket.data[field][name] || 0);
   });
-  
+
   return datasets;
 }
 
@@ -454,32 +489,32 @@ function aggregateTopN(buckets, field, n) {
 async function loadSources() {
   const container = document.getElementById('sources-container');
   const status = document.getElementById('sources-status');
-  
+
   try {
     status.textContent = 'Loading...';
     status.className = 'status loading';
-    
+
     const response = await fetch(`${API_BASE}/api/sources`);
-    
+
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}`);
     }
-    
+
     const data = await response.json();
-    
+
     if (data.recentlyApproved && data.recentlyApproved.length > 0) {
       renderSources(data.recentlyApproved, container);
       status.textContent = 'Live';
       status.className = 'status live';
     } else {
-      container.innerHTML = '<div class="empty-state"><p>No new sources in the last 7 days</p></div>';
+      container.innerHTML =
+        '<div class="empty-state"><p>No new sources in the last 7 days</p></div>';
       status.textContent = 'No Data';
       status.className = 'status';
     }
-    
   } catch (error) {
     console.error('Failed to load sources:', error);
-    container.innerHTML = `<div class="error-state"><p>Failed to load sources</p></div>`;
+    container.innerHTML = '<div class="error-state"><p>Failed to load sources</p></div>';
     status.textContent = 'Error';
     status.className = 'status error';
   }
@@ -489,12 +524,13 @@ async function loadSources() {
  * Render sources list
  */
 function renderSources(sources, container) {
-  const listHtml = sources.map(source => {
-    const url = typeof source === 'string' ? source : source.url;
-    const approvedAt = source.approvedAt ? formatLocalTime(source.approvedAt) : 'Recently';
-    const title = source.title || new URL(url).hostname;
-    
-    return `
+  const listHtml = sources
+    .map(source => {
+      const url = typeof source === 'string' ? source : source.url;
+      const approvedAt = source.approvedAt ? formatLocalTime(source.approvedAt) : 'Recently';
+      const title = source.title || new URL(url).hostname;
+
+      return `
       <li class="source-item">
         <a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">
           ${escapeHtml(title)}
@@ -502,8 +538,9 @@ function renderSources(sources, container) {
         <span class="source-date">${approvedAt}</span>
       </li>
     `;
-  }).join('');
-  
+    })
+    .join('');
+
   container.innerHTML = `<ul class="sources-list">${listHtml}</ul>`;
 }
 
@@ -524,16 +561,16 @@ function formatLocalTime(isoString) {
   const now = new Date();
   const diffMs = now - date;
   const diffMins = Math.floor(diffMs / 60000);
-  
+
   if (diffMins < 1) return 'Just now';
   if (diffMins < 60) return `${diffMins}m ago`;
-  
+
   const diffHours = Math.floor(diffMins / 60);
   if (diffHours < 24) return `${diffHours}h ago`;
-  
+
   const diffDays = Math.floor(diffHours / 24);
   if (diffDays < 7) return `${diffDays}d ago`;
-  
+
   return date.toLocaleDateString();
 }
 
@@ -593,4 +630,3 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
-

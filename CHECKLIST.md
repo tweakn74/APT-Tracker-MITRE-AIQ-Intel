@@ -184,18 +184,23 @@ Open dashboard in browser and verify:
 ## Common Issues
 
 ### ❌ CORS errors
+
 **Fix:** Update `ALLOWED_ORIGIN` in `wrangler.toml` and redeploy
 
 ### ❌ No data showing
+
 **Fix:** Check `API_BASE` in `app.js` matches worker URL
 
 ### ❌ 404 on API calls
+
 **Fix:** Verify worker is deployed and URL is correct
 
 ### ❌ KV errors
+
 **Fix:** Verify namespace ID in `wrangler.toml` is correct
 
 ### ❌ GitHub Actions failing
+
 **Fix:** Check secrets are set correctly in repository settings
 
 ---
@@ -236,4 +241,3 @@ Run with: `bash test-deployment.sh`
 ---
 
 **If all items are checked, you're ready to go! 🚀**
-

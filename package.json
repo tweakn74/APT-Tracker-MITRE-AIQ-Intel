@@ -7,10 +7,14 @@
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
     "test": "node --test tests/**/*.test.js",
-    "lint": "eslint worker/ tests/ scripts/",
+    "lint": "eslint worker/ tests/ scripts/ app.js",
+    "lint:fix": "eslint --fix worker/ tests/ scripts/ app.js",
+    "format": "prettier --write \"**/*.{js,mjs,json,md}\"",
+    "format:check": "prettier --check \"**/*.{js,mjs,json,md}\"",
     "type-check": "tsc --noEmit",
     "kv:export": "node scripts/kv_export.mjs",
-    "backup": "node scripts/backup.mjs"
+    "backup": "node scripts/backup.mjs",
+    "prepare": "husky"
   },
   "keywords": [
     "threat-intelligence",
@@ -29,6 +33,14 @@
   },
   "dependencies": {
     "fast-xml-parser": "^4.5.0"
+  },
+  "lint-staged": {
+    "*.{js,mjs}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md}": [
+      "prettier --write"
+    ]
   }
 }
-

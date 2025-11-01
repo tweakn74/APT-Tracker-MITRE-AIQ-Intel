@@ -40,6 +40,7 @@ To add a new threat intelligence feed:
    - Relevant to threat intelligence
 
 2. Test the feed:
+
    ```bash
    curl -I https://example.com/feed.xml
    ```
@@ -80,6 +81,7 @@ git checkout -b feature/your-feature-name
    - Aim for high coverage
 
 3. **Run Checks**
+
    ```bash
    npm run lint
    npm run type-check
@@ -87,12 +89,14 @@ git checkout -b feature/your-feature-name
    ```
 
 4. **Test Locally**
+
    ```bash
    npm run dev
    # Test at http://localhost:8787
    ```
 
 5. **Commit Changes**
+
    ```bash
    git add .
    git commit -m "feat: add new feature"
@@ -107,6 +111,7 @@ git checkout -b feature/your-feature-name
    - `chore:` - Maintenance
 
 6. **Push and Create PR**
+
    ```bash
    git push origin feature/your-feature-name
    ```
@@ -116,7 +121,7 @@ git checkout -b feature/your-feature-name
 #### Pull Request Guidelines
 
 - **Title:** Clear and descriptive
-- **Description:** 
+- **Description:**
   - What changes were made
   - Why they were made
   - How to test them
@@ -135,6 +140,7 @@ git checkout -b feature/your-feature-name
 - Keep lines under 100 characters
 
 Example:
+
 ```javascript
 /**
  * Extract tags from text
@@ -163,6 +169,7 @@ export function extractTags(text) {
 - Mock external dependencies
 
 Example:
+
 ```javascript
 test('extractTags - should extract CVE identifiers', () => {
   const text = 'Critical vulnerability CVE-2024-1234';
@@ -231,6 +238,7 @@ If you discover a security vulnerability:
 ## Recognition
 
 Contributors will be:
+
 - Listed in README.md
 - Mentioned in release notes
 - Credited in commit history
@@ -242,4 +250,3 @@ By contributing, you agree that your contributions will be licensed under the MI
 ---
 
 Thank you for contributing to APT Tracker! 🛡️
-

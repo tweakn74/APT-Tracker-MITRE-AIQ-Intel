@@ -1,4 +1,5 @@
 # APT Tracker Dashboard Enhancement Plan
+
 ## Making Threat Intelligence Actionable for Security Analysts
 
 **Version:** 1.1.0  
@@ -20,6 +21,7 @@ This document outlines a comprehensive plan to enhance the APT Tracker dashboard
 ### 1. Recorded Future Platform Capabilities
 
 **Key Features Identified:**
+
 - **Intelligence Cards™**: Contextual cards for CVEs, IPs, domains, malware with risk scores, evidence, and related entities
 - **Risk Scoring**: Dynamic, evidence-based risk scores (0-100) that consider:
   - Exploit availability and weaponization
@@ -29,7 +31,7 @@ This document outlines a comprehensive plan to enhance the APT Tracker dashboard
 - **Customizable Risk Lists**: Ability to create custom filtered lists by combining multiple criteria
 - **High-Fidelity Alerting**: Filter by risk rules, risk scores, date ranges, and specific risk lists
 - **Fusion Module**: Combine internal and external data sources with custom transformations
-- **Time-Based Views**: 
+- **Time-Based Views**:
   - Last 24 hours (tactical)
   - Last 7 days (operational)
   - Last 30 days (strategic)
@@ -39,6 +41,7 @@ This document outlines a comprehensive plan to enhance the APT Tracker dashboard
 - **Integration-Ready**: CSV/JSON exports, API access, SIEM integration
 
 **Analyst Workflow Optimizations:**
+
 - Minimize manual aggregation and correlation
 - Reduce time from discovery to action
 - Provide full context with IOCs, sandbox analysis, hunting packages
@@ -47,6 +50,7 @@ This document outlines a comprehensive plan to enhance the APT Tracker dashboard
 ### 2. MITRE ATT&CK Navigator
 
 **Key Features:**
+
 - **Technique Heatmaps**: Visual representation of technique frequency/severity
 - **Layer Annotations**: Add notes, scores, colors to techniques
 - **Filtering by Tactic**: Filter techniques by kill chain phase
@@ -56,6 +60,7 @@ This document outlines a comprehensive plan to enhance the APT Tracker dashboard
 ### 3. Industry Best Practices
 
 **Prioritization Factors:**
+
 1. **Severity/Impact**: CVSS score, potential business impact
 2. **Exploitability**: POC availability, exploit kit integration, active exploitation
 3. **Asset Context**: Affected systems, criticality, exposure
@@ -63,6 +68,7 @@ This document outlines a comprehensive plan to enhance the APT Tracker dashboard
 5. **Threat Intelligence**: Threat actor interest, dark web chatter
 
 **Filtering Dimensions:**
+
 - Severity levels (Critical, High, Medium, Low)
 - Threat types (Ransomware, Zero-day, APT, Malware, Phishing)
 - Actionability (Has CVE, Has MITRE mapping, In KEV, Has POC)
@@ -76,28 +82,33 @@ This document outlines a comprehensive plan to enhance the APT Tracker dashboard
 ### ✅ **What We Have:**
 
 **Tagging System:**
+
 - CVE ID extraction (CVE-YYYY-NNNNN)
 - MITRE ATT&CK technique IDs (T#### and T####.###)
 - CWE ID extraction (CWE-###)
 - Security keywords: RANSOMWARE, ZERO-DAY, EXPLOIT, MALWARE, PHISHING, KEV, HIGH-PRIORITY, APT
 
 **Data Sources (12+):**
+
 - Government: CISA News, CISA Alerts, CISA KEV, NCSC UK
 - Vendors: Microsoft Security Blog, Google Project Zero
 - News: BleepingComputer, The Record, Krebs on Security
 - Research: Cisco Talos, Mandiant
 
 **Current Filtering:**
+
 - Basic query parameters: `limit`, `offset`, `after` (date), `tag`, `q` (search)
 - Server-side filtering in worker
 - No UI controls for filtering
 
 **Trends Engine:**
+
 - Hourly bucketing over 7 days
 - Top sources and top tags aggregation
 - Chart.js visualizations
 
 **Architecture:**
+
 - Cloudflare Worker backend (serverless, edge computing)
 - Cloudflare KV storage (key-value persistence)
 - GitHub Pages frontend (static hosting)
@@ -125,6 +136,7 @@ This document outlines a comprehensive plan to enhance the APT Tracker dashboard
 **Objective:** Add comprehensive client-side and server-side filtering controls
 
 **Features:**
+
 1. **Filter Bar Component** (Top of dashboard)
    - Severity: Critical, High, Medium, Low, All
    - Threat Type: Ransomware, Zero-day, Exploit, Malware, Phishing, APT, All
@@ -143,6 +155,7 @@ This document outlines a comprehensive plan to enhance the APT Tracker dashboard
    - Search suggestions/autocomplete
 
 **Implementation:**
+
 - Add filter controls to `index.html`
 - Update `app.js` with filter state management
 - Enhance worker API to support new filter parameters
@@ -157,6 +170,7 @@ This document outlines a comprehensive plan to enhance the APT Tracker dashboard
 **Objective:** Implement evidence-based risk scoring for threat prioritization
 
 **Risk Score Calculation (0-100):**
+
 ```
 Base Score (40 points):
 - KEV listing: +40 (actively exploited)
@@ -185,12 +199,14 @@ Threat Type (10 points):
 ```
 
 **Severity Classification:**
+
 - **Critical (90-100)**: KEV + Active Exploitation + Recent
 - **High (70-89)**: CVE + POC/Exploit Kit + Recent
 - **Medium (40-69)**: CVE + Documented TTP
 - **Low (0-39)**: General threat intelligence
 
 **Implementation:**
+
 - Add `calculateRiskScore()` function to `worker/lib/scoring.js`
 - Enhance tagging to detect POC mentions, exploit kit names
 - Add severity field to threat items
@@ -206,6 +222,7 @@ Threat Type (10 points):
 **Objective:** Improve tag extraction and add new detection capabilities
 
 **New Tags to Add:**
+
 - **Exploit Kits**: Angler, Neutrino, RIG, Magnitude, Fallout, etc.
 - **Ransomware Families**: LockBit, BlackCat, Royal, Play, etc.
 - **APT Groups**: APT28, APT29, Lazarus, etc.
@@ -215,6 +232,7 @@ Threat Type (10 points):
 - **Patch Status**: "unpatched", "no patch", "patch available"
 
 **Enhanced Detection:**
+
 - Regex patterns for exploit kit names
 - Known ransomware family database
 - APT group aliases and naming variations
@@ -222,6 +240,7 @@ Threat Type (10 points):
 - CVSS score extraction from descriptions
 
 **Implementation:**
+
 - Expand `extractTags()` in `worker/lib/feeds.js`
 - Add pattern databases in `worker/lib/patterns.js`
 - Add CVSS score extraction
@@ -236,6 +255,7 @@ Threat Type (10 points):
 **Objective:** Add detailed drill-down views for individual threats
 
 **Features:**
+
 - **Modal/Slide-out Panel** when clicking a threat item
 - **Threat Card Sections**:
   1. **Header**: Title, Risk Score, Severity Badge, Timestamp
@@ -248,6 +268,7 @@ Threat Type (10 points):
   8. **External Links**: NVD, MITRE ATT&CK, source article
 
 **Implementation:**
+
 - Add modal component to `index.html`
 - Create `renderThreatCard()` function in `app.js`
 - Add API endpoint `/api/threats/:id` for detailed view
@@ -263,18 +284,21 @@ Threat Type (10 points):
 **Objective:** Differentiate sources by credibility and adjust risk scores
 
 **Source Tiers:**
+
 1. **Tier 1 (Government/Official)**: CISA, NCSC, CERT - Weight: 1.2x
 2. **Tier 2 (Vendor/Research)**: Microsoft, Google, Mandiant - Weight: 1.1x
 3. **Tier 3 (Reputable News)**: BleepingComputer, Krebs - Weight: 1.0x
 4. **Tier 4 (Community)**: User-submitted, unverified - Weight: 0.8x
 
 **Features:**
+
 - Source credibility badges in UI
 - Risk score multiplier based on source tier
 - Filter by source tier
 - Source reputation tracking
 
 **Implementation:**
+
 - Add source tier mapping in `worker/lib/sources.js`
 - Apply weight multiplier in risk score calculation
 - Add tier badges to UI
@@ -289,6 +313,7 @@ Threat Type (10 points):
 **Objective:** Enable data export and advanced analytics
 
 **Features:**
+
 1. **Export Functionality**:
    - Export filtered results as CSV
    - Export as JSON for SIEM integration
@@ -308,6 +333,7 @@ Threat Type (10 points):
    - Quick access to saved views
 
 **Implementation:**
+
 - Add export buttons to UI
 - Create CSV/JSON generation functions
 - Add localStorage for saved filters
@@ -321,22 +347,27 @@ Threat Type (10 points):
 ## Implementation Roadmap
 
 ### **Sprint 1 (Week 1): Foundation**
+
 - [ ] Phase 1: Advanced Filtering UI
 - [ ] Phase 2: Risk Scoring Engine (Part 1 - Basic scoring)
 
 ### **Sprint 2 (Week 2): Intelligence**
+
 - [ ] Phase 2: Risk Scoring Engine (Part 2 - Severity classification)
 - [ ] Phase 3: Enhanced Tagging & Detection
 
 ### **Sprint 3 (Week 3): User Experience**
+
 - [ ] Phase 4: Threat Intelligence Cards
 - [ ] UI/UX refinements and testing
 
 ### **Sprint 4 (Week 4): Polish**
+
 - [ ] Phase 5: Source Credibility & Weighting
 - [ ] Phase 6: Advanced Analytics & Exports (Part 1)
 
 ### **Sprint 5 (Week 5): Finalization**
+
 - [ ] Phase 6: Advanced Analytics & Exports (Part 2)
 - [ ] Documentation updates
 - [ ] Performance optimization
@@ -347,6 +378,7 @@ Threat Type (10 points):
 ## Technical Architecture Changes
 
 ### **New Worker Files:**
+
 ```
 worker/
   lib/
@@ -357,6 +389,7 @@ worker/
 ```
 
 ### **New API Endpoints:**
+
 ```
 GET /api/threats/:id              # Get detailed threat by ID
 GET /api/threats/export?format=   # Export threats (csv, json, mitre)
@@ -366,6 +399,7 @@ POST /api/filters/presets         # Save filter preset
 ```
 
 ### **Frontend Enhancements:**
+
 ```
 index.html
   - Filter bar component
@@ -385,16 +419,19 @@ app.js
 ## Success Metrics
 
 **Analyst Efficiency:**
+
 - Time to identify critical threats: < 30 seconds
 - Time to assess threat relevance: < 2 minutes
 - False positive rate: < 10%
 
 **Platform Usage:**
+
 - Daily active analysts: Track engagement
 - Filters used per session: Measure feature adoption
 - Export frequency: Measure actionability
 
 **Data Quality:**
+
 - Risk score accuracy: Validate against known exploits
 - Tag precision: > 95% correct tags
 - Source coverage: 15+ high-quality sources
@@ -414,12 +451,14 @@ app.js
 ## Appendix: Competitive Analysis
 
 ### Recorded Future Strengths:
+
 - Evidence-based risk scoring
 - Massive source coverage (750K+ sources)
 - Deep dark web monitoring
 - Threat actor profiling
 
 ### Our Differentiators:
+
 - **Free and Open Source**: No licensing costs
 - **Lightweight**: Serverless, fast, no infrastructure
 - **Customizable**: Full control over sources and logic
@@ -427,8 +466,8 @@ app.js
 - **Real-Time**: Edge computing for instant updates
 
 ### Areas to Match:
+
 - Risk scoring sophistication
 - Filtering granularity
 - Analyst workflow optimization
 - Export and integration capabilities
-

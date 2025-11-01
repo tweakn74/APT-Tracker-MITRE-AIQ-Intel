@@ -14,10 +14,10 @@ test('getTopN - should return top N items sorted by count', () => {
     'Source D': 15,
     'Source E': 30,
   };
-  
+
   const result = getTopN(counts, 3);
   const keys = Object.keys(result);
-  
+
   assert.strictEqual(keys.length, 3);
   assert.strictEqual(keys[0], 'Source E');
   assert.strictEqual(keys[1], 'Source B');
@@ -26,7 +26,7 @@ test('getTopN - should return top N items sorted by count', () => {
 
 test('getTopN - should handle empty counts', () => {
   const result = getTopN({}, 5);
-  
+
   assert.strictEqual(Object.keys(result).length, 0);
 });
 
@@ -35,22 +35,21 @@ test('getTopN - should handle N larger than available items', () => {
     'Item 1': 10,
     'Item 2': 5,
   };
-  
+
   const result = getTopN(counts, 10);
-  
+
   assert.strictEqual(Object.keys(result).length, 2);
 });
 
 test('getTopN - should preserve count values', () => {
   const counts = {
-    'A': 100,
-    'B': 200,
-    'C': 50,
+    A: 100,
+    B: 200,
+    C: 50,
   };
-  
+
   const result = getTopN(counts, 2);
-  
+
   assert.strictEqual(result['B'], 200);
   assert.strictEqual(result['A'], 100);
 });
-

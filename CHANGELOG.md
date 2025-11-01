@@ -17,7 +17,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - **"Has POC" Actionability Filter**
-
   - New filter option to find threats with proof-of-concept exploits
   - Detects keywords: "POC", "proof of concept", "proof-of-concept", "exploit code", "exploit available"
   - Client-side filtering for instant results
@@ -158,14 +157,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - **Complete Threat Intelligence Aggregator**
-
   - Cloudflare Worker backend aggregating 12+ threat intelligence sources
   - Support for RSS, Atom, and JSON feed formats
   - Automatic deduplication using canonical URLs and title hashing
   - Rate limiting with per-host concurrency limits and exponential backoff retry
 
 - **Intelligent Tagging System**
-
   - Automatic extraction of CVE IDs (CVE-YYYY-NNNNN format)
   - MITRE ATT&CK technique IDs (T#### and T####.### for sub-techniques)
   - CWE IDs (CWE-### format)
@@ -173,19 +170,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Source attribution for all threat items
 
 - **Trends Engine**
-
   - Hourly bucketing over 7-day rolling window
   - Top sources and top tags analytics
   - 24-hour trending view with bar charts
 
 - **Source Discovery**
-
   - Automatic discovery of new threat intelligence sources
   - Candidate source tracking with approval workflow
   - Recently approved sources widget (7-day window)
 
 - **Frontend Dashboard (GitHub Pages)**
-
   - Real-time Current Threats widget with auto-refresh (3 minutes)
   - Trending Charts widget with Chart.js visualizations (5 minutes)
   - New Intel Sources widget
@@ -194,7 +188,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Status indicators (Live/Loading/Error)
 
 - **Security Hardening**
-
   - XSS prevention with HTML sanitization and escaping
   - CORS with strict origin checking
   - Content Security Policy (CSP) headers
@@ -202,7 +195,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Input validation and error handling
 
 - **Data Sources**
-
   - CISA News and Alerts
   - CISA Known Exploited Vulnerabilities (KEV)
   - Microsoft Security Response Center (MSRC)
@@ -215,7 +207,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Mandiant
 
 - **Infrastructure**
-
   - Cloudflare Workers deployment
   - Cloudflare KV storage for persistence
   - GitHub Pages for frontend hosting

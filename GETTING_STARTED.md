@@ -31,6 +31,7 @@ npx wrangler kv:namespace create NEWS_KV
 ```
 
 **Copy the namespace ID** from the output. It looks like:
+
 ```
 { binding = "NEWS_KV", id = "abc123def456..." }
 ```
@@ -59,6 +60,7 @@ npm run deploy
 ```
 
 **Save your worker URL** from the output:
+
 ```
 Published apt-tracker-mitre-aiq-intel (X.XX sec)
   https://apt-tracker-mitre-aiq-intel.YOUR_SUBDOMAIN.workers.dev
@@ -108,6 +110,7 @@ Wait 1-2 minutes for deployment.
 Open: `https://YOUR_USERNAME.github.io/APT-Tracker-MITRE-AIQ-Intel`
 
 You should see:
+
 - ✅ Current Threats list with items
 - ✅ Trends charts
 - ✅ New Sources widget
@@ -199,11 +202,12 @@ curl -X POST https://YOUR_WORKER_URL/api/sources/approve \
 Add this to any page:
 
 ```html
-<iframe 
-  src="https://YOUR_USERNAME.github.io/APT-Tracker-MITRE-AIQ-Intel" 
-  width="100%" 
-  height="800" 
-  frameborder="0">
+<iframe
+  src="https://YOUR_USERNAME.github.io/APT-Tracker-MITRE-AIQ-Intel"
+  width="100%"
+  height="800"
+  frameborder="0"
+>
 </iframe>
 ```
 
@@ -271,4 +275,3 @@ npm run backup
 **Need help?** Check the [troubleshooting section](#troubleshooting) or open an issue!
 
 **Ready for your interview?** Your dashboard is live and production-ready! 🎯
-

@@ -68,6 +68,7 @@ npx wrangler kv:namespace create NEWS_KV
 ```
 
 You'll see output like:
+
 ```
 🌀 Creating namespace with title "apt-tracker-mitre-aiq-intel-NEWS_KV"
 ✨ Success!
@@ -115,6 +116,7 @@ npm run deploy
 ### 5.2 Note Your Worker URL
 
 After deployment, you'll see:
+
 ```
 Published apt-tracker-mitre-aiq-intel (X.XX sec)
   https://apt-tracker-mitre-aiq-intel.YOUR_SUBDOMAIN.workers.dev
@@ -182,10 +184,12 @@ You'll see a message: "Your site is live at https://YOUR_USERNAME.github.io/APT-
 3. Add these secrets:
 
 **CLOUDFLARE_API_TOKEN**
+
 - Name: `CLOUDFLARE_API_TOKEN`
 - Value: The API token from Step 1.2
 
 **CLOUDFLARE_ACCOUNT_ID**
+
 - Name: `CLOUDFLARE_ACCOUNT_ID`
 - Value: The Account ID from Step 1.3
 
@@ -213,6 +217,7 @@ Should return JSON with threat items.
 Open: `https://YOUR_USERNAME.github.io/APT-Tracker-MITRE-AIQ-Intel`
 
 You should see:
+
 - ✅ Current Threats list populated
 - ✅ Trends charts (may be empty initially)
 - ✅ No console errors
@@ -301,16 +306,16 @@ npm run deploy && git add app.js && git commit -m "Deploy" && git push
 Add this to any webpage:
 
 ```html
-<iframe 
-  src="https://YOUR_USERNAME.github.io/APT-Tracker-MITRE-AIQ-Intel" 
-  width="100%" 
-  height="800" 
+<iframe
+  src="https://YOUR_USERNAME.github.io/APT-Tracker-MITRE-AIQ-Intel"
+  width="100%"
+  height="800"
   frameborder="0"
-  title="APT Tracker Dashboard">
+  title="APT Tracker Dashboard"
+>
 </iframe>
 ```
 
 ---
 
 🎉 **Congratulations!** Your threat intelligence dashboard is now live!
-

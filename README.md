@@ -118,14 +118,14 @@ Your dashboard will be live at: `https://tweakn74.github.io/APT-Tracker-MITRE-AI
 
 ### Environment Variables
 
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `NEWS_KV` | Yes | KV namespace binding (set in wrangler.toml) |
-| `ALLOWED_ORIGIN` | Yes | CORS origin (e.g., `https://tweakn74.github.io`) |
-| `DEFAULT_FEEDS` | Yes | Comma-separated list of RSS/Atom/JSON feed URLs |
-| `BLOCKLIST` | No | Comma-separated list of blocked domains |
-| `TW_BEARER` | No | Twitter/X API bearer token (optional) |
-| `TW_LIST_ID` | No | Twitter/X List ID (optional) |
+| Variable         | Required | Description                                      |
+| ---------------- | -------- | ------------------------------------------------ |
+| `NEWS_KV`        | Yes      | KV namespace binding (set in wrangler.toml)      |
+| `ALLOWED_ORIGIN` | Yes      | CORS origin (e.g., `https://tweakn74.github.io`) |
+| `DEFAULT_FEEDS`  | Yes      | Comma-separated list of RSS/Atom/JSON feed URLs  |
+| `BLOCKLIST`      | No       | Comma-separated list of blocked domains          |
+| `TW_BEARER`      | No       | Twitter/X API bearer token (optional)            |
+| `TW_LIST_ID`     | No       | Twitter/X List ID (optional)                     |
 
 ### Default Feed Sources
 
@@ -160,12 +160,14 @@ Or use the discovery API to find and approve new sources.
 Returns merged, normalized, and tagged threat intelligence items.
 
 **Query Parameters:**
+
 - `limit` (default: 60, max: 100) - Number of items to return
 - `after` (ISO-8601) - Only items published after this date
 - `tag` - Filter by tag (e.g., `CVE-2024-1234`, `RANSOMWARE`, `T1059`)
 - `q` - Search query (matches title and description)
 
 **Response:**
+
 ```json
 {
   "updated": "2024-10-31T12:00:00Z",
@@ -188,6 +190,7 @@ Returns merged, normalized, and tagged threat intelligence items.
 Returns hourly trend buckets for the last 24 hours.
 
 **Response:**
+
 ```json
 {
   "buckets": [
@@ -214,6 +217,7 @@ Returns hourly trend buckets for the last 24 hours.
 Returns approved and candidate sources.
 
 **Response:**
+
 ```json
 {
   "approved": [
@@ -238,6 +242,7 @@ Returns approved and candidate sources.
 Approve a candidate source.
 
 **Request:**
+
 ```json
 {
   "url": "https://newsite.com/rss"
@@ -249,6 +254,7 @@ Approve a candidate source.
 Block a domain.
 
 **Request:**
+
 ```json
 {
   "domain": "spam.com"
@@ -260,6 +266,7 @@ Block a domain.
 Run the discovery scraper to find new sources.
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -273,6 +280,7 @@ Run the discovery scraper to find new sources.
 Health check endpoint.
 
 **Response:**
+
 ```json
 {
   "status": "healthy",
@@ -302,6 +310,7 @@ npx wrangler deploy --env production
 Automatically deployed via GitHub Actions on push to `main`.
 
 Manual deployment:
+
 1. Ensure `index.html` and `app.js` are in the repository root
 2. Enable GitHub Pages in repository settings
 3. Select `main` branch and `root` directory
@@ -318,12 +327,13 @@ Add these secrets to your GitHub repository (Settings → Secrets and variables 
 ### Full Dashboard
 
 ```html
-<iframe 
-  src="https://tweakn74.github.io/APT-Tracker-MITRE-AIQ-Intel" 
-  width="100%" 
-  height="800" 
+<iframe
+  src="https://tweakn74.github.io/APT-Tracker-MITRE-AIQ-Intel"
+  width="100%"
+  height="800"
   frameborder="0"
-  title="APT Tracker Dashboard">
+  title="APT Tracker Dashboard"
+>
 </iframe>
 ```
 
@@ -333,22 +343,26 @@ Add these secrets to your GitHub repository (Settings → Secrets and variables 
 <div id="threat-feed"></div>
 
 <script>
-async function loadThreats() {
-  const response = await fetch('https://YOUR_WORKER_URL/api/threats?limit=10');
-  const data = await response.json();
-  
-  const html = data.items.map(item => `
+  async function loadThreats() {
+    const response = await fetch('https://YOUR_WORKER_URL/api/threats?limit=10');
+    const data = await response.json();
+
+    const html = data.items
+      .map(
+        item => `
     <div>
       <a href="${item.link}">${item.title}</a>
       <span>${item.source} - ${new Date(item.pubDate).toLocaleString()}</span>
     </div>
-  `).join('');
-  
-  document.getElementById('threat-feed').innerHTML = html;
-}
+  `
+      )
+      .join('');
 
-loadThreats();
-setInterval(loadThreats, 3 * 60 * 1000); // Update every 3 minutes
+    document.getElementById('threat-feed').innerHTML = html;
+  }
+
+  loadThreats();
+  setInterval(loadThreats, 3 * 60 * 1000); // Update every 3 minutes
 </script>
 ```
 
@@ -452,6 +466,7 @@ node scripts/kv_restore.mjs backups/kv-dump-TIMESTAMP.json
 ### Security Headers
 
 All API responses include:
+
 - `Content-Security-Policy: default-src 'none'`
 - `X-Content-Type-Options: nosniff`
 - `Referrer-Policy: no-referrer-when-downgrade`
@@ -504,4 +519,3 @@ Contributions welcome! Please:
 ---
 
 Built with ❤️ for the cybersecurity community
-
