@@ -6,51 +6,190 @@
   <title>APT Profiles - WatchLockAI</title>
   <link rel="stylesheet" href="/src/style.css">
   <style>
+    /* Dashboard 9: Recorded Future Style - Professional Threat Intel Design */
+
     .apt-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+      gap: 24px;
       margin-top: 20px;
     }
 
     .apt-card {
       background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 20px;
-      transition: transform 0.2s, box-shadow 0.2s;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
 
-    .apt-card:hover {
+    /* Risk-based card styling */
+    .apt-card.risk-critical {
+      border-color: #dc2626;
+      box-shadow: 0 0 20px rgba(220, 38, 38, 0.15);
+    }
+
+    .apt-card.risk-critical:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(220, 38, 38, 0.3);
+      border-color: #ef4444;
+    }
+
+    .apt-card.risk-high {
+      border-color: #ea580c;
+      box-shadow: 0 0 15px rgba(234, 88, 12, 0.1);
+    }
+
+    .apt-card.risk-high:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(234, 88, 12, 0.25);
+    }
+
+    .apt-card.risk-medium {
+      border-color: #f59e0b;
+    }
+
+    .apt-card.risk-medium:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(245, 158, 11, 0.2);
+    }
+
+    .apt-card.risk-low:hover {
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Risk Score Badge - Top Right Corner */
+    .risk-score-badge {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      z-index: 10;
+    }
+
+    .risk-score-badge .score-number {
+      font-size: 1.8em;
+      line-height: 1;
+    }
+
+    .risk-score-badge .score-label {
+      font-size: 0.65em;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+    }
+
+    .risk-critical .risk-score-badge {
+      background: linear-gradient(135deg, #dc2626, #ef4444);
+      color: white;
+      animation: pulse-critical 2s infinite;
+    }
+
+    .risk-high .risk-score-badge {
+      background: linear-gradient(135deg, #ea580c, #f97316);
+      color: white;
+    }
+
+    .risk-medium .risk-score-badge {
+      background: linear-gradient(135deg, #f59e0b, #fbbf24);
+      color: white;
+    }
+
+    .risk-low .risk-score-badge {
+      background: linear-gradient(135deg, #10b981, #34d399);
+      color: white;
+    }
+
+    @keyframes pulse-critical {
+      0%, 100% { box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3); }
+      50% { box-shadow: 0 4px 20px rgba(220, 38, 38, 0.6); }
     }
 
     .apt-header {
       display: flex;
       justify-content: space-between;
       align-items: start;
-      margin-bottom: 15px;
+      margin-bottom: 16px;
+      padding-right: 80px; /* Space for risk badge */
     }
 
     .apt-name {
-      font-size: 1.4em;
+      font-size: 1.5em;
       font-weight: bold;
       color: var(--accent);
-      margin-bottom: 5px;
+      margin-bottom: 6px;
     }
 
     .apt-aliases {
-      font-size: 0.9em;
+      font-size: 0.85em;
       color: var(--text-secondary);
       font-style: italic;
+      margin-bottom: 8px;
+    }
+
+    /* Status Badges */
+    .status-badges {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .status-badge {
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 0.7em;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-new {
+      background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+      color: white;
+      animation: glow-new 2s infinite;
+    }
+
+    .badge-active {
+      background: linear-gradient(135deg, #10b981, #34d399);
+      color: white;
+    }
+
+    .badge-high-priority {
+      background: linear-gradient(135deg, #dc2626, #ef4444);
+      color: white;
+      animation: pulse-priority 1.5s infinite;
+    }
+
+    @keyframes glow-new {
+      0%, 100% { box-shadow: 0 0 8px rgba(139, 92, 246, 0.4); }
+      50% { box-shadow: 0 0 16px rgba(139, 92, 246, 0.8); }
+    }
+
+    @keyframes pulse-priority {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
     }
 
     .country-badge {
-      padding: 4px 12px;
-      border-radius: 12px;
+      padding: 6px 14px;
+      border-radius: 16px;
       font-size: 0.85em;
       font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .country-russia { background: #ff6b6b; color: white; }
@@ -61,32 +200,161 @@
 
     .apt-description {
       color: var(--text-primary);
-      line-height: 1.6;
-      margin-bottom: 15px;
+      line-height: 1.7;
+      margin-bottom: 16px;
+      font-size: 0.95em;
+    }
+
+    /* Motivation Tags */
+    .motivation-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .motivation-tag {
+      padding: 5px 12px;
+      border-radius: 14px;
+      font-size: 0.8em;
+      font-weight: 600;
+      text-transform: capitalize;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .motivation-espionage {
+      background: linear-gradient(135deg, #3b82f6, #60a5fa);
+      color: white;
+    }
+
+    .motivation-financial {
+      background: linear-gradient(135deg, #10b981, #34d399);
+      color: white;
+    }
+
+    .motivation-destructive {
+      background: linear-gradient(135deg, #dc2626, #ef4444);
+      color: white;
+    }
+
+    /* Timeline Visualization */
+    .activity-timeline {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 16px;
+    }
+
+    .timeline-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .timeline-label {
+      font-size: 0.85em;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    .last-active {
+      font-size: 0.8em;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .last-active.recent {
+      color: #10b981;
+      font-weight: 600;
+    }
+
+    .last-active.dormant {
+      color: #94a3b8;
+    }
+
+    .timeline-bar-container {
+      position: relative;
+      height: 8px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .timeline-bar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.5s ease;
+    }
+
+    .timeline-bar.recent {
+      background: linear-gradient(90deg, #10b981, #34d399);
+    }
+
+    .timeline-bar.moderate {
+      background: linear-gradient(90deg, #f59e0b, #fbbf24);
+    }
+
+    .timeline-bar.old {
+      background: linear-gradient(90deg, #6b7280, #9ca3af);
+    }
+
+    .timeline-dates {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 6px;
+      font-size: 0.75em;
+      color: var(--text-secondary);
     }
 
     .apt-meta {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 15px;
+      gap: 12px;
+      margin-bottom: 16px;
       font-size: 0.9em;
     }
 
     .meta-item {
       display: flex;
       flex-direction: column;
+      gap: 4px;
     }
 
     .meta-label {
       color: var(--text-secondary);
-      font-size: 0.85em;
-      margin-bottom: 3px;
+      font-size: 0.8em;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
     }
 
     .meta-value {
       color: var(--text-primary);
-      font-weight: 500;
+      font-weight: 600;
+      font-size: 1.05em;
+    }
+
+    .mitre-link {
+      color: #3b82f6;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .mitre-link:hover {
+      color: #60a5fa;
+      text-decoration: underline;
     }
 
     .techniques-section {
@@ -125,12 +393,59 @@
     }
 
     .malware-badge {
-      background: var(--danger);
+      background: linear-gradient(135deg, #ef4444, #f87171);
       color: white;
-      padding: 4px 10px;
-      border-radius: 4px;
-      font-size: 0.85em;
-      font-weight: 500;
+      padding: 5px 11px;
+      border-radius: 6px;
+      font-size: 0.75em;
+      font-weight: 600;
+      box-shadow: 0 2px 4px rgba(239, 68, 68, 0.2);
+    }
+
+    .sector-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .sector-tag {
+      background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+      color: white;
+      padding: 5px 11px;
+      border-radius: 6px;
+      font-size: 0.75em;
+      font-weight: 600;
+      box-shadow: 0 2px 4px rgba(139, 92, 246, 0.2);
+    }
+
+    .sophistication-badge {
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 0.75em;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .soph-advanced {
+      background: linear-gradient(135deg, #dc2626, #ef4444);
+      color: white;
+    }
+
+    .soph-high {
+      background: linear-gradient(135deg, #ea580c, #f97316);
+      color: white;
+    }
+
+    .soph-medium {
+      background: linear-gradient(135deg, #f59e0b, #fbbf24);
+      color: white;
+    }
+
+    .soph-low {
+      background: linear-gradient(135deg, #10b981, #34d399);
+      color: white;
     }
 
     .filter-bar {
@@ -302,6 +617,36 @@
             <option value="hacktivism">Hacktivism</option>
           </select>
         </div>
+        <div class="filter-group">
+          <label for="riskLevelFilter" class="filter-label">Risk Level</label>
+          <select id="riskLevelFilter" class="filter-select">
+            <option value="">All Risk Levels</option>
+            <option value="critical">Critical (80-100)</option>
+            <option value="high">High (60-79)</option>
+            <option value="medium">Medium (40-59)</option>
+            <option value="low">Low (0-39)</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="activityFilter" class="filter-label">Activity Status</label>
+          <select id="activityFilter" class="filter-select">
+            <option value="">All Status</option>
+            <option value="active">Active (Last 6 months)</option>
+            <option value="dormant">Dormant (>6 months)</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="sortBy" class="filter-label">Sort By</label>
+          <select id="sortBy" class="filter-select">
+            <option value="risk-desc">Risk Score (High to Low)</option>
+            <option value="risk-asc">Risk Score (Low to High)</option>
+            <option value="activity-desc">Last Activity (Most Recent)</option>
+            <option value="activity-asc">Last Activity (Oldest)</option>
+            <option value="name-asc">Name (A-Z)</option>
+            <option value="name-desc">Name (Z-A)</option>
+            <option value="sophistication">Sophistication Level</option>
+          </select>
+        </div>
       </div>
 
       <!-- Quick Stats Widget -->
@@ -347,12 +692,112 @@
   <script type="module">
     let aptData = [];
 
+    /**
+     * Calculate risk score for an APT group (0-100 scale)
+     *
+     * Formula Components:
+     * 1. Sophistication Base Score (0-40 points)
+     * 2. Activity Recency Score (0-30 points)
+     * 3. Techniques Coverage Score (0-15 points)
+     * 4. Motivation Weight (0-10 points)
+     * 5. Targeted Sectors Bonus (0-5 points)
+     */
+    function calculateRiskScore(apt) {
+      let score = 0;
+
+      // 1. Sophistication Base Score (0-40 points)
+      const sophisticationScores = {
+        'advanced': 40,
+        'high': 30,
+        'medium': 20,
+        'low': 10
+      };
+      score += sophisticationScores[apt.sophistication] || 10;
+
+      // 2. Activity Recency Score (0-30 points)
+      const lastActivity = new Date(apt.lastActivity);
+      const now = new Date();
+      const daysSinceActivity = Math.floor((now - lastActivity) / (1000 * 60 * 60 * 24));
+      const recencyScore = Math.max(0, 30 - (daysSinceActivity / 365 * 30));
+      score += recencyScore;
+
+      // 3. Techniques Coverage Score (0-15 points)
+      const techniquesScore = Math.min((apt.techniques?.length || 0) * 2, 15);
+      score += techniquesScore;
+
+      // 4. Motivation Weight (0-10 points)
+      const motivationScores = {
+        'destructive': 10,
+        'espionage': 7,
+        'financial': 5
+      };
+      const maxMotivationScore = Math.max(...apt.motivation.map(m => motivationScores[m] || 0));
+      score += maxMotivationScore;
+
+      // 5. Targeted Sectors Bonus (0-5 points)
+      const sectorsScore = Math.min(apt.targetedSectors?.length || 0, 5);
+      score += sectorsScore;
+
+      return Math.min(Math.round(score), 100);
+    }
+
+    function getRiskLevel(score) {
+      if (score >= 80) return 'critical';
+      if (score >= 60) return 'high';
+      if (score >= 40) return 'medium';
+      return 'low';
+    }
+
+    function getRiskColor(score) {
+      if (score >= 80) return '#dc2626';
+      if (score >= 60) return '#ea580c';
+      if (score >= 40) return '#f59e0b';
+      return '#10b981';
+    }
+
+    function getActivityStatus(lastActivity) {
+      const lastDate = new Date(lastActivity);
+      const now = new Date();
+      const monthsSince = (now - lastDate) / (1000 * 60 * 60 * 24 * 30);
+      return monthsSince <= 6 ? 'active' : 'dormant';
+    }
+
+    function formatRelativeTime(dateString) {
+      const date = new Date(dateString);
+      const now = new Date();
+      const diffMs = now - date;
+      const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+      const diffMonths = Math.floor(diffDays / 30);
+      const diffYears = Math.floor(diffDays / 365);
+
+      if (diffDays < 30) return `${diffDays} days ago`;
+      if (diffMonths < 12) return `${diffMonths} months ago`;
+      return `${diffYears} years ago`;
+    }
+
+    function isNewAPT(firstSeen) {
+      const firstDate = new Date(firstSeen);
+      const now = new Date();
+      const daysSince = (now - firstDate) / (1000 * 60 * 60 * 24);
+      return daysSince <= 30;
+    }
+
     async function loadAPTProfiles() {
       try {
         const response = await fetch('/data/apt-profiles.json');
         const data = await response.json();
-        aptData = data.groups;
-        
+
+        // Calculate risk scores for each APT group
+        aptData = data.groups.map(apt => ({
+          ...apt,
+          riskScore: calculateRiskScore(apt),
+          riskLevel: getRiskLevel(calculateRiskScore(apt)),
+          activityStatus: getActivityStatus(apt.lastActivity)
+        }));
+
+        // Sort by risk score (highest first) by default
+        aptData.sort((a, b) => b.riskScore - a.riskScore);
+
         // Populate country filter
         const countries = [...new Set(aptData.map(apt => apt.country))].sort();
         const countryFilter = document.getElementById('countryFilter');
@@ -389,61 +834,163 @@
     function createAPTCard(apt) {
       const countryClass = apt.country.toLowerCase().replace(/\s+/g, '-');
       const sophClass = `soph-${apt.sophistication}`;
-      
+      const riskClass = `risk-${apt.riskLevel}`;
+      const isNew = isNewAPT(apt.firstSeen);
+      const isActive = apt.activityStatus === 'active';
+      const isHighPriority = apt.riskScore >= 80;
+
+      // Get country flag emoji
+      const countryFlags = {
+        'Russia': '🇷🇺',
+        'China': '🇨🇳',
+        'North Korea': '🇰🇵',
+        'Iran': '🇮🇷',
+        'Unknown': '🏴'
+      };
+      const flag = countryFlags[apt.country] || '🏴';
+
+      // Calculate timeline bar width and color
+      const firstDate = new Date(apt.firstSeen);
+      const lastDate = new Date(apt.lastActivity);
+      const now = new Date();
+      const totalSpan = now - firstDate;
+      const activeSpan = lastDate - firstDate;
+      const timelineWidth = Math.min((activeSpan / totalSpan) * 100, 100);
+
+      const daysSinceActivity = Math.floor((now - lastDate) / (1000 * 60 * 60 * 24));
+      let timelineClass = 'old';
+      if (daysSinceActivity < 180) timelineClass = 'recent';
+      else if (daysSinceActivity < 365) timelineClass = 'moderate';
+
       return `
-        <div class="apt-card">
+        <div class="apt-card ${riskClass}">
+          <!-- Risk Score Badge -->
+          <div class="risk-score-badge">
+            <div class="score-number">${apt.riskScore}</div>
+            <div class="score-label">Risk</div>
+          </div>
+
           <div class="apt-header">
             <div>
               <div class="apt-name">${apt.name}</div>
               <div class="apt-aliases">${apt.aliases.join(', ')}</div>
+
+              <!-- Status Badges -->
+              <div class="status-badges">
+                ${isNew ? '<span class="status-badge badge-new">🆕 NEW</span>' : ''}
+                ${isActive ? '<span class="status-badge badge-active">✓ ACTIVE</span>' : ''}
+                ${isHighPriority ? '<span class="status-badge badge-high-priority">⚠️ HIGH PRIORITY</span>' : ''}
+              </div>
             </div>
-            <span class="country-badge country-${countryClass}">${apt.country}</span>
           </div>
-          
+
+          <!-- Country Badge with Flag -->
+          <div style="margin-bottom: 12px;">
+            <span class="country-badge country-${countryClass}">${flag} ${apt.country}</span>
+          </div>
+
+          <!-- Motivation Tags -->
+          <div class="motivation-tags">
+            ${apt.motivation.map(m => `<span class="motivation-tag motivation-${m}">🎯 ${m.charAt(0).toUpperCase() + m.slice(1)}</span>`).join('')}
+          </div>
+
           <p class="apt-description">${apt.description}</p>
-          
+
+          <!-- Activity Timeline -->
+          <div class="activity-timeline">
+            <div class="timeline-header">
+              <span class="timeline-label">📅 Activity Timeline</span>
+              <span class="last-active ${isActive ? 'recent' : 'dormant'}">
+                ${isActive ? '🟢' : '⚪'} Last Active: ${formatRelativeTime(apt.lastActivity)}
+              </span>
+            </div>
+            <div class="timeline-bar-container">
+              <div class="timeline-bar ${timelineClass}" style="width: ${timelineWidth}%"></div>
+            </div>
+            <div class="timeline-dates">
+              <span>First Seen: ${new Date(apt.firstSeen).getFullYear()}</span>
+              <span>Last Activity: ${new Date(apt.lastActivity).toLocaleDateString()}</span>
+            </div>
+          </div>
+
           <div class="apt-meta">
             <div class="meta-item">
-              <span class="meta-label">First Seen</span>
-              <span class="meta-value">${new Date(apt.firstSeen).getFullYear()}</span>
-            </div>
-            <div class="meta-item">
-              <span class="meta-label">Sophistication</span>
+              <span class="meta-label">🎖️ Sophistication</span>
               <span class="sophistication-badge ${sophClass}">${apt.sophistication.toUpperCase()}</span>
             </div>
             <div class="meta-item">
-              <span class="meta-label">Motivation</span>
-              <span class="meta-value">${apt.motivation.join(', ')}</span>
+              <span class="meta-label">🔗 MITRE ATT&CK</span>
+              <a href="https://attack.mitre.org/groups/${apt.mitreAttackId}/" target="_blank" class="mitre-link meta-value">${apt.mitreAttackId || 'N/A'}</a>
             </div>
             <div class="meta-item">
-              <span class="meta-label">MITRE ID</span>
-              <span class="meta-value">${apt.mitreAttackId || 'N/A'}</span>
+              <span class="meta-label">🛡️ Malware Families</span>
+              <span class="meta-value">${apt.malware?.length || 0}</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">🔧 Tools</span>
+              <span class="meta-value">${apt.tools?.length || 0}</span>
             </div>
           </div>
 
           <div class="techniques-section">
-            <div class="section-label">🎯 Targeted Sectors</div>
-            <div class="technique-tags">
-              ${apt.targetedSectors.slice(0, 5).map(sector => `<span class="technique-tag">${sector}</span>`).join('')}
+            <div class="section-label">🎯 Targeted Sectors (${apt.targetedSectors.length})</div>
+            <div class="sector-tags">
+              ${apt.targetedSectors.slice(0, 6).map(sector => `<span class="sector-tag">${sector}</span>`).join('')}
+              ${apt.targetedSectors.length > 6 ? `<span class="sector-tag">+${apt.targetedSectors.length - 6} more</span>` : ''}
             </div>
           </div>
 
           <div class="techniques-section">
-            <div class="section-label">⚔️ Malware Arsenal</div>
+            <div class="section-label">⚔️ Malware Arsenal (${apt.malware.length})</div>
             <div class="malware-list">
-              ${apt.malware.slice(0, 4).map(m => `<span class="malware-badge">${m.name}</span>`).join('')}
+              ${apt.malware.slice(0, 5).map(m => `<span class="malware-badge">${m.name}</span>`).join('')}
+              ${apt.malware.length > 5 ? `<span class="malware-badge">+${apt.malware.length - 5} more</span>` : ''}
             </div>
           </div>
 
           <div class="techniques-section">
             <div class="section-label">🔧 MITRE ATT&CK Techniques (${apt.techniques.length})</div>
             <div class="technique-tags">
-              ${apt.techniques.slice(0, 6).map(t => `<span class="technique-tag">${t.id}</span>`).join('')}
-              ${apt.techniques.length > 6 ? `<span class="technique-tag">+${apt.techniques.length - 6} more</span>` : ''}
+              ${apt.techniques.slice(0, 8).map(t => `<span class="technique-tag">${t.id}</span>`).join('')}
+              ${apt.techniques.length > 8 ? `<span class="technique-tag">+${apt.techniques.length - 8} more</span>` : ''}
             </div>
           </div>
         </div>
       `;
+    }
+
+    function sortAPTGroups(groups) {
+      const sortBy = document.getElementById('sortBy').value;
+      const sorted = [...groups];
+
+      switch (sortBy) {
+        case 'risk-desc':
+          sorted.sort((a, b) => b.riskScore - a.riskScore);
+          break;
+        case 'risk-asc':
+          sorted.sort((a, b) => a.riskScore - b.riskScore);
+          break;
+        case 'activity-desc':
+          sorted.sort((a, b) => new Date(b.lastActivity) - new Date(a.lastActivity));
+          break;
+        case 'activity-asc':
+          sorted.sort((a, b) => new Date(a.lastActivity) - new Date(b.lastActivity));
+          break;
+        case 'name-asc':
+          sorted.sort((a, b) => a.name.localeCompare(b.name));
+          break;
+        case 'name-desc':
+          sorted.sort((a, b) => b.name.localeCompare(a.name));
+          break;
+        case 'sophistication':
+          const sophOrder = { 'advanced': 4, 'high': 3, 'medium': 2, 'low': 1 };
+          sorted.sort((a, b) => (sophOrder[b.sophistication] || 0) - (sophOrder[a.sophistication] || 0));
+          break;
+        default:
+          sorted.sort((a, b) => b.riskScore - a.riskScore);
+      }
+
+      return sorted;
     }
 
     function filterAPTs() {
@@ -451,21 +998,30 @@
       const country = document.getElementById('countryFilter').value;
       const sophistication = document.getElementById('sophisticationFilter').value;
       const motivation = document.getElementById('motivationFilter').value;
+      const riskLevel = document.getElementById('riskLevelFilter').value;
+      const activityStatus = document.getElementById('activityFilter').value;
 
       const filtered = aptData.filter(apt => {
-        const matchesSearch = !searchTerm || 
+        // Enhanced search - includes sectors and techniques
+        const matchesSearch = !searchTerm ||
           apt.name.toLowerCase().includes(searchTerm) ||
           apt.aliases.some(alias => alias.toLowerCase().includes(searchTerm)) ||
-          apt.description.toLowerCase().includes(searchTerm);
-        
+          apt.description.toLowerCase().includes(searchTerm) ||
+          apt.targetedSectors.some(sector => sector.toLowerCase().includes(searchTerm)) ||
+          apt.techniques.some(tech => tech.id.toLowerCase().includes(searchTerm) || tech.name.toLowerCase().includes(searchTerm));
+
         const matchesCountry = !country || apt.country === country;
         const matchesSophistication = !sophistication || apt.sophistication === sophistication;
         const matchesMotivation = !motivation || apt.motivation.includes(motivation);
+        const matchesRiskLevel = !riskLevel || apt.riskLevel === riskLevel;
+        const matchesActivityStatus = !activityStatus || apt.activityStatus === activityStatus;
 
-        return matchesSearch && matchesCountry && matchesSophistication && matchesMotivation;
+        return matchesSearch && matchesCountry && matchesSophistication && matchesMotivation && matchesRiskLevel && matchesActivityStatus;
       });
 
-      renderAPTCards(filtered);
+      // Apply sorting
+      const sorted = sortAPTGroups(filtered);
+      renderAPTCards(sorted);
     }
 
     // Event listeners
@@ -473,6 +1029,9 @@
     document.getElementById('countryFilter').addEventListener('change', filterAPTs);
     document.getElementById('sophisticationFilter').addEventListener('change', filterAPTs);
     document.getElementById('motivationFilter').addEventListener('change', filterAPTs);
+    document.getElementById('riskLevelFilter').addEventListener('change', filterAPTs);
+    document.getElementById('activityFilter').addEventListener('change', filterAPTs);
+    document.getElementById('sortBy').addEventListener('change', filterAPTs);
 
     // Load data on page load
     loadAPTProfiles();
