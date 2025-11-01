@@ -209,6 +209,16 @@
     .tag.cve {
       background: rgba(248, 81, 73, 0.15);
       color: var(--danger);
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .tag.cve:hover {
+      background: rgba(248, 81, 73, 0.25);
+    }
+
+    .tag.cve a:hover {
+      text-decoration: underline;
     }
     
     .tag.attack {
@@ -505,44 +515,45 @@
       <div class="filter-section">
         <label class="filter-label">Severity</label>
         <div class="filter-options">
-          <button class="filter-btn active" data-filter="severity" data-value="ALL">All</button>
-          <button class="filter-btn severity-critical" data-filter="severity" data-value="CRITICAL">Critical</button>
-          <button class="filter-btn severity-high" data-filter="severity" data-value="HIGH">High</button>
-          <button class="filter-btn severity-medium" data-filter="severity" data-value="MEDIUM">Medium</button>
-          <button class="filter-btn severity-low" data-filter="severity" data-value="LOW">Low</button>
+          <button type="button" class="filter-btn active" data-filter="severity" data-value="ALL">All</button>
+          <button type="button" class="filter-btn severity-critical" data-filter="severity" data-value="CRITICAL">Critical</button>
+          <button type="button" class="filter-btn severity-high" data-filter="severity" data-value="HIGH">High</button>
+          <button type="button" class="filter-btn severity-medium" data-filter="severity" data-value="MEDIUM">Medium</button>
+          <button type="button" class="filter-btn severity-low" data-filter="severity" data-value="LOW">Low</button>
         </div>
       </div>
 
       <div class="filter-section">
         <label class="filter-label">Threat Type</label>
         <div class="filter-options">
-          <button class="filter-btn active" data-filter="threatType" data-value="ALL">All</button>
-          <button class="filter-btn" data-filter="threatType" data-value="RANSOMWARE">Ransomware</button>
-          <button class="filter-btn" data-filter="threatType" data-value="ZERO-DAY">Zero-day</button>
-          <button class="filter-btn" data-filter="threatType" data-value="EXPLOIT">Exploit</button>
-          <button class="filter-btn" data-filter="threatType" data-value="MALWARE">Malware</button>
-          <button class="filter-btn" data-filter="threatType" data-value="PHISHING">Phishing</button>
-          <button class="filter-btn" data-filter="threatType" data-value="APT">APT</button>
+          <button type="button" class="filter-btn active" data-filter="threatType" data-value="ALL">All</button>
+          <button type="button" class="filter-btn" data-filter="threatType" data-value="RANSOMWARE">Ransomware</button>
+          <button type="button" class="filter-btn" data-filter="threatType" data-value="ZERO-DAY">Zero-day</button>
+          <button type="button" class="filter-btn" data-filter="threatType" data-value="EXPLOIT">Exploit</button>
+          <button type="button" class="filter-btn" data-filter="threatType" data-value="MALWARE">Malware</button>
+          <button type="button" class="filter-btn" data-filter="threatType" data-value="PHISHING">Phishing</button>
+          <button type="button" class="filter-btn" data-filter="threatType" data-value="APT">APT</button>
         </div>
       </div>
 
       <div class="filter-section">
         <label class="filter-label">Time Window</label>
         <div class="filter-options">
-          <button class="filter-btn active" data-filter="timeWindow" data-value="ALL">All Time</button>
-          <button class="filter-btn" data-filter="timeWindow" data-value="24h">Last 24 Hours</button>
-          <button class="filter-btn" data-filter="timeWindow" data-value="7d">Last 7 Days</button>
-          <button class="filter-btn" data-filter="timeWindow" data-value="30d">Last 30 Days</button>
+          <button type="button" class="filter-btn active" data-filter="timeWindow" data-value="ALL">All Time</button>
+          <button type="button" class="filter-btn" data-filter="timeWindow" data-value="24h">Last 24 Hours</button>
+          <button type="button" class="filter-btn" data-filter="timeWindow" data-value="7d">Last 7 Days</button>
+          <button type="button" class="filter-btn" data-filter="timeWindow" data-value="30d">Last 30 Days</button>
         </div>
       </div>
 
       <div class="filter-section">
         <label class="filter-label">Actionability</label>
         <div class="filter-options">
-          <button class="filter-btn active" data-filter="actionability" data-value="ALL">All</button>
-          <button class="filter-btn" data-filter="actionability" data-value="KEV">KEV Only</button>
-          <button class="filter-btn" data-filter="actionability" data-value="CVE">Has CVE</button>
-          <button class="filter-btn" data-filter="actionability" data-value="MITRE">Has MITRE</button>
+          <button type="button" class="filter-btn active" data-filter="actionability" data-value="ALL">All</button>
+          <button type="button" class="filter-btn" data-filter="actionability" data-value="KEV">KEV Only</button>
+          <button type="button" class="filter-btn" data-filter="actionability" data-value="CVE">Has CVE</button>
+          <button type="button" class="filter-btn" data-filter="actionability" data-value="MITRE">Has MITRE</button>
+          <button type="button" class="filter-btn" data-filter="actionability" data-value="POC">Has POC</button>
         </div>
       </div>
 

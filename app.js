@@ -231,6 +231,11 @@ async function loadThreats() {
         items = items.filter(item => item.tags && item.tags.some(tag => tag.startsWith('CVE-')));
       } else if (filterState.actionability === 'MITRE') {
         items = items.filter(item => item.tags && item.tags.some(tag => /^T\d{4}/.test(tag)));
+      } else if (filterState.actionability === 'POC') {
+        items = items.filter(item => {
+          const text = `${item.title} ${item.description || ''}`.toLowerCase();
+          return /proof[- ]of[- ]concept|poc|exploit.*code|exploit.*available/i.test(text);
+        });
       }
     }
 
@@ -276,11 +281,20 @@ function renderThreats(items, container) {
 
     const tagsHtml = (item.tags || []).map(tag => {
       let tagClass = 'tag';
-      if (tag.startsWith('CVE-')) tagClass += ' cve';
-      else if (tag.startsWith('T')) tagClass += ' attack';
-      else if (tag === 'HIGH-PRIORITY') tagClass += ' high-priority';
+      let tagHtml = escapeHtml(tag);
 
-      return `<span class="${tagClass}">${escapeHtml(tag)}</span>`;
+      // Make CVE tags clickable links to Tenable CVE database
+      if (tag.startsWith('CVE-')) {
+        tagClass += ' cve';
+        const cveUrl = `https://www.tenable.com/cve/${tag}`;
+        tagHtml = `<a href="${cveUrl}" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">${escapeHtml(tag)}</a>`;
+      } else if (tag.startsWith('T')) {
+        tagClass += ' attack';
+      } else if (tag === 'HIGH-PRIORITY') {
+        tagClass += ' high-priority';
+      }
+
+      return `<span class="${tagClass}">${tagHtml}</span>`;
     }).join('');
 
     const localTime = formatLocalTime(item.pubDate);
