@@ -4,22 +4,27 @@
  */
 
 import { XMLParser } from 'fast-xml-parser';
-import { 
-  fetchAllFeeds, 
-  normalizeItems, 
-  deduplicateItems, 
+import {
+  fetchAllFeeds,
+  normalizeItems,
+  deduplicateItems,
   extractTags,
-  sanitizeHtml 
+  sanitizeHtml
 } from './lib/feeds.js';
 import { updateTrendsBucket, getTrendsBuckets } from './lib/trends.js';
 import { discoverNewSources } from './lib/discovery.js';
-import { 
-  getSources, 
-  addApprovedSource, 
+import {
+  getSources,
+  addApprovedSource,
   addCandidateSource,
-  blockDomain 
+  blockDomain
 } from './lib/sources.js';
 import { logStructured, createHealthCheck } from './lib/utils.js';
+import {
+  addRiskScores,
+  filterBySeverity,
+  sortByRiskScore
+} from './lib/scoring.js';
 
 /**
  * Main request handler
@@ -82,9 +87,10 @@ async function handleThreats(request, env, ctx) {
   const after = url.searchParams.get('after');
   const tag = url.searchParams.get('tag');
   const q = url.searchParams.get('q');
+  const severity = url.searchParams.get('severity'); // NEW: severity filter
 
   const startTime = Date.now();
-  
+
   try {
     // Get approved sources
     const sources = await getSources(env);
@@ -94,51 +100,59 @@ async function handleThreats(request, env, ctx) {
       ...approvedUrls
     ];
 
-    logStructured('info', 'Fetching threats', { 
+    logStructured('info', 'Fetching threats', {
       feedCount: feedUrls.length,
-      filters: { limit, after, tag, q }
+      filters: { limit, after, tag, q, severity }
     });
 
     // Fetch all feeds
     const rawItems = await fetchAllFeeds(feedUrls, env);
-    
+
     // Normalize and tag
     let items = normalizeItems(rawItems);
-    
+
     // Deduplicate
     items = deduplicateItems(items);
-    
-    // Sort by date (most recent first)
-    items.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
-    
+
+    // Add risk scores and severity
+    items = addRiskScores(items);
+
+    // Sort by risk score (highest first)
+    items = sortByRiskScore(items);
+
     // Apply filters
     if (after) {
       const afterDate = new Date(after);
       items = items.filter(item => new Date(item.pubDate) > afterDate);
     }
-    
+
     if (tag) {
       items = items.filter(item => item.tags.includes(tag.toUpperCase()));
     }
-    
+
     if (q) {
       const query = q.toLowerCase();
-      items = items.filter(item => 
+      items = items.filter(item =>
         item.title.toLowerCase().includes(query) ||
         (item.description && item.description.toLowerCase().includes(query))
       );
     }
-    
+
+    // Filter by severity
+    if (severity) {
+      items = filterBySeverity(items, severity.toUpperCase());
+    }
+
     // Limit results
     items = items.slice(0, limit);
-    
+
     // Update trends (async, don't wait)
     ctx.waitUntil(updateTrendsBucket(items, env));
-    
+
     const duration = Date.now() - startTime;
-    logStructured('info', 'Threats fetched', { 
+    logStructured('info', 'Threats fetched', {
       itemCount: items.length,
-      duration 
+      duration
     });
 
     return jsonResponse({

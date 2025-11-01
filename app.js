@@ -10,24 +10,160 @@ const TRENDS_POLL_INTERVAL = 5 * 60 * 1000; // 5 minutes
 // State
 let threatsChart = null;
 let tagsChart = null;
+let filterState = {
+  severity: 'ALL',
+  threatType: 'ALL',
+  timeWindow: 'ALL',
+  actionability: 'ALL',
+  search: ''
+};
 
 /**
  * Initialize the dashboard
  */
 async function init() {
   console.log('Initializing APT Tracker dashboard...');
-  
+
+  // Set up filter event listeners
+  setupFilters();
+
   // Initial load
   await Promise.all([
     loadThreats(),
     loadTrends(),
     loadSources(),
   ]);
-  
+
   // Set up polling
   setInterval(loadThreats, THREATS_POLL_INTERVAL);
   setInterval(loadTrends, TRENDS_POLL_INTERVAL);
   setInterval(loadSources, TRENDS_POLL_INTERVAL);
+}
+
+/**
+ * Set up filter event listeners
+ */
+function setupFilters() {
+  // Filter buttons
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const filterType = e.target.dataset.filter;
+      const filterValue = e.target.dataset.value;
+
+      // Update active state
+      document.querySelectorAll(`[data-filter="${filterType}"]`).forEach(b => {
+        b.classList.remove('active');
+      });
+      e.target.classList.add('active');
+
+      // Update filter state
+      filterState[filterType] = filterValue;
+
+      // Reload threats
+      loadThreats();
+      updateActiveFilters();
+    });
+  });
+
+  // Search box
+  const searchBox = document.getElementById('searchBox');
+  let searchTimeout;
+  searchBox.addEventListener('input', (e) => {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(() => {
+      filterState.search = e.target.value;
+      loadThreats();
+      updateActiveFilters();
+    }, 500); // Debounce 500ms
+  });
+}
+
+/**
+ * Update active filters display
+ */
+function updateActiveFilters() {
+  const container = document.getElementById('activeFilters');
+  const pills = [];
+
+  // Add filter pills
+  if (filterState.severity !== 'ALL') {
+    pills.push({ type: 'severity', value: filterState.severity, label: `Severity: ${filterState.severity}` });
+  }
+  if (filterState.threatType !== 'ALL') {
+    pills.push({ type: 'threatType', value: filterState.threatType, label: `Type: ${filterState.threatType}` });
+  }
+  if (filterState.timeWindow !== 'ALL') {
+    pills.push({ type: 'timeWindow', value: filterState.timeWindow, label: `Time: ${filterState.timeWindow}` });
+  }
+  if (filterState.actionability !== 'ALL') {
+    pills.push({ type: 'actionability', value: filterState.actionability, label: `Filter: ${filterState.actionability}` });
+  }
+  if (filterState.search) {
+    pills.push({ type: 'search', value: filterState.search, label: `Search: "${filterState.search}"` });
+  }
+
+  if (pills.length === 0) {
+    container.style.display = 'none';
+    return;
+  }
+
+  container.style.display = 'flex';
+  container.innerHTML = pills.map(pill => `
+    <span class="filter-pill">
+      ${escapeHtml(pill.label)}
+      <span class="filter-pill-remove" onclick="removeFilter('${pill.type}')">&times;</span>
+    </span>
+  `).join('') + `
+    <button class="clear-filters-btn" onclick="clearAllFilters()">Clear All</button>
+  `;
+}
+
+/**
+ * Remove a specific filter
+ */
+function removeFilter(filterType) {
+  if (filterType === 'search') {
+    filterState.search = '';
+    document.getElementById('searchBox').value = '';
+  } else {
+    filterState[filterType] = 'ALL';
+    // Reset button state
+    document.querySelectorAll(`[data-filter="${filterType}"]`).forEach(btn => {
+      btn.classList.remove('active');
+      if (btn.dataset.value === 'ALL') {
+        btn.classList.add('active');
+      }
+    });
+  }
+  loadThreats();
+  updateActiveFilters();
+}
+
+/**
+ * Clear all filters
+ */
+function clearAllFilters() {
+  filterState = {
+    severity: 'ALL',
+    threatType: 'ALL',
+    timeWindow: 'ALL',
+    actionability: 'ALL',
+    search: ''
+  };
+
+  // Reset all buttons
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.classList.remove('active');
+    if (btn.dataset.value === 'ALL') {
+      btn.classList.add('active');
+    }
+  });
+
+  // Reset search box
+  document.getElementById('searchBox').value = '';
+
+  loadThreats();
+  updateActiveFilters();
 }
 
 /**
@@ -36,32 +172,84 @@ async function init() {
 async function loadThreats() {
   const container = document.getElementById('threats-container');
   const status = document.getElementById('threats-status');
-  
+
   try {
     status.textContent = 'Loading...';
     status.className = 'status loading';
-    
-    const response = await fetch(`${API_BASE}/api/threats?limit=60`);
-    
+
+    // Build query parameters
+    const params = new URLSearchParams();
+    params.append('limit', '100'); // Get more items for client-side filtering
+
+    // Server-side filters
+    if (filterState.severity !== 'ALL') {
+      params.append('severity', filterState.severity);
+    }
+
+    if (filterState.search) {
+      params.append('q', filterState.search);
+    }
+
+    // Time window filter
+    if (filterState.timeWindow !== 'ALL') {
+      const now = new Date();
+      let afterDate;
+
+      if (filterState.timeWindow === '24h') {
+        afterDate = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+      } else if (filterState.timeWindow === '7d') {
+        afterDate = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+      } else if (filterState.timeWindow === '30d') {
+        afterDate = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+      }
+
+      if (afterDate) {
+        params.append('after', afterDate.toISOString());
+      }
+    }
+
+    const response = await fetch(`${API_BASE}/api/threats?${params.toString()}`);
+
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}`);
     }
-    
+
     const data = await response.json();
-    
-    if (data.items && data.items.length > 0) {
-      renderThreats(data.items, container);
+    let items = data.items || [];
+
+    // Client-side filters
+    if (filterState.threatType !== 'ALL') {
+      items = items.filter(item =>
+        item.tags && item.tags.includes(filterState.threatType)
+      );
+    }
+
+    if (filterState.actionability !== 'ALL') {
+      if (filterState.actionability === 'KEV') {
+        items = items.filter(item => item.tags && item.tags.includes('KEV'));
+      } else if (filterState.actionability === 'CVE') {
+        items = items.filter(item => item.tags && item.tags.some(tag => tag.startsWith('CVE-')));
+      } else if (filterState.actionability === 'MITRE') {
+        items = items.filter(item => item.tags && item.tags.some(tag => /^T\d{4}/.test(tag)));
+      }
+    }
+
+    // Limit to 60 for display
+    items = items.slice(0, 60);
+
+    if (items.length > 0) {
+      renderThreats(items, container);
       status.textContent = 'Live';
       status.className = 'status live';
-      
+
       // Update aria-live region
       container.setAttribute('aria-live', 'polite');
     } else {
-      container.innerHTML = '<div class="empty-state"><p>No threats found</p></div>';
+      container.innerHTML = '<div class="empty-state"><p>No threats found matching filters</p></div>';
       status.textContent = 'No Data';
       status.className = 'status';
     }
-    
+
   } catch (error) {
     console.error('Failed to load threats:', error);
     container.innerHTML = `<div class="error-state"><p>Failed to load threats: ${escapeHtml(error.message)}</p></div>`;
@@ -77,21 +265,31 @@ function renderThreats(items, container) {
   const listHtml = items.map(item => {
     const isHighPriority = item.tags && item.tags.includes('HIGH-PRIORITY');
     const priorityClass = isHighPriority ? 'high-priority' : '';
-    
+
+    // Severity badge
+    const severityHtml = item.severity ?
+      `<span class="severity-badge severity-${item.severity.toLowerCase()}">${item.severity}</span>` : '';
+
+    // Risk score
+    const riskScoreHtml = item.riskScore !== undefined ?
+      `<span class="risk-score" style="color: ${getSeverityColor(item.severity)}">${item.riskScore}</span>` : '';
+
     const tagsHtml = (item.tags || []).map(tag => {
       let tagClass = 'tag';
       if (tag.startsWith('CVE-')) tagClass += ' cve';
       else if (tag.startsWith('T')) tagClass += ' attack';
       else if (tag === 'HIGH-PRIORITY') tagClass += ' high-priority';
-      
+
       return `<span class="${tagClass}">${escapeHtml(tag)}</span>`;
     }).join('');
-    
+
     const localTime = formatLocalTime(item.pubDate);
-    
+
     return `
       <div class="threat-item ${priorityClass}">
         <div class="threat-title">
+          ${severityHtml}
+          ${riskScoreHtml}
           <a href="${escapeHtml(item.link)}" target="_blank" rel="noopener noreferrer">
             ${escapeHtml(item.title)}
           </a>
@@ -104,8 +302,21 @@ function renderThreats(items, container) {
       </div>
     `;
   }).join('');
-  
+
   container.innerHTML = `<div class="threats-list">${listHtml}</div>`;
+}
+
+/**
+ * Get severity color for display
+ */
+function getSeverityColor(severity) {
+  switch (severity) {
+    case 'CRITICAL': return '#d32f2f';
+    case 'HIGH': return '#f57c00';
+    case 'MEDIUM': return '#fbc02d';
+    case 'LOW': return '#388e3c';
+    default: return '#757575';
+  }
 }
 
 /**

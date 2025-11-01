@@ -9,7 +9,7 @@ route = { pattern = "api.yourdomain.com/*", zone_name = "yourdomain.com" }
 
 [[kv_namespaces]]
 binding = "NEWS_KV"
-id = "YOUR_KV_NAMESPACE_ID"
+id = "cef5c15199694c06a2b492f711228f98"
 
 [vars]
 ALLOWED_ORIGIN = "https://tweakn74.github.io"
