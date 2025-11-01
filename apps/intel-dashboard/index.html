@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="WatchLockAI - Enterprise Threat Intelligence Platform">
+  <title>WatchLockAI - Executive Dashboard</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      /* Dark Theme Colors */
+      --bg-primary: #0a0e27;
+      --bg-secondary: #1a1f3a;
+      --text-primary: #e2e8f0;
+      --text-secondary: #94a3b8;
+      --border: #2d3748;
+
+      /* Accent Colors */
+      --accent-blue: #3b82f6;
+      --accent-purple: #8b5cf6;
+      --accent-cyan: #06b6d4;
+      --accent-green: #10b981;
+      --accent-orange: #f59e0b;
+      --accent-red: #ef4444;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 60px;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      font-weight: 300;
+    }
+
+    /* Executive Metrics Grid */
+    .executive-metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+
+    .metric-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+
+    .metric-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+    }
+
+    .metric-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .metric-gradient-blue {
+      --gradient-start: #3b82f6;
+      --gradient-end: #06b6d4;
+    }
+
+    .metric-gradient-green {
+      --gradient-start: #10b981;
+      --gradient-end: #06b6d4;
+    }
+
+    .metric-gradient-purple {
+      --gradient-start: #8b5cf6;
+      --gradient-end: #3b82f6;
+    }
+
+    .metric-gradient-orange {
+      --gradient-start: #f59e0b;
+      --gradient-end: #ef4444;
+    }
+
+    .metric-icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    }
+
+    .metric-large {
+      font-size: 4rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      line-height: 1;
+    }
+
+    .metric-label {
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 15px;
+      font-weight: 500;
+    }
+
+    .metric-trend {
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 20px;
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    .trend-up {
+      background: rgba(16, 185, 129, 0.2);
+      color: var(--accent-green);
+    }
+
+    .trend-neutral {
+      background: rgba(148, 163, 184, 0.2);
+      color: var(--text-secondary);
+    }
+
+    /* Navigation Links */
+    .nav-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .nav-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 30px;
+      text-decoration: none;
+      color: var(--text-primary);
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-card:hover {
+      transform: translateX(8px);
+      border-color: var(--accent-blue);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    }
+
+    .nav-icon {
+      font-size: 2.5rem;
+      flex-shrink: 0;
+    }
+
+    .nav-content h3 {
+      font-size: 1.25rem;
+      margin-bottom: 5px;
+    }
+
+    .nav-content p {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border);
+      margin-top: 60px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .subtitle {
+        font-size: 1rem;
+      }
+
+      .executive-metrics-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .metric-card {
+        padding: 30px 20px;
+      }
+
+      .metric-large {
+        font-size: 3rem;
+      }
+
+      .nav-links {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Loading State */
+    .loading {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-secondary);
+    }
+
+    .loading::after {
+      content: '...';
+      animation: dots 1.5s steps(4, end) infinite;
+    }
+
+    @keyframes dots {
+      0%, 20% { content: '.'; }
+      40% { content: '..'; }
+      60%, 100% { content: '...'; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🔒 WatchLockAI</h1>
+      <p class="subtitle">Enterprise Threat Intelligence Platform</p>
+    </header>
+
+    <div class="executive-metrics-grid">
+      <div class="metric-card metric-gradient-blue" onclick="window.location.href='apt-profiles.html'">
+        <div class="metric-icon">🎯</div>
+        <div class="metric-large" id="aptGroupsMetric">-</div>
+        <div class="metric-label">Total APT Groups Tracked</div>
+        <div class="metric-trend trend-up" id="aptGroupsTrend">↑ 14% this month</div>
+      </div>
+
+      <div class="metric-card metric-gradient-green" onclick="window.location.href='apt-profiles.html'">
+        <div class="metric-icon">⚡</div>
+        <div class="metric-large" id="activeActorsMetric">-</div>
+        <div class="metric-label">Active Threat Actors</div>
+        <div class="metric-trend trend-neutral" id="activeActorsTrend">→ No change</div>
+      </div>
+
+      <div class="metric-card metric-gradient-purple" onclick="window.location.href='detections.html'">
+        <div class="metric-icon">🛡️</div>
+        <div class="metric-large" id="detectionsMetric">-</div>
+        <div class="metric-label">Detection Rules Deployed</div>
+        <div class="metric-trend trend-up" id="detectionsTrend">↑ 25% this month</div>
+      </div>
+
+      <div class="metric-card metric-gradient-orange" onclick="window.location.href='detections.html'">
+        <div class="metric-icon">📊</div>
+        <div class="metric-large" id="techniquesMetric">-</div>
+        <div class="metric-label">MITRE Techniques Covered</div>
+        <div class="metric-trend trend-up" id="techniquesTrend">↑ 10% this month</div>
+      </div>
+    </div>
+
+    <h2 style="margin-bottom: 30px; font-size: 1.75rem;">Explore Intelligence</h2>
+
+    <div class="nav-links">
+      <a href="apt-profiles.html" class="nav-card">
+        <div class="nav-icon">🎯</div>
+        <div class="nav-content">
+          <h3>APT Profiles</h3>
+          <p>Threat actor groups, techniques, and attribution</p>
+        </div>
+      </a>
+
+      <a href="detections.html" class="nav-card">
+        <div class="nav-icon">🛡️</div>
+        <div class="nav-content">
+          <h3>Detection Engineering</h3>
+          <p>Detection rules and MITRE ATT&CK coverage</p>
+        </div>
+      </a>
+    </div>
+
+    <footer>
+      <p>&copy; 2025 WatchLockAI | Enterprise Threat Intelligence Platform</p>
+      <p style="margin-top: 10px; font-size: 0.875rem;">Powered by MITRE ATT&CK Framework</p>
+    </footer>
+  </div>
+
+  <script>
+    // Load metrics from data files
+    async function loadMetrics() {
+      try {
+        // Load APT profiles data
+        const aptResponse = await fetch('/data/apt-profiles.json');
+        const aptJson = await aptResponse.json();
+        const aptData = aptJson.groups || aptJson; // Handle both formats
+
+        // Load detections data
+        const detectionsResponse = await fetch('/data/detections.json');
+        const detectionsJson = await detectionsResponse.json();
+        const detectionsData = detectionsJson.detections || detectionsJson; // Handle both formats
+
+        // Calculate metrics
+        const totalAPTGroups = aptData.length;
+        const activeActors = calculateActiveActors(aptData);
+        const totalDetections = detectionsData.length;
+        const techniquesCovered = calculateTechniquesCovered(detectionsData);
+
+        // Update UI
+        document.getElementById('aptGroupsMetric').textContent = totalAPTGroups;
+        document.getElementById('activeActorsMetric').textContent = activeActors;
+        document.getElementById('detectionsMetric').textContent = totalDetections;
+        document.getElementById('techniquesMetric').textContent = techniquesCovered;
+
+      } catch (error) {
+        console.error('Error loading metrics:', error);
+        // Show error state
+        document.querySelectorAll('.metric-large').forEach(el => {
+          el.textContent = '?';
+        });
+      }
+    }
+
+    // Calculate active threat actors (active in last 12 months)
+    function calculateActiveActors(aptData) {
+      const oneYearAgo = new Date();
+      oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+
+      return aptData.filter(apt => {
+        if (!apt.lastActivity) return false;
+        const lastActivity = new Date(apt.lastActivity);
+        return lastActivity >= oneYearAgo;
+      }).length;
+    }
+
+    // Calculate unique MITRE techniques covered
+    function calculateTechniquesCovered(detectionsData) {
+      const techniques = new Set();
+      detectionsData.forEach(detection => {
+        if (detection.techniques && Array.isArray(detection.techniques)) {
+          detection.techniques.forEach(tech => {
+            if (tech.id) {
+              techniques.add(tech.id);
+            }
+          });
+        }
+      });
+      return techniques.size;
+    }
+
+    // Load metrics on page load
+    loadMetrics();
+  </script>
+</body>
+</html>
+

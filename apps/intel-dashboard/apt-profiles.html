@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APT Profiles - WatchLockAI</title>
+  <link rel="stylesheet" href="/src/style.css">
+  <style>
+    .apt-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .apt-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .apt-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .apt-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      margin-bottom: 15px;
+    }
+
+    .apt-name {
+      font-size: 1.4em;
+      font-weight: bold;
+      color: var(--accent);
+      margin-bottom: 5px;
+    }
+
+    .apt-aliases {
+      font-size: 0.9em;
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+
+    .country-badge {
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 0.85em;
+      font-weight: 600;
+    }
+
+    .country-russia { background: #ff6b6b; color: white; }
+    .country-china { background: #ff9f43; color: white; }
+    .country-north-korea { background: #ee5a6f; color: white; }
+    .country-iran { background: #48dbfb; color: white; }
+    .country-unknown { background: #636e72; color: white; }
+
+    .apt-description {
+      color: var(--text-primary);
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .apt-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 15px;
+      font-size: 0.9em;
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .meta-label {
+      color: var(--text-secondary);
+      font-size: 0.85em;
+      margin-bottom: 3px;
+    }
+
+    .meta-value {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .techniques-section {
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-size: 0.9em;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .technique-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .technique-tag {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.8em;
+      color: var(--text-primary);
+    }
+
+    .malware-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .malware-badge {
+      background: var(--danger);
+      color: white;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.85em;
+      font-weight: 500;
+    }
+
+    .filter-bar {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 20px;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .filter-label {
+      font-size: 0.9em;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    .filter-select {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .search-input {
+      width: 100%;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+
+    .back-link {
+      display: inline-block;
+      color: var(--accent);
+      text-decoration: none;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+
+    .back-link:hover {
+      color: var(--accent-hover);
+    }
+
+    .sophistication-badge {
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.85em;
+      font-weight: 600;
+    }
+
+    .soph-advanced { background: #e74c3c; color: white; }
+    .soph-high { background: #e67e22; color: white; }
+    .soph-medium { background: #f39c12; color: white; }
+    .soph-low { background: #95a5a6; color: white; }
+
+    /* Quick Stats Widget */
+    .quick-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+      margin-top: 20px;
+    }
+
+    .stat-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .stat-icon {
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+
+    .stat-number {
+      font-size: 2.5em;
+      font-weight: bold;
+      margin: 10px 0;
+      color: var(--text-primary);
+    }
+
+    .stat-label {
+      font-size: 0.9em;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Color variants */
+    .stat-blue { border-left: 4px solid #3b82f6; }
+    .stat-green { border-left: 4px solid #10b981; }
+    .stat-purple { border-left: 4px solid #8b5cf6; }
+    .stat-red { border-left: 4px solid #ef4444; }
+    .stat-orange { border-left: 4px solid #f59e0b; }
+    .stat-cyan { border-left: 4px solid #06b6d4; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="header-content">
+        <h1 class="logo">
+          <span class="logo-icon">🔒</span>
+          WatchLockAI - APT Profiles
+        </h1>
+        <p class="tagline">Advanced Persistent Threat Intelligence Database</p>
+      </div>
+    </header>
+
+    <div class="main-content">
+      <a href="/" class="back-link">← Back to Dashboard</a>
+
+      <div class="filter-bar">
+        <div class="filter-group search-box">
+          <label class="filter-label">Search</label>
+          <input type="text" id="searchInput" class="search-input" placeholder="Search by name, alias, or description...">
+        </div>
+        <div class="filter-group">
+          <label for="countryFilter" class="filter-label">Country</label>
+          <select id="countryFilter" class="filter-select">
+            <option value="">All Countries</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="sophisticationFilter" class="filter-label">Sophistication</label>
+          <select id="sophisticationFilter" class="filter-select">
+            <option value="">All Levels</option>
+            <option value="advanced">Advanced</option>
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="motivationFilter" class="filter-label">Motivation</label>
+          <select id="motivationFilter" class="filter-select">
+            <option value="">All Motivations</option>
+            <option value="espionage">Espionage</option>
+            <option value="financial">Financial</option>
+            <option value="destructive">Destructive</option>
+            <option value="hacktivism">Hacktivism</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Quick Stats Widget -->
+      <div class="quick-stats-grid">
+        <div class="stat-card stat-blue">
+          <div class="stat-icon">🎯</div>
+          <div class="stat-number" id="aptGroupsCount">-</div>
+          <div class="stat-label">APT Groups</div>
+        </div>
+        <div class="stat-card stat-green">
+          <div class="stat-icon">🌍</div>
+          <div class="stat-number" id="countriesCount">-</div>
+          <div class="stat-label">Countries</div>
+        </div>
+        <div class="stat-card stat-purple">
+          <div class="stat-icon">🛡️</div>
+          <div class="stat-number" id="detectionsCount">15</div>
+          <div class="stat-label">Detections</div>
+        </div>
+        <div class="stat-card stat-red">
+          <div class="stat-icon">🔴</div>
+          <div class="stat-number" id="criticalCount">5</div>
+          <div class="stat-label">Critical</div>
+        </div>
+        <div class="stat-card stat-orange">
+          <div class="stat-icon">🟠</div>
+          <div class="stat-number" id="highCount">9</div>
+          <div class="stat-label">High</div>
+        </div>
+        <div class="stat-card stat-cyan">
+          <div class="stat-icon">📊</div>
+          <div class="stat-number" id="techniquesCount">22</div>
+          <div class="stat-label">Techniques</div>
+        </div>
+      </div>
+
+      <div id="aptGrid" class="apt-grid">
+        <!-- APT cards will be inserted here -->
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    let aptData = [];
+
+    async function loadAPTProfiles() {
+      try {
+        const response = await fetch('/data/apt-profiles.json');
+        const data = await response.json();
+        aptData = data.groups;
+        
+        // Populate country filter
+        const countries = [...new Set(aptData.map(apt => apt.country))].sort();
+        const countryFilter = document.getElementById('countryFilter');
+        countries.forEach(country => {
+          const option = document.createElement('option');
+          option.value = country;
+          option.textContent = country;
+          countryFilter.appendChild(option);
+        });
+
+        renderAPTCards(aptData);
+        updateQuickStats();
+      } catch (error) {
+        console.error('Failed to load APT profiles:', error);
+        document.getElementById('aptGrid').innerHTML = '<p style="color: var(--danger);">Failed to load APT profiles</p>';
+      }
+    }
+
+    function updateQuickStats() {
+      const stats = {
+        aptGroups: aptData.length,
+        countries: new Set(aptData.map(a => a.country)).size,
+      };
+
+      document.getElementById('aptGroupsCount').textContent = stats.aptGroups;
+      document.getElementById('countriesCount').textContent = stats.countries;
+    }
+
+    function renderAPTCards(groups) {
+      const grid = document.getElementById('aptGrid');
+      grid.innerHTML = groups.map(apt => createAPTCard(apt)).join('');
+    }
+
+    function createAPTCard(apt) {
+      const countryClass = apt.country.toLowerCase().replace(/\s+/g, '-');
+      const sophClass = `soph-${apt.sophistication}`;
+      
+      return `
+        <div class="apt-card">
+          <div class="apt-header">
+            <div>
+              <div class="apt-name">${apt.name}</div>
+              <div class="apt-aliases">${apt.aliases.join(', ')}</div>
+            </div>
+            <span class="country-badge country-${countryClass}">${apt.country}</span>
+          </div>
+          
+          <p class="apt-description">${apt.description}</p>
+          
+          <div class="apt-meta">
+            <div class="meta-item">
+              <span class="meta-label">First Seen</span>
+              <span class="meta-value">${new Date(apt.firstSeen).getFullYear()}</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Sophistication</span>
+              <span class="sophistication-badge ${sophClass}">${apt.sophistication.toUpperCase()}</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Motivation</span>
+              <span class="meta-value">${apt.motivation.join(', ')}</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">MITRE ID</span>
+              <span class="meta-value">${apt.mitreAttackId || 'N/A'}</span>
+            </div>
+          </div>
+
+          <div class="techniques-section">
+            <div class="section-label">🎯 Targeted Sectors</div>
+            <div class="technique-tags">
+              ${apt.targetedSectors.slice(0, 5).map(sector => `<span class="technique-tag">${sector}</span>`).join('')}
+            </div>
+          </div>
+
+          <div class="techniques-section">
+            <div class="section-label">⚔️ Malware Arsenal</div>
+            <div class="malware-list">
+              ${apt.malware.slice(0, 4).map(m => `<span class="malware-badge">${m.name}</span>`).join('')}
+            </div>
+          </div>
+
+          <div class="techniques-section">
+            <div class="section-label">🔧 MITRE ATT&CK Techniques (${apt.techniques.length})</div>
+            <div class="technique-tags">
+              ${apt.techniques.slice(0, 6).map(t => `<span class="technique-tag">${t.id}</span>`).join('')}
+              ${apt.techniques.length > 6 ? `<span class="technique-tag">+${apt.techniques.length - 6} more</span>` : ''}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function filterAPTs() {
+      const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+      const country = document.getElementById('countryFilter').value;
+      const sophistication = document.getElementById('sophisticationFilter').value;
+      const motivation = document.getElementById('motivationFilter').value;
+
+      const filtered = aptData.filter(apt => {
+        const matchesSearch = !searchTerm || 
+          apt.name.toLowerCase().includes(searchTerm) ||
+          apt.aliases.some(alias => alias.toLowerCase().includes(searchTerm)) ||
+          apt.description.toLowerCase().includes(searchTerm);
+        
+        const matchesCountry = !country || apt.country === country;
+        const matchesSophistication = !sophistication || apt.sophistication === sophistication;
+        const matchesMotivation = !motivation || apt.motivation.includes(motivation);
+
+        return matchesSearch && matchesCountry && matchesSophistication && matchesMotivation;
+      });
+
+      renderAPTCards(filtered);
+    }
+
+    // Event listeners
+    document.getElementById('searchInput').addEventListener('input', filterAPTs);
+    document.getElementById('countryFilter').addEventListener('change', filterAPTs);
+    document.getElementById('sophisticationFilter').addEventListener('change', filterAPTs);
+    document.getElementById('motivationFilter').addEventListener('change', filterAPTs);
+
+    // Load data on page load
+    loadAPTProfiles();
+  </script>
+</body>
+</html>
+

@@ -7,6 +7,9 @@
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
     "test": "node --test tests/**/*.test.js",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:report": "playwright show-report",
     "lint": "eslint worker/ tests/ scripts/ app.js",
     "lint:fix": "eslint --fix worker/ tests/ scripts/ app.js",
     "format": "prettier --write \"**/*.{js,mjs,json,md}\"",
@@ -27,7 +30,9 @@
   "license": "MIT",
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20241127.0",
+    "@playwright/test": "^1.56.1",
     "eslint": "^9.17.0",
+    "http-server": "^14.1.1",
     "typescript": "^5.7.2",
     "wrangler": "^3.95.0"
   },
