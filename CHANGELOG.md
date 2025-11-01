@@ -5,6 +5,54 @@ All notable changes to the APT Tracker - MITRE ATT&CK Intelligence Dashboard wil
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.1] - 2025-11-01
+
+### Fixed
+
+- **Button Type Attributes** - Added `type="button"` to all 23 filter buttons
+  - Prevents unintended form submission behavior
+  - Improves HTML standards compliance and accessibility
+  - Affects severity, threat type, time window, and actionability filters
+
+### Added
+
+- **"Has POC" Actionability Filter**
+
+  - New filter option to find threats with proof-of-concept exploits
+  - Detects keywords: "POC", "proof of concept", "proof-of-concept", "exploit code", "exploit available"
+  - Client-side filtering for instant results
+  - Works in combination with other actionability filters (KEV, CVE, MITRE)
+  - Helps analysts prioritize threats with publicly available exploit code
+
+- **Clickable CVE Tags**
+  - CVE tags now link to Tenable CVE database (https://www.tenable.com/cve/CVE-YYYY-NNNNN)
+  - Provides comprehensive vulnerability details and explanations
+  - Links open in new tab with security attributes (`rel="noopener noreferrer"`)
+  - Hover effects: darker background (25% opacity) + text underline
+  - Cursor changes to pointer on hover for better UX
+  - Smooth transition effects (0.2s ease)
+  - Maintains existing CVE tag styling (red background, danger color)
+
+### Changed
+
+- Improved CVE tag interactivity and visual feedback
+- Enhanced user experience for vulnerability research workflow
+- Better accessibility with proper button types
+
+### Infrastructure
+
+- Created backup before changes (`backups/backup-2025-10-31-230414/`)
+- Comprehensive code quality review completed
+- All IDE diagnostics reviewed (only minor CSS warnings remain)
+- Git commit: 22f1f33
+
+### Testing
+
+- POC filter tested with regex pattern matching on live data
+- CVE links tested with proper URL encoding and security attributes
+- All existing filters verified to remain functional
+- Button type changes validated for form submission prevention
+
 ## [1.1.0] - 2025-11-01
 
 ### Added - Phase 1: Advanced Filtering UI
