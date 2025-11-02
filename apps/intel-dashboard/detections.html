@@ -357,6 +357,440 @@
       margin-top: 20px;
     }
 
+    /* Analytics Dashboard Section */
+    .analytics-section {
+      margin: 30px 0;
+      padding: 25px;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(139, 92, 246, 0.05));
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 12px;
+    }
+
+    .analytics-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid rgba(59, 130, 246, 0.3);
+    }
+
+    .analytics-title {
+      font-size: 1.5em;
+      font-weight: 700;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .analytics-title-icon {
+      font-size: 1.3em;
+    }
+
+    .time-range-selector {
+      display: flex;
+      gap: 8px;
+      background: rgba(26, 31, 58, 0.8);
+      padding: 4px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .time-range-btn {
+      padding: 8px 16px;
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 0.9em;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+
+    .time-range-btn:hover {
+      background: rgba(59, 130, 246, 0.2);
+      color: var(--text-primary);
+    }
+
+    .time-range-btn.active {
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      color: white;
+    }
+
+    .analytics-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .chart-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .chart-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .chart-title {
+      font-size: 1.1em;
+      font-weight: 600;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .chart-subtitle {
+      font-size: 0.85em;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    .chart-container {
+      position: relative;
+      width: 100%;
+      height: 280px;
+    }
+
+    /* Line Chart Styles */
+    .line-chart {
+      width: 100%;
+      height: 100%;
+    }
+
+    .chart-grid-line {
+      stroke: rgba(255, 255, 255, 0.1);
+      stroke-width: 1;
+    }
+
+    .chart-axis-label {
+      fill: var(--text-secondary);
+      font-size: 11px;
+    }
+
+    .chart-line {
+      fill: none;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .chart-line-critical {
+      stroke: #dc2626;
+      filter: drop-shadow(0 0 4px rgba(220, 38, 38, 0.5));
+    }
+
+    .chart-line-high {
+      stroke: #ea580c;
+      filter: drop-shadow(0 0 4px rgba(234, 88, 12, 0.5));
+    }
+
+    .chart-line-medium {
+      stroke: #f59e0b;
+      filter: drop-shadow(0 0 4px rgba(245, 158, 11, 0.5));
+    }
+
+    .chart-dot {
+      cursor: pointer;
+      transition: r 0.2s ease;
+    }
+
+    .chart-dot:hover {
+      r: 6;
+    }
+
+    /* Donut Chart Styles */
+    .donut-chart-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      height: 100%;
+    }
+
+    .donut-chart {
+      position: relative;
+      width: 200px;
+      height: 200px;
+    }
+
+    .donut-segment {
+      transition: opacity 0.3s ease;
+      cursor: pointer;
+    }
+
+    .donut-segment:hover {
+      opacity: 0.8;
+    }
+
+    .donut-center-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .donut-center-number {
+      font-size: 2.5em;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .donut-center-label {
+      font-size: 0.9em;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    .donut-legend {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .legend-item:hover {
+      transform: translateX(5px);
+    }
+
+    .legend-color {
+      width: 16px;
+      height: 16px;
+      border-radius: 3px;
+    }
+
+    .legend-label {
+      font-size: 0.9em;
+      color: var(--text-secondary);
+      flex: 1;
+    }
+
+    .legend-value {
+      font-size: 0.95em;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* Bar Chart Styles */
+    .bar-chart {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 10px 0;
+    }
+
+    .bar-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .bar-label {
+      min-width: 100px;
+      font-size: 0.9em;
+      color: var(--text-secondary);
+      text-align: right;
+    }
+
+    .bar-track {
+      flex: 1;
+      height: 32px;
+      background: rgba(45, 55, 72, 0.5);
+      border-radius: 6px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+      border-radius: 6px;
+      transition: width 0.8s ease;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 10px;
+      box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+    }
+
+    .bar-value {
+      font-size: 0.85em;
+      font-weight: 600;
+      color: white;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Data Table Styles */
+    .analytics-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .analytics-table thead {
+      background: rgba(45, 55, 72, 0.5);
+    }
+
+    .analytics-table th {
+      padding: 12px;
+      text-align: left;
+      font-size: 0.85em;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .analytics-table td {
+      padding: 12px;
+      font-size: 0.9em;
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .analytics-table tbody tr {
+      transition: background 0.2s ease;
+    }
+
+    .analytics-table tbody tr:hover {
+      background: rgba(59, 130, 246, 0.1);
+    }
+
+    .table-detection-name {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .table-triggers {
+      font-weight: 700;
+      color: #3b82f6;
+    }
+
+    .table-last-triggered {
+      font-size: 0.85em;
+      color: var(--text-secondary);
+    }
+
+    /* Tooltip */
+    .chart-tooltip {
+      position: absolute;
+      background: rgba(10, 14, 39, 0.95);
+      border: 1px solid rgba(59, 130, 246, 0.5);
+      border-radius: 6px;
+      padding: 10px 12px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    .chart-tooltip.visible {
+      opacity: 1;
+    }
+
+    .tooltip-date {
+      font-size: 0.85em;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+
+    .tooltip-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 4px 0;
+    }
+
+    .tooltip-color {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+    }
+
+    .tooltip-label {
+      font-size: 0.85em;
+      color: var(--text-secondary);
+    }
+
+    .tooltip-value {
+      font-size: 0.9em;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-left: auto;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .analytics-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .donut-chart-container {
+        flex-direction: column;
+        gap: 20px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .analytics-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+
+      .time-range-selector {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .time-range-btn {
+        flex: 1;
+        padding: 8px 12px;
+        font-size: 0.85em;
+      }
+
+      .chart-container {
+        height: 240px;
+      }
+
+      .bar-label {
+        min-width: 80px;
+        font-size: 0.85em;
+      }
+
+      .analytics-table {
+        font-size: 0.85em;
+      }
+
+      .analytics-table th,
+      .analytics-table td {
+        padding: 8px;
+      }
+    }
+
     .stat-card {
       background: var(--bg-secondary);
       border: 1px solid var(--border);
@@ -453,10 +887,99 @@
         </div>
       </div>
 
+      <!-- Analytics Dashboard Section -->
+      <div class="analytics-section">
+        <div class="analytics-header">
+          <div class="analytics-title">
+            <span class="analytics-title-icon">📊</span>
+            Analytics Dashboard
+          </div>
+          <div class="time-range-selector">
+            <button type="button" class="time-range-btn" data-range="7">7 Days</button>
+            <button type="button" class="time-range-btn active" data-range="30">30 Days</button>
+            <button type="button" class="time-range-btn" data-range="90">90 Days</button>
+          </div>
+        </div>
+
+        <div class="analytics-grid">
+          <!-- Detection Trends Line Chart -->
+          <div class="chart-card">
+            <div class="chart-header">
+              <div>
+                <div class="chart-title">📈 Detection Trends</div>
+                <div class="chart-subtitle">Detections triggered over time</div>
+              </div>
+            </div>
+            <div class="chart-container">
+              <svg class="line-chart" id="trendChart"></svg>
+              <div class="chart-tooltip" id="trendTooltip"></div>
+            </div>
+          </div>
+
+          <!-- Severity Distribution Donut Chart -->
+          <div class="chart-card">
+            <div class="chart-header">
+              <div>
+                <div class="chart-title">🎯 Severity Distribution</div>
+                <div class="chart-subtitle">Detections by severity level</div>
+              </div>
+            </div>
+            <div class="chart-container">
+              <div class="donut-chart-container">
+                <div class="donut-chart">
+                  <svg width="200" height="200" id="donutChart"></svg>
+                  <div class="donut-center-text">
+                    <div class="donut-center-number" id="donutTotal">15</div>
+                    <div class="donut-center-label">Total</div>
+                  </div>
+                </div>
+                <div class="donut-legend" id="donutLegend"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Platform Coverage Bar Chart -->
+          <div class="chart-card">
+            <div class="chart-header">
+              <div>
+                <div class="chart-title">💻 Platform Coverage</div>
+                <div class="chart-subtitle">Detections by platform</div>
+              </div>
+            </div>
+            <div class="chart-container">
+              <div class="bar-chart" id="platformChart"></div>
+            </div>
+          </div>
+
+          <!-- Top Triggered Detections Table -->
+          <div class="chart-card">
+            <div class="chart-header">
+              <div>
+                <div class="chart-title">🔥 Top Triggered Detections</div>
+                <div class="chart-subtitle">Most active rules (last 30 days)</div>
+              </div>
+            </div>
+            <div class="chart-container" style="overflow-y: auto;">
+              <table class="analytics-table">
+                <thead>
+                  <tr>
+                    <th>Detection</th>
+                    <th>Triggers</th>
+                    <th>Severity</th>
+                    <th>Last Triggered</th>
+                  </tr>
+                </thead>
+                <tbody id="topDetectionsTable"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="tab-container">
         <div class="tabs">
-          <button class="tab active" data-tab="catalog">Detection Catalog</button>
-          <button class="tab" data-tab="coverage">MITRE Coverage</button>
+          <button type="button" class="tab active" data-tab="catalog">Detection Catalog</button>
+          <button type="button" class="tab" data-tab="coverage">MITRE Coverage</button>
         </div>
 
         <div id="catalogTab" class="tab-content active">
