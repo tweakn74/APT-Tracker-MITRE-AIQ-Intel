@@ -1,0 +1,46 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - heading "🔒 WatchLockAI" [level=1] [ref=e4]
+    - paragraph [ref=e5]: Enterprise Threat Intelligence Platform
+  - generic [ref=e6]:
+    - generic [ref=e7] [cursor=pointer]:
+      - generic [ref=e8]: 🎯
+      - generic [ref=e9]: "8"
+      - generic [ref=e10]: Total APT Groups Tracked
+      - generic [ref=e11]: ↑ 14% this month
+    - generic [ref=e12] [cursor=pointer]:
+      - generic [ref=e13]: ⚡
+      - generic [ref=e14]: "4"
+      - generic [ref=e15]: Active Threat Actors
+      - generic [ref=e16]: → No change
+    - generic [ref=e17] [cursor=pointer]:
+      - generic [ref=e18]: 🛡️
+      - generic [ref=e19]: "15"
+      - generic [ref=e20]: Detection Rules Deployed
+      - generic [ref=e21]: ↑ 25% this month
+    - generic [ref=e22] [cursor=pointer]:
+      - generic [ref=e23]: 📊
+      - generic [ref=e24]: "22"
+      - generic [ref=e25]: MITRE Techniques Covered
+      - generic [ref=e26]: ↑ 10% this month
+  - heading "Explore Intelligence" [level=2] [ref=e27]
+  - generic [ref=e28]:
+    - link "🎯 APT Profiles Threat actor groups, techniques, and attribution" [ref=e29] [cursor=pointer]:
+      - /url: apt-profiles.html
+      - generic [ref=e30]: 🎯
+      - generic [ref=e31]:
+        - heading "APT Profiles" [level=3] [ref=e32]
+        - paragraph [ref=e33]: Threat actor groups, techniques, and attribution
+    - link "🛡️ Detection Engineering Detection rules and MITRE ATT&CK coverage" [ref=e34] [cursor=pointer]:
+      - /url: detections.html
+      - generic [ref=e35]: 🛡️
+      - generic [ref=e36]:
+        - heading "Detection Engineering" [level=3] [ref=e37]
+        - paragraph [ref=e38]: Detection rules and MITRE ATT&CK coverage
+  - contentinfo [ref=e39]:
+    - paragraph [ref=e40]: © 2025 WatchLockAI | Enterprise Threat Intelligence Platform
+    - paragraph [ref=e41]: Powered by MITRE ATT&CK Framework
+```

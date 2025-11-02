@@ -1,0 +1,533 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - heading "🔒 WatchLockAI - APT Profiles" [level=1] [ref=e6]
+      - paragraph [ref=e7]: Advanced Persistent Threat Intelligence Database
+  - generic [ref=e8]:
+    - link "← Back to Dashboard" [ref=e9] [cursor=pointer]:
+      - /url: /
+    - generic [ref=e10]:
+      - generic [ref=e11]:
+        - generic [ref=e12]: Search
+        - textbox "Search by name, alias, or description..." [ref=e13]
+      - generic [ref=e14]:
+        - generic [ref=e15]: Country
+        - combobox "Country" [ref=e16]:
+          - option "All Countries" [selected]
+          - option "China"
+          - option "Iran"
+          - option "North Korea"
+          - option "Russia"
+          - option "Unknown"
+      - generic [ref=e17]:
+        - generic [ref=e18]: Sophistication
+        - combobox "Sophistication" [ref=e19]:
+          - option "All Levels" [selected]
+          - option "Advanced"
+          - option "High"
+          - option "Medium"
+          - option "Low"
+      - generic [ref=e20]:
+        - generic [ref=e21]: Motivation
+        - combobox "Motivation" [ref=e22]:
+          - option "All Motivations" [selected]
+          - option "Espionage"
+          - option "Financial"
+          - option "Destructive"
+          - option "Hacktivism"
+      - generic [ref=e23]:
+        - generic [ref=e24]: Risk Level
+        - combobox "Risk Level" [ref=e25]:
+          - option "All Risk Levels" [selected]
+          - option "Critical (80-100)"
+          - option "High (60-79)"
+          - option "Medium (40-59)"
+          - option "Low (0-39)"
+      - generic [ref=e26]:
+        - generic [ref=e27]: Activity Status
+        - combobox "Activity Status" [ref=e28]:
+          - option "All Status" [selected]
+          - option "Active (Last 6 months)"
+          - option "Dormant (>6 months)"
+      - generic [ref=e29]:
+        - generic [ref=e30]: Sort By
+        - combobox "Sort By" [ref=e31]:
+          - option "Risk Score (High to Low)" [selected]
+          - option "Risk Score (Low to High)"
+          - option "Last Activity (Most Recent)"
+          - option "Last Activity (Oldest)"
+          - option "Name (A-Z)"
+          - option "Name (Z-A)"
+          - option "Sophistication Level"
+    - generic [ref=e32]:
+      - generic [ref=e33] [cursor=pointer]:
+        - generic [ref=e34]: 🎯
+        - generic [ref=e35]: "8"
+        - generic [ref=e36]: APT Groups
+      - generic [ref=e37] [cursor=pointer]:
+        - generic [ref=e38]: 🌍
+        - generic [ref=e39]: "5"
+        - generic [ref=e40]: Countries
+      - generic [ref=e41] [cursor=pointer]:
+        - generic [ref=e42]: 🛡️
+        - generic [ref=e43]: "15"
+        - generic [ref=e44]: Detections
+      - generic [ref=e45] [cursor=pointer]:
+        - generic [ref=e46]: 🔴
+        - generic [ref=e47]: "5"
+        - generic [ref=e48]: Critical
+      - generic [ref=e49] [cursor=pointer]:
+        - generic [ref=e50]: 🟠
+        - generic [ref=e51]: "9"
+        - generic [ref=e52]: High
+      - generic [ref=e53] [cursor=pointer]:
+        - generic [ref=e54]: 📊
+        - generic [ref=e55]: "22"
+        - generic [ref=e56]: Techniques
+    - generic [ref=e57]:
+      - generic [ref=e58]:
+        - generic [ref=e59]:
+          - generic [ref=e60]: "71"
+          - generic [ref=e61]: Risk
+        - generic [ref=e63]:
+          - generic [ref=e64]: APT28
+          - generic [ref=e65]: Fancy Bear, Sofacy, Sednit, Pawn Storm, STRONTIUM
+        - generic [ref=e67]: 🇷🇺 Russia
+        - generic [ref=e68]:
+          - generic [ref=e69]: 🎯 Espionage
+          - generic [ref=e70]: 🎯 Destructive
+        - paragraph [ref=e71]: Russian state-sponsored APT group active since at least 2007. Known for targeting government, military, and security organizations worldwide. Associated with Russian military intelligence (GRU).
+        - generic [ref=e72]:
+          - generic [ref=e73]:
+            - generic [ref=e74]: 📅 Activity Timeline
+            - generic [ref=e75]: "⚪ Last Active: 11 months ago"
+          - generic [ref=e78]:
+            - generic [ref=e79]: "First Seen: 2006"
+            - generic [ref=e80]: "Last Activity: 11/30/2024"
+        - generic [ref=e81]:
+          - generic [ref=e82]:
+            - generic [ref=e83]: 🎖️ Sophistication
+            - generic [ref=e84]: ADVANCED
+          - generic [ref=e85]:
+            - generic [ref=e86]: 🔗 MITRE ATT&CK
+            - link "G0007" [ref=e87] [cursor=pointer]:
+              - /url: https://attack.mitre.org/groups/G0007/
+          - generic [ref=e88]:
+            - generic [ref=e89]: 🛡️ Malware Families
+            - generic [ref=e90]: "4"
+          - generic [ref=e91]:
+            - generic [ref=e92]: 🔧 Tools
+            - generic [ref=e93]: "3"
+        - generic [ref=e94]:
+          - generic [ref=e95]: 🎯 Targeted Sectors (6)
+          - generic [ref=e96]:
+            - generic [ref=e97]: Government
+            - generic [ref=e98]: Military
+            - generic [ref=e99]: Defense
+            - generic [ref=e100]: Media
+            - generic [ref=e101]: Energy
+            - generic [ref=e102]: Aerospace
+        - generic [ref=e103]:
+          - generic [ref=e104]: ⚔️ Malware Arsenal (4)
+          - generic [ref=e105]:
+            - generic [ref=e106]: X-Agent
+            - generic [ref=e107]: Sofacy
+            - generic [ref=e108]: X-Tunnel
+            - generic [ref=e109]: CHOPSTICK
+        - generic [ref=e110]:
+          - generic [ref=e111]: 🔧 MITRE ATT&CK Techniques (7)
+          - generic [ref=e112]:
+            - generic [ref=e113]: T1566.001
+            - generic [ref=e114]: T1566.002
+            - generic [ref=e115]: T1059.001
+            - generic [ref=e116]: T1053.005
+            - generic [ref=e117]: T1003.001
+            - generic [ref=e118]: T1071.001
+            - generic [ref=e119]: T1027
+      - generic [ref=e120]:
+        - generic [ref=e121]:
+          - generic [ref=e122]: "69"
+          - generic [ref=e123]: Risk
+        - generic [ref=e125]:
+          - generic [ref=e126]: Lazarus Group
+          - generic [ref=e127]: HIDDEN COBRA, Guardians of Peace, ZINC, APT38
+        - generic [ref=e129]: 🇰🇵 North Korea
+        - generic [ref=e130]:
+          - generic [ref=e131]: 🎯 Financial
+          - generic [ref=e132]: 🎯 Espionage
+          - generic [ref=e133]: 🎯 Destructive
+        - paragraph [ref=e134]: North Korean state-sponsored APT group active since at least 2009. Known for both espionage and financially motivated attacks. Responsible for major cyber attacks including Sony Pictures and WannaCry.
+        - generic [ref=e135]:
+          - generic [ref=e136]:
+            - generic [ref=e137]: 📅 Activity Timeline
+            - generic [ref=e138]: "⚪ Last Active: 11 months ago"
+          - generic [ref=e141]:
+            - generic [ref=e142]: "First Seen: 2008"
+            - generic [ref=e143]: "Last Activity: 11/30/2024"
+        - generic [ref=e144]:
+          - generic [ref=e145]:
+            - generic [ref=e146]: 🎖️ Sophistication
+            - generic [ref=e147]: ADVANCED
+          - generic [ref=e148]:
+            - generic [ref=e149]: 🔗 MITRE ATT&CK
+            - link "G0032" [ref=e150] [cursor=pointer]:
+              - /url: https://attack.mitre.org/groups/G0032/
+          - generic [ref=e151]:
+            - generic [ref=e152]: 🛡️ Malware Families
+            - generic [ref=e153]: "4"
+          - generic [ref=e154]:
+            - generic [ref=e155]: 🔧 Tools
+            - generic [ref=e156]: "2"
+        - generic [ref=e157]:
+          - generic [ref=e158]: 🎯 Targeted Sectors (5)
+          - generic [ref=e159]:
+            - generic [ref=e160]: Financial
+            - generic [ref=e161]: Cryptocurrency
+            - generic [ref=e162]: Media
+            - generic [ref=e163]: Defense
+            - generic [ref=e164]: Government
+        - generic [ref=e165]:
+          - generic [ref=e166]: ⚔️ Malware Arsenal (4)
+          - generic [ref=e167]:
+            - generic [ref=e168]: WannaCry
+            - generic [ref=e169]: BLINDINGCAN
+            - generic [ref=e170]: HOPLIGHT
+            - generic [ref=e171]: ELECTRICFISH
+        - generic [ref=e172]:
+          - generic [ref=e173]: 🔧 MITRE ATT&CK Techniques (6)
+          - generic [ref=e174]:
+            - generic [ref=e175]: T1566.001
+            - generic [ref=e176]: T1204.002
+            - generic [ref=e177]: T1486
+            - generic [ref=e178]: T1490
+            - generic [ref=e179]: T1078
+            - generic [ref=e180]: T1071.001
+      - generic [ref=e181]:
+        - generic [ref=e182]:
+          - generic [ref=e183]: "66"
+          - generic [ref=e184]: Risk
+        - generic [ref=e186]:
+          - generic [ref=e187]: APT29
+          - generic [ref=e188]: Cozy Bear, The Dukes, YTTRIUM, Nobelium
+        - generic [ref=e190]: 🇷🇺 Russia
+        - generic [ref=e192]: 🎯 Espionage
+        - paragraph [ref=e193]: Russian state-sponsored APT group active since at least 2008. Associated with Russian Foreign Intelligence Service (SVR). Known for sophisticated and stealthy operations.
+        - generic [ref=e194]:
+          - generic [ref=e195]:
+            - generic [ref=e196]: 📅 Activity Timeline
+            - generic [ref=e197]: "⚪ Last Active: 11 months ago"
+          - generic [ref=e200]:
+            - generic [ref=e201]: "First Seen: 2007"
+            - generic [ref=e202]: "Last Activity: 11/30/2024"
+        - generic [ref=e203]:
+          - generic [ref=e204]:
+            - generic [ref=e205]: 🎖️ Sophistication
+            - generic [ref=e206]: ADVANCED
+          - generic [ref=e207]:
+            - generic [ref=e208]: 🔗 MITRE ATT&CK
+            - link "G0016" [ref=e209] [cursor=pointer]:
+              - /url: https://attack.mitre.org/groups/G0016/
+          - generic [ref=e210]:
+            - generic [ref=e211]: 🛡️ Malware Families
+            - generic [ref=e212]: "4"
+          - generic [ref=e213]:
+            - generic [ref=e214]: 🔧 Tools
+            - generic [ref=e215]: "2"
+        - generic [ref=e216]:
+          - generic [ref=e217]: 🎯 Targeted Sectors (5)
+          - generic [ref=e218]:
+            - generic [ref=e219]: Government
+            - generic [ref=e220]: Think Tanks
+            - generic [ref=e221]: Technology
+            - generic [ref=e222]: Healthcare
+            - generic [ref=e223]: Energy
+        - generic [ref=e224]:
+          - generic [ref=e225]: ⚔️ Malware Arsenal (4)
+          - generic [ref=e226]:
+            - generic [ref=e227]: SUNBURST
+            - generic [ref=e228]: TEARDROP
+            - generic [ref=e229]: CozyDuke
+            - generic [ref=e230]: SeaDuke
+        - generic [ref=e231]:
+          - generic [ref=e232]: 🔧 MITRE ATT&CK Techniques (6)
+          - generic [ref=e233]:
+            - generic [ref=e234]: T1195.002
+            - generic [ref=e235]: T1566.001
+            - generic [ref=e236]: T1059.001
+            - generic [ref=e237]: T1547.001
+            - generic [ref=e238]: T1055
+            - generic [ref=e239]: T1071.001
+      - generic [ref=e240]:
+        - generic [ref=e241]:
+          - generic [ref=e242]: "66"
+          - generic [ref=e243]: Risk
+        - generic [ref=e245]:
+          - generic [ref=e246]: APT41
+          - generic [ref=e247]: Winnti, Barium, Wicked Panda, Double Dragon
+        - generic [ref=e249]: 🇨🇳 China
+        - generic [ref=e250]:
+          - generic [ref=e251]: 🎯 Espionage
+          - generic [ref=e252]: 🎯 Financial
+        - paragraph [ref=e253]: Chinese state-sponsored APT group active since at least 2012. Unique for conducting both state-sponsored espionage and financially motivated operations. Targets healthcare, telecom, and technology sectors.
+        - generic [ref=e254]:
+          - generic [ref=e255]:
+            - generic [ref=e256]: 📅 Activity Timeline
+            - generic [ref=e257]: "⚪ Last Active: 11 months ago"
+          - generic [ref=e260]:
+            - generic [ref=e261]: "First Seen: 2011"
+            - generic [ref=e262]: "Last Activity: 11/30/2024"
+        - generic [ref=e263]:
+          - generic [ref=e264]:
+            - generic [ref=e265]: 🎖️ Sophistication
+            - generic [ref=e266]: ADVANCED
+          - generic [ref=e267]:
+            - generic [ref=e268]: 🔗 MITRE ATT&CK
+            - link "G0096" [ref=e269] [cursor=pointer]:
+              - /url: https://attack.mitre.org/groups/G0096/
+          - generic [ref=e270]:
+            - generic [ref=e271]: 🛡️ Malware Families
+            - generic [ref=e272]: "4"
+          - generic [ref=e273]:
+            - generic [ref=e274]: 🔧 Tools
+            - generic [ref=e275]: "3"
+        - generic [ref=e276]:
+          - generic [ref=e277]: 🎯 Targeted Sectors (6)
+          - generic [ref=e278]:
+            - generic [ref=e279]: Healthcare
+            - generic [ref=e280]: Telecommunications
+            - generic [ref=e281]: Technology
+            - generic [ref=e282]: Gaming
+            - generic [ref=e283]: Media
+            - generic [ref=e284]: Education
+        - generic [ref=e285]:
+          - generic [ref=e286]: ⚔️ Malware Arsenal (4)
+          - generic [ref=e287]:
+            - generic [ref=e288]: HIGHNOON
+            - generic [ref=e289]: LOWKEY
+            - generic [ref=e290]: DUSTPAN
+            - generic [ref=e291]: MESSAGETAP
+        - generic [ref=e292]:
+          - generic [ref=e293]: 🔧 MITRE ATT&CK Techniques (6)
+          - generic [ref=e294]:
+            - generic [ref=e295]: T1190
+            - generic [ref=e296]: T1566.001
+            - generic [ref=e297]: T1059.003
+            - generic [ref=e298]: T1543.003
+            - generic [ref=e299]: T1055
+            - generic [ref=e300]: T1027.002
+      - generic [ref=e301]:
+        - generic [ref=e302]:
+          - generic [ref=e303]: "62"
+          - generic [ref=e304]: Risk
+        - generic [ref=e306]:
+          - generic [ref=e307]: APT10
+          - generic [ref=e308]: MenuPass, Stone Panda, Red Apollo, CVNX
+        - generic [ref=e310]: 🇨🇳 China
+        - generic [ref=e312]: 🎯 Espionage
+        - paragraph [ref=e313]: Chinese state-sponsored APT group active since at least 2009. Known for targeting managed service providers (MSPs) to gain access to their clients. Associated with Chinese Ministry of State Security (MSS).
+        - generic [ref=e314]:
+          - generic [ref=e315]:
+            - generic [ref=e316]: 📅 Activity Timeline
+            - generic [ref=e317]: "⚪ Last Active: 1 years ago"
+          - generic [ref=e320]:
+            - generic [ref=e321]: "First Seen: 2008"
+            - generic [ref=e322]: "Last Activity: 9/30/2024"
+        - generic [ref=e323]:
+          - generic [ref=e324]:
+            - generic [ref=e325]: 🎖️ Sophistication
+            - generic [ref=e326]: ADVANCED
+          - generic [ref=e327]:
+            - generic [ref=e328]: 🔗 MITRE ATT&CK
+            - link "G0045" [ref=e329] [cursor=pointer]:
+              - /url: https://attack.mitre.org/groups/G0045/
+          - generic [ref=e330]:
+            - generic [ref=e331]: 🛡️ Malware Families
+            - generic [ref=e332]: "3"
+          - generic [ref=e333]:
+            - generic [ref=e334]: 🔧 Tools
+            - generic [ref=e335]: "3"
+        - generic [ref=e336]:
+          - generic [ref=e337]: 🎯 Targeted Sectors (5)
+          - generic [ref=e338]:
+            - generic [ref=e339]: Managed Service Providers
+            - generic [ref=e340]: Technology
+            - generic [ref=e341]: Telecommunications
+            - generic [ref=e342]: Government
+            - generic [ref=e343]: Healthcare
+        - generic [ref=e344]:
+          - generic [ref=e345]: ⚔️ Malware Arsenal (3)
+          - generic [ref=e346]:
+            - generic [ref=e347]: UPPERCUT
+            - generic [ref=e348]: ANEL
+            - generic [ref=e349]: HAYMAKER
+        - generic [ref=e350]:
+          - generic [ref=e351]: 🔧 MITRE ATT&CK Techniques (5)
+          - generic [ref=e352]:
+            - generic [ref=e353]: T1566.001
+            - generic [ref=e354]: T1059.001
+            - generic [ref=e355]: T1053.005
+            - generic [ref=e356]: T1003.001
+            - generic [ref=e357]: T1071.001
+      - generic [ref=e358]:
+        - generic [ref=e359]:
+          - generic [ref=e360]: "59"
+          - generic [ref=e361]: Risk
+        - generic [ref=e363]:
+          - generic [ref=e364]: Carbanak
+          - generic [ref=e365]: FIN7, Anunak
+        - generic [ref=e367]: 🏴 Unknown
+        - generic [ref=e369]: 🎯 Financial
+        - paragraph [ref=e370]: Financially motivated cybercrime group active since at least 2013. Known for targeting banks and financial institutions. Responsible for stealing over $1 billion from banks worldwide.
+        - generic [ref=e371]:
+          - generic [ref=e372]:
+            - generic [ref=e373]: 📅 Activity Timeline
+            - generic [ref=e374]: "⚪ Last Active: 1 years ago"
+          - generic [ref=e377]:
+            - generic [ref=e378]: "First Seen: 2012"
+            - generic [ref=e379]: "Last Activity: 10/31/2024"
+        - generic [ref=e380]:
+          - generic [ref=e381]:
+            - generic [ref=e382]: 🎖️ Sophistication
+            - generic [ref=e383]: ADVANCED
+          - generic [ref=e384]:
+            - generic [ref=e385]: 🔗 MITRE ATT&CK
+            - link "G0008" [ref=e386] [cursor=pointer]:
+              - /url: https://attack.mitre.org/groups/G0008/
+          - generic [ref=e387]:
+            - generic [ref=e388]: 🛡️ Malware Families
+            - generic [ref=e389]: "3"
+          - generic [ref=e390]:
+            - generic [ref=e391]: 🔧 Tools
+            - generic [ref=e392]: "3"
+        - generic [ref=e393]:
+          - generic [ref=e394]: 🎯 Targeted Sectors (4)
+          - generic [ref=e395]:
+            - generic [ref=e396]: Financial
+            - generic [ref=e397]: Hospitality
+            - generic [ref=e398]: Retail
+            - generic [ref=e399]: Restaurant
+        - generic [ref=e400]:
+          - generic [ref=e401]: ⚔️ Malware Arsenal (3)
+          - generic [ref=e402]:
+            - generic [ref=e403]: Carbanak
+            - generic [ref=e404]: GRIFFON
+            - generic [ref=e405]: POWERSOURCE
+        - generic [ref=e406]:
+          - generic [ref=e407]: 🔧 MITRE ATT&CK Techniques (5)
+          - generic [ref=e408]:
+            - generic [ref=e409]: T1566.001
+            - generic [ref=e410]: T1059.001
+            - generic [ref=e411]: T1053.005
+            - generic [ref=e412]: T1003.001
+            - generic [ref=e413]: T1071.001
+      - generic [ref=e414]:
+        - generic [ref=e415]:
+          - generic [ref=e416]: "44"
+          - generic [ref=e417]: Risk
+        - generic [ref=e419]:
+          - generic [ref=e420]: APT33
+          - generic [ref=e421]: Elfin, Holmium, Refined Kitten
+        - generic [ref=e423]: 🇮🇷 Iran
+        - generic [ref=e424]:
+          - generic [ref=e425]: 🎯 Espionage
+          - generic [ref=e426]: 🎯 Destructive
+        - paragraph [ref=e427]: Iranian state-sponsored APT group active since at least 2013. Known for targeting aviation and energy sectors. Associated with Iranian government.
+        - generic [ref=e428]:
+          - generic [ref=e429]:
+            - generic [ref=e430]: 📅 Activity Timeline
+            - generic [ref=e431]: "⚪ Last Active: 1 years ago"
+          - generic [ref=e434]:
+            - generic [ref=e435]: "First Seen: 2012"
+            - generic [ref=e436]: "Last Activity: 8/31/2024"
+        - generic [ref=e437]:
+          - generic [ref=e438]:
+            - generic [ref=e439]: 🎖️ Sophistication
+            - generic [ref=e440]: MEDIUM
+          - generic [ref=e441]:
+            - generic [ref=e442]: 🔗 MITRE ATT&CK
+            - link "G0064" [ref=e443] [cursor=pointer]:
+              - /url: https://attack.mitre.org/groups/G0064/
+          - generic [ref=e444]:
+            - generic [ref=e445]: 🛡️ Malware Families
+            - generic [ref=e446]: "3"
+          - generic [ref=e447]:
+            - generic [ref=e448]: 🔧 Tools
+            - generic [ref=e449]: "2"
+        - generic [ref=e450]:
+          - generic [ref=e451]: 🎯 Targeted Sectors (4)
+          - generic [ref=e452]:
+            - generic [ref=e453]: Aviation
+            - generic [ref=e454]: Energy
+            - generic [ref=e455]: Petrochemical
+            - generic [ref=e456]: Government
+        - generic [ref=e457]:
+          - generic [ref=e458]: ⚔️ Malware Arsenal (3)
+          - generic [ref=e459]:
+            - generic [ref=e460]: SHAPESHIFT
+            - generic [ref=e461]: DROPSHOT
+            - generic [ref=e462]: TURNEDUP
+        - generic [ref=e463]:
+          - generic [ref=e464]: 🔧 MITRE ATT&CK Techniques (5)
+          - generic [ref=e465]:
+            - generic [ref=e466]: T1566.001
+            - generic [ref=e467]: T1059.001
+            - generic [ref=e468]: T1053.005
+            - generic [ref=e469]: T1003
+            - generic [ref=e470]: T1071.001
+      - generic [ref=e471]:
+        - generic [ref=e472]:
+          - generic [ref=e473]: "42"
+          - generic [ref=e474]: Risk
+        - generic [ref=e476]:
+          - generic [ref=e477]: APT1
+          - generic [ref=e478]: Comment Crew, Comment Group, Comment Panda
+        - generic [ref=e480]: 🇨🇳 China
+        - generic [ref=e482]: 🎯 Espionage
+        - paragraph [ref=e483]: Chinese state-sponsored APT group active since at least 2006. One of the first publicly exposed APT groups. Associated with PLA Unit 61398. Known for large-scale intellectual property theft.
+        - generic [ref=e484]:
+          - generic [ref=e485]:
+            - generic [ref=e486]: 📅 Activity Timeline
+            - generic [ref=e487]: "⚪ Last Active: 11 years ago"
+          - generic [ref=e490]:
+            - generic [ref=e491]: "First Seen: 2005"
+            - generic [ref=e492]: "Last Activity: 11/30/2013"
+        - generic [ref=e493]:
+          - generic [ref=e494]:
+            - generic [ref=e495]: 🎖️ Sophistication
+            - generic [ref=e496]: MEDIUM
+          - generic [ref=e497]:
+            - generic [ref=e498]: 🔗 MITRE ATT&CK
+            - link "G0006" [ref=e499] [cursor=pointer]:
+              - /url: https://attack.mitre.org/groups/G0006/
+          - generic [ref=e500]:
+            - generic [ref=e501]: 🛡️ Malware Families
+            - generic [ref=e502]: "3"
+          - generic [ref=e503]:
+            - generic [ref=e504]: 🔧 Tools
+            - generic [ref=e505]: "2"
+        - generic [ref=e506]:
+          - generic [ref=e507]: 🎯 Targeted Sectors (5)
+          - generic [ref=e508]:
+            - generic [ref=e509]: Aerospace
+            - generic [ref=e510]: Defense
+            - generic [ref=e511]: Technology
+            - generic [ref=e512]: Manufacturing
+            - generic [ref=e513]: Energy
+        - generic [ref=e514]:
+          - generic [ref=e515]: ⚔️ Malware Arsenal (3)
+          - generic [ref=e516]:
+            - generic [ref=e517]: WEBC2
+            - generic [ref=e518]: TROJAN.ECLTYS
+            - generic [ref=e519]: BACKDOOR.BARKIOFORK
+        - generic [ref=e520]:
+          - generic [ref=e521]: 🔧 MITRE ATT&CK Techniques (5)
+          - generic [ref=e522]:
+            - generic [ref=e523]: T1566.001
+            - generic [ref=e524]: T1059.003
+            - generic [ref=e525]: T1053.005
+            - generic [ref=e526]: T1003
+            - generic [ref=e527]: T1071.001
+```

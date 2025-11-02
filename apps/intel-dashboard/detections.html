@@ -6,6 +6,50 @@
   <title>Detection Engineering - WatchLockAI</title>
   <link rel="stylesheet" href="/src/style.css">
   <style>
+    /* Versedetect Dark Theme Colors */
+    :root {
+      /* Background Colors */
+      --bg: #0f1114;
+      --panel: #151821;
+      --panel-soft: #1b1f2a;
+      --panel-elevated: #1c202d;
+      --bg-translucent: #0f1114;
+
+      /* Legacy variable names for compatibility */
+      --bg-primary: #0f1114;
+      --bg-secondary: #151821;
+      --bg-tertiary: #1b1f2a;
+
+      /* Text Colors */
+      --text-primary: #e8ecf1;
+      --text-muted: #a7b0bf;
+      --text-subtle: #7b8496;
+      --text-secondary: #a7b0bf; /* Legacy compatibility */
+
+      /* Border Colors */
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.16);
+      --border: rgba(255, 255, 255, 0.08); /* Legacy compatibility */
+
+      /* Brand/Accent Colors */
+      --brand: #5aa9ff;
+      --brand-strong: #7bbcff;
+      --brand-alt: #7ee787;
+      --danger: #ff6b7a;
+      --warn: #ffb86b;
+      --accent: #5aa9ff; /* Legacy compatibility */
+      --accent-hover: #7bbcff; /* Legacy compatibility */
+
+      /* Border Radius */
+      --radius-sm: 12px;
+      --radius-md: 16px;
+      --radius-lg: 22px;
+
+      /* Shadows */
+      --shadow-md: 0 12px 30px rgba(0, 0, 0, 0.35);
+      --shadow-lg: 0 22px 45px rgba(0, 0, 0, 0.45);
+    }
+
     .detection-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
@@ -55,11 +99,11 @@
       text-transform: uppercase;
     }
 
-    .severity-critical { background: #e74c3c; color: white; }
-    .severity-high { background: #e67e22; color: white; }
-    .severity-medium { background: #f39c12; color: white; }
-    .severity-low { background: #3498db; color: white; }
-    .severity-info { background: #95a5a6; color: white; }
+    .severity-critical { background: var(--danger); color: white; }
+    .severity-high { background: var(--brand); color: white; }
+    .severity-medium { background: var(--warn); color: white; }
+    .severity-low { background: var(--brand-alt); color: white; }
+    .severity-info { background: var(--text-subtle); color: white; }
 
     .status-badge {
       padding: 4px 10px;
@@ -490,18 +534,18 @@
     }
 
     .chart-line-critical {
-      stroke: #dc2626;
-      filter: drop-shadow(0 0 4px rgba(220, 38, 38, 0.5));
+      stroke: var(--danger);
+      filter: drop-shadow(0 0 4px rgba(255, 107, 122, 0.5));
     }
 
     .chart-line-high {
-      stroke: #ea580c;
-      filter: drop-shadow(0 0 4px rgba(234, 88, 12, 0.5));
+      stroke: var(--brand);
+      filter: drop-shadow(0 0 4px rgba(90, 169, 255, 0.5));
     }
 
     .chart-line-medium {
-      stroke: #f59e0b;
-      filter: drop-shadow(0 0 4px rgba(245, 158, 11, 0.5));
+      stroke: var(--warn);
+      filter: drop-shadow(0 0 4px rgba(255, 184, 107, 0.5));
     }
 
     .chart-dot {

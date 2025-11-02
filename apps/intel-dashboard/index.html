@@ -13,25 +13,44 @@
     }
 
     :root {
-      /* Dark Theme Colors */
-      --bg-primary: #0a0e27;
-      --bg-secondary: #1a1f3a;
-      --text-primary: #e2e8f0;
-      --text-secondary: #94a3b8;
-      --border: #2d3748;
+      /* Versedetect Dark Theme Colors */
 
-      /* Accent Colors */
-      --accent-blue: #3b82f6;
-      --accent-purple: #8b5cf6;
-      --accent-cyan: #06b6d4;
-      --accent-green: #10b981;
-      --accent-orange: #f59e0b;
-      --accent-red: #ef4444;
+      /* Background Colors */
+      --bg: #0f1114;
+      --panel: #151821;
+      --panel-soft: #1b1f2a;
+      --panel-elevated: #1c202d;
+      --bg-translucent: #0f1114;
+
+      /* Text Colors */
+      --text-primary: #e8ecf1;
+      --text-muted: #a7b0bf;
+      --text-subtle: #7b8496;
+
+      /* Border Colors */
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.16);
+
+      /* Brand/Accent Colors */
+      --brand: #5aa9ff;
+      --brand-strong: #7bbcff;
+      --brand-alt: #7ee787;
+      --danger: #ff6b7a;
+      --warn: #ffb86b;
+
+      /* Border Radius */
+      --radius-sm: 12px;
+      --radius-md: 16px;
+      --radius-lg: 22px;
+
+      /* Shadows */
+      --shadow-md: 0 12px 30px rgba(0, 0, 0, 0.35);
+      --shadow-lg: 0 22px 45px rgba(0, 0, 0, 0.45);
     }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      background: var(--bg-primary);
+      background: var(--bg);
       color: var(--text-primary);
       line-height: 1.6;
       min-height: 100vh;
@@ -53,7 +72,7 @@
       font-size: 3rem;
       font-weight: 700;
       margin-bottom: 10px;
-      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+      background: linear-gradient(135deg, var(--brand), var(--brand-strong));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -61,7 +80,7 @@
 
     .subtitle {
       font-size: 1.25rem;
-      color: var(--text-secondary);
+      color: var(--text-muted);
       font-weight: 300;
     }
 
@@ -74,9 +93,9 @@
     }
 
     .metric-card {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: 16px;
+      background: var(--panel);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
       padding: 40px;
       text-align: center;
       position: relative;
@@ -97,27 +116,27 @@
 
     .metric-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+      box-shadow: var(--shadow-md);
     }
 
     .metric-gradient-blue {
-      --gradient-start: #3b82f6;
-      --gradient-end: #06b6d4;
+      --gradient-start: var(--brand);
+      --gradient-end: var(--brand-strong);
     }
 
     .metric-gradient-green {
-      --gradient-start: #10b981;
-      --gradient-end: #06b6d4;
+      --gradient-start: var(--brand-alt);
+      --gradient-end: var(--brand);
     }
 
     .metric-gradient-purple {
-      --gradient-start: #8b5cf6;
-      --gradient-end: #3b82f6;
+      --gradient-start: var(--brand-strong);
+      --gradient-end: var(--brand);
     }
 
     .metric-gradient-orange {
-      --gradient-start: #f59e0b;
-      --gradient-end: #ef4444;
+      --gradient-start: var(--warn);
+      --gradient-end: var(--danger);
     }
 
     .metric-icon {
@@ -135,7 +154,7 @@
 
     .metric-label {
       font-size: 1.125rem;
-      color: var(--text-secondary);
+      color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 1px;
       margin-bottom: 15px;
@@ -152,13 +171,13 @@
     }
 
     .trend-up {
-      background: rgba(16, 185, 129, 0.2);
-      color: var(--accent-green);
+      background: rgba(126, 231, 135, 0.2);
+      color: var(--brand-alt);
     }
 
     .trend-neutral {
-      background: rgba(148, 163, 184, 0.2);
-      color: var(--text-secondary);
+      background: rgba(167, 176, 191, 0.2);
+      color: var(--text-muted);
     }
 
     /* Navigation Links */
@@ -170,9 +189,9 @@
     }
 
     .nav-card {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: 12px;
+      background: var(--panel);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
       padding: 30px;
       text-decoration: none;
       color: var(--text-primary);
@@ -184,8 +203,8 @@
 
     .nav-card:hover {
       transform: translateX(8px);
-      border-color: var(--accent-blue);
-      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+      border-color: var(--brand);
+      box-shadow: 0 4px 12px rgba(90, 169, 255, 0.3);
     }
 
     .nav-icon {
@@ -200,14 +219,14 @@
 
     .nav-content p {
       font-size: 0.875rem;
-      color: var(--text-secondary);
+      color: var(--text-muted);
     }
 
     footer {
       text-align: center;
       padding: 40px 20px;
-      color: var(--text-secondary);
-      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-subtle);
       margin-top: 60px;
     }
 
@@ -243,7 +262,7 @@
     .loading {
       text-align: center;
       padding: 60px 20px;
-      color: var(--text-secondary);
+      color: var(--text-muted);
     }
 
     .loading::after {

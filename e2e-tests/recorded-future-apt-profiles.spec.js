@@ -58,21 +58,21 @@ test.describe('Dashboard 9: Recorded Future Style APT Profiles', () => {
 
   test('Risk level badges display correct colors', async ({ page }) => {
     await page.waitForSelector('.apt-card', { timeout: 5000 });
-    
-    // Check for critical risk cards (red)
+
+    // Check for critical risk cards (red - Versedetect --danger color)
     const criticalCards = page.locator('.apt-card.risk-critical');
     if (await criticalCards.count() > 0) {
       const firstCritical = criticalCards.first();
-      await expect(firstCritical).toHaveCSS('border-color', /rgb\(220, 38, 38\)/);
+      await expect(firstCritical).toHaveCSS('border-color', /rgb\(255, 107, 122\)/);
     }
-    
-    // Check for high risk cards (orange)
+
+    // Check for high risk cards (blue - Versedetect --brand color)
     const highCards = page.locator('.apt-card.risk-high');
     if (await highCards.count() > 0) {
       const firstHigh = highCards.first();
-      await expect(firstHigh).toHaveCSS('border-color', /rgb\(234, 88, 12\)/);
+      await expect(firstHigh).toHaveCSS('border-color', /rgb\(90, 169, 255\)/);
     }
-    
+
     // Verify at least one risk-level class is applied
     const riskCards = page.locator('.apt-card[class*="risk-"]');
     const count = await riskCards.count();
