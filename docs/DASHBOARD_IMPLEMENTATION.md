@@ -1,8 +1,8 @@
 # WatchLockAI Dashboard Implementation
 
-**Version:** v2.11.0  
-**Last Updated:** November 2, 2025  
-**Status:** Phase 2 - 5/9 dashboards complete (56%)
+**Version:** v2.12.0
+**Last Updated:** November 3, 2025
+**Status:** Phase 2 - 6/9 dashboards complete (67%)
 
 ---
 
@@ -16,12 +16,12 @@
 | 4   | Quick Stats Widget                 | HIGHEST   | Very Simple | ✅ COMPLETE | v2.8.0  | 6/6 (100%)   |
 | 5   | Dark Theme Enhancements            | HIGH      | Simple      | ✅ COMPLETE | v2.11.0 | 10/10 (100%) |
 | 6   | Detection Coverage Heatmap         | MEDIUM    | Moderate    | ⏳ PLANNED  | -       | -            |
-| 7   | Modern APT Overview                | HIGH      | Moderate    | ⏳ NEXT     | v2.12.0 | -            |
+| 7   | Modern APT Overview                | HIGH      | Moderate    | ✅ COMPLETE | v2.12.0 | 16/16 (100%) |
 | 8   | Dark Web Intelligence Feed         | HIGH      | Complex     | ⏳ PLANNED  | -       | -            |
 | 9   | Recorded Future Style APT Profiles | HIGHEST   | Moderate    | ✅ COMPLETE | v2.9.0  | 21/21 (100%) |
 
-**Overall Progress:** 5/9 dashboards (56%)  
-**Test Coverage:** 125/125 tests passing (100%)
+**Overall Progress:** 6/9 dashboards (67%)
+**Test Coverage:** 141/141 tests passing (100%)
 
 ---
 
@@ -540,6 +540,212 @@
 
 ---
 
-**Last Updated:** November 2, 2025
-**Version:** v2.11.0
-**Next Milestone:** Dashboard 7 (Modern APT Overview) - v2.12.0
+## Dashboard 7: Modern APT Overview (v2.12.0)
+
+**Status:** ✅ COMPLETE
+**Version:** v2.12.0
+**Date:** November 3, 2025
+**Priority:** HIGH
+**Difficulty:** Moderate
+**Tests:** 16/16 passing (100%)
+
+### Overview
+
+Dashboard 7 enhances the APT Profiles page with a comprehensive detail modal that displays in-depth information about each APT group. Users can click on any APT card to view a detailed profile including description, history, MITRE ATT&CK techniques, malware arsenal, targeted sectors, and more.
+
+### Features Implemented
+
+#### 1. APT Detail Modal
+
+**Modal Structure:**
+
+- **Header Section:**
+
+  - APT name (large title)
+  - Aliases (subtitle)
+  - Country badge with flag emoji
+  - Sophistication level badge
+  - Risk score badge (0-100 scale)
+  - Close button (top-right X)
+
+- **Body Sections:**
+  - **Overview:** Full description, first seen date, last activity date, activity status
+  - **Motivation:** Tags for espionage, financial, destructive motivations
+  - **Targeted Sectors:** List of industries targeted by the APT group
+  - **Targeted Countries:** List of countries targeted
+  - **MITRE ATT&CK Techniques:** Clickable links to MITRE ATT&CK technique pages
+  - **Malware Arsenal:** List of malware families with descriptions
+  - **Tools:** List of tools used by the APT group
+  - **External References:** Link to MITRE ATT&CK group page
+
+#### 2. Modal Interactions
+
+**Opening the Modal:**
+
+- Click on any APT card
+- Cards have `cursor: pointer` style
+- Cards have `data-id` attribute for identification
+
+**Closing the Modal:**
+
+- Click the close button (X) in top-right corner
+- Press ESC key
+- Click outside the modal (on the backdrop)
+
+**Animations:**
+
+- Fade-in animation for modal backdrop (0.2s)
+- Slide-in animation for modal content (0.3s)
+- Smooth transitions for all interactions
+
+#### 3. Visual Design
+
+**Color Scheme:**
+
+- Uses Versedetect color scheme variables
+- Background: `var(--panel)` (#151821)
+- Border: `var(--border)`
+- Text: `var(--text-primary)`, `var(--text-muted)`
+- Accent colors: `var(--brand)`, `var(--brand-alt)`, `var(--danger)`
+
+**Border Radius:**
+
+- Modal content: `var(--radius-md)` (16px)
+- Badges and tags: `var(--radius-sm)` (12px)
+
+**Shadows:**
+
+- Modal content: `var(--shadow-lg)` for depth
+
+**Responsive Design:**
+
+- Modal adapts to mobile, tablet, and desktop viewports
+- Scrollable content for long profiles
+- Max-height constraint with overflow-y: auto
+
+#### 4. Technical Implementation
+
+**Files Modified:**
+
+- `apps/intel-dashboard/apt-profiles.html`
+  - Added modal HTML structure (lines 1261-1273)
+  - Added modal CSS styles (lines 631-793)
+  - Added `showAPTModal()` function (lines 1193-1322)
+  - Modified `renderAPTCards()` to add click handlers (lines 1049-1063)
+  - Modified `createAPTCard()` to add `data-id` and cursor pointer (line 1097)
+  - Added modal event listeners (lines 1392-1418)
+
+**Files Created:**
+
+- `e2e-tests/modern-apt-overview.spec.js` (16 tests)
+
+**Key Functions:**
+
+```javascript
+// Show APT detail modal
+function showAPTModal(apt) {
+  // Populate modal header with APT name, aliases, badges
+  // Populate modal body with comprehensive profile sections
+  // Display modal
+}
+
+// Render APT cards with click handlers
+function renderAPTCards(groups) {
+  // Render cards
+  // Add click event listeners to open modal
+}
+```
+
+**Modal Event Handlers:**
+
+```javascript
+// Close button click
+closeBtn.addEventListener('click', () => {
+  modal.style.display = 'none';
+});
+
+// Click outside modal
+window.addEventListener('click', event => {
+  if (event.target === modal) {
+    modal.style.display = 'none';
+  }
+});
+
+// ESC key
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && modal.style.display === 'block') {
+    modal.style.display = 'none';
+  }
+});
+```
+
+### Testing
+
+**Test File:** `e2e-tests/modern-apt-overview.spec.js`
+
+**Test Coverage (16 tests):**
+
+1. ✅ APT cards are clickable and have cursor pointer
+2. ✅ Clicking APT card opens modal
+3. ✅ Modal displays comprehensive APT profile information
+4. ✅ Modal header displays APT name, aliases, and metadata
+5. ✅ Modal close button works
+6. ✅ ESC key closes modal
+7. ✅ Clicking outside modal closes it
+8. ✅ MITRE ATT&CK technique links are functional
+9. ✅ Modal displays malware information correctly
+10. ✅ Modal has smooth animations
+11. ✅ Modal content is scrollable for long content
+12. ✅ Multiple APT cards can be opened sequentially
+13. ✅ Modal works with filtered results
+14. ✅ Modal is accessible and has proper ARIA attributes
+15. ✅ No console errors when opening and closing modal
+16. ✅ Modal responsive design works on mobile viewport
+
+**Test Results:**
+
+- Dashboard 7 Tests: 16/16 passing (100%)
+- Full Test Suite: 141/141 passing (100%)
+- No console errors
+- All accessibility checks passing
+
+### Challenges and Solutions
+
+**Challenge 1: Close Button Overlap**
+
+- **Problem:** Risk score badge in modal header was intercepting pointer events, preventing close button clicks
+- **Solution:** Added `z-index: 1000` and `pointer-events: auto` to close button, and `padding-right: 70px` to modal header
+
+**Challenge 2: Modal Content Overflow**
+
+- **Problem:** Long APT profiles could extend beyond viewport
+- **Solution:** Added `max-height: calc(100vh - 200px)` and `overflow-y: auto` to modal body
+
+**Challenge 3: Multiple Close Methods**
+
+- **Problem:** Users expect multiple ways to close modals
+- **Solution:** Implemented three close methods: close button, ESC key, and click outside
+
+### Success Metrics
+
+- ✅ All 16 Dashboard 7 tests passing (100%)
+- ✅ Full test suite: 141 tests passing (100%)
+- ✅ APT detail modal with comprehensive information
+- ✅ Smooth animations and responsive design
+- ✅ MITRE ATT&CK technique links functional
+- ✅ No console errors
+- ✅ Accessibility checks passing
+- ✅ Git commit and tag v2.12.0 created
+
+### Next Steps
+
+- [ ] Take screenshots of modal functionality
+- [ ] Begin Dashboard 3: Geopolitical Map (Phase 3)
+- [ ] Begin Dashboard 6: Coverage Heatmap (Phase 3)
+- [ ] Begin Dashboard 8: Dark Web Intelligence Feed (Phase 3)
+
+---
+
+**Last Updated:** November 3, 2025
+**Version:** v2.12.0
+**Next Milestone:** Dashboard 3 (Geopolitical Map) - v2.13.0
