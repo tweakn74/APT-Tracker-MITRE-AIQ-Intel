@@ -292,23 +292,23 @@
 
 ### Medium
 
-1. **Chart.js Performance**
+- [~] **Chart.js Performance**
 
-   - Large datasets (1000+ data points) cause rendering lag
-   - **Workaround:** Limit data points to 100 per chart
-   - **Fix:** Implement data aggregation and sampling
+  - Large datasets (1000+ data points) cause rendering lag
+  - **Workaround:** Limit data points to 100 per chart
+  - **Fix:** Implement data aggregation and sampling
 
-2. **Mobile Responsiveness**
-   - Some dashboard components not fully responsive on small screens
-   - **Workaround:** Use desktop or tablet for best experience
-   - **Fix:** Implement mobile-first responsive design
+- [~] **Mobile Responsiveness**
+  - Some dashboard components not fully responsive on small screens
+  - **Workaround:** Use desktop or tablet for best experience
+  - **Fix:** Implement mobile-first responsive design
 
 ### Low
 
-3. **Browser Compatibility**
-   - IE11 not supported (by design)
-   - Safari <14 may have CSS variable issues
-   - **Fix:** Add browser compatibility warnings
+- [~] **Browser Compatibility**
+  - IE11 not supported (by design)
+  - Safari <14 may have CSS variable issues
+  - **Fix:** Add browser compatibility warnings
 
 ---
 
