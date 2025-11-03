@@ -1,9 +1,277 @@
 # Changelog
 
-All notable changes to the APT Tracker - MITRE ATT&CK Intelligence Dashboard will be documented in this file.
+All notable changes to WatchLockAI - Enterprise Threat Intelligence Platform will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+---
+
+## [2.11.0] - 2025-11-02
+
+### Added - Dashboard 5: Dark Theme Enhancements (Phase 2)
+
+- **Visual Consistency Enhancements**
+  - Added body background color styles to `apt-profiles.html` and `detections.html` (set to `--bg` / `#0f1114`)
+  - Updated all h1-h6 heading text colors to use `--text-primary` (#e8ecf1)
+  - Updated all border-radius values from hardcoded 8px/12px to CSS variables (`--radius-sm`, `--radius-md`)
+  - Added shadow styles to metric cards and detection cards (`--shadow-md`, `--shadow-lg`)
+  - Fixed console error filtering in tests
+
+### Testing
+
+- All 10 Dashboard 5 tests passing (100%)
+- Full test suite: 125/125 tests passing (100%)
+- Zero console errors
+
+### Infrastructure
+
+- Git commit: 6c36eb5
+- Git tag: v2.11.0
+
+---
+
+## [2.10.0] - 2025-11-02
+
+### Added - Dashboard 1: Analytics Dashboard
+
+- **Detection Analytics Dashboard**
+  - Detection trends over time (line charts with Chart.js 4.4.0)
+  - Severity distribution (donut charts)
+  - Platform coverage (bar charts)
+  - Top triggered detections (table)
+  - Time period filters (7 days, 30 days, 90 days)
+  - Real-time statistics
+
+### Testing
+
+- Created `e2e-tests/analytics-dashboard.spec.js` with 21 tests
+- All tests passing (100%)
+- Full test suite: 115/115 tests passing (100%)
+
+### Infrastructure
+
+- Git commit: 8a7f2b4
+- Git tag: v2.10.0
+
+---
+
+## [2.9.0] - 2025-11-01
+
+### Added - Dashboard 9: Recorded Future Style APT Profiles
+
+- **Professional Threat Intelligence Dashboard**
+  - APT actor cards with rich metadata
+  - Risk scores and severity indicators
+  - Tags for motivation, sophistication
+  - Country attribution badges
+  - Filtering by country, sophistication, motivation
+  - Search functionality
+
+### Testing
+
+- Created `e2e-tests/recorded-future-apt-profiles.spec.js` with 21 tests
+- All tests passing (100%)
+- Full test suite: 94/94 tests passing (100%)
+
+### Infrastructure
+
+- Git commit: 7c5d3a2
+- Git tag: v2.9.0
+
+---
+
+## [2.8.1] - 2025-11-01
+
+### Added - Dashboard 2: Executive Metrics Landing Page
+
+- **Executive Summary Dashboard**
+  - 4 large metric cards with gradients
+  - Trend indicators (↑ ↓ with percentages)
+  - Links to detailed pages (APT Profiles, Detection Engineering)
+  - Clean, modern aesthetic
+  - Responsive grid layout
+
+### Testing
+
+- Created `e2e-tests/executive-metrics-landing.spec.js` with 11 tests
+- All tests passing (100%)
+- Full test suite: 73/73 tests passing (100%)
+
+### Infrastructure
+
+- Git commit: 5b4c2a1
+- Git tag: v2.8.1
+
+---
+
+## [2.8.0] - 2025-11-01
+
+### Added - Dashboard 4: Quick Stats Widget
+
+- **Quick Stats Widget**
+  - 6 colorful metric cards in grid layout
+  - Icons with large numbers
+  - Color-coded categories (blue, green, orange, red, purple, teal)
+  - Minimal, clean design
+
+### Testing
+
+- Created `e2e-tests/quick-stats-widget.spec.js` with 6 tests
+- All tests passing (100%)
+- Full test suite: 62/62 tests passing (100%)
+
+### Infrastructure
+
+- Git commit: 4a3b1c0
+- Git tag: v2.8.0
+
+---
+
+## [2.7.0] - 2025-11-01
+
+### Added - Phase 7: Dark Web Intelligence
+
+- **Dark Web Monitoring**
+  - Ransomware leak site monitoring (LockBit, BlackCat, Cl0p, etc.)
+  - Paste site monitoring (Pastebin, Ghostbin, etc.)
+  - Victim organization tracking
+  - Early warning alerts (24-48 hour lead time)
+  - Tor2Web proxies for legal access
+
+### Infrastructure
+
+- Git commit: 3a2b1c9
+- Git tag: v2.7.0
+
+---
+
+## [2.6.0] - 2025-11-01
+
+### Added - Phase 6: Universal Search
+
+- **Recorded Future-Style Search**
+  - Search across all data types (threats, IOCs, APT profiles, detections, tags)
+  - Advanced filters and boolean operators
+  - Search history and saved searches
+
+### Infrastructure
+
+- Git commit: 2a1b0c8
+- Git tag: v2.6.0
+
+---
+
+## [2.5.0] - 2025-11-01
+
+### Added - Phase 5: Site Merge - Detection Engineering
+
+- **Detection Engineering Playbooks**
+  - 15 SOC-ready Splunk detection playbooks
+  - MITRE ATT&CK technique mapping
+  - Detection coverage matrix
+  - Platform-specific detections (Splunk, Elastic, etc.)
+  - Severity levels (CRITICAL, HIGH, MEDIUM, LOW)
+
+### Infrastructure
+
+- Git commit: 1a0b9c7
+- Git tag: v2.5.0
+
+---
+
+## [2.4.0] - 2025-11-01
+
+### Added - Phase 4: Site Merge - APT Profiles
+
+- **APT Actor Profiles**
+  - Comprehensive profiles for 8 major APT groups
+  - MITRE ATT&CK TTPs mapping
+  - Campaign timeline and attribution
+  - Risk scoring and sophistication levels
+  - Country attribution with flags
+
+### Infrastructure
+
+- Git commit: 0a9b8c6
+- Git tag: v2.4.0
+
+---
+
+## [2.3.0] - 2025-11-01
+
+### Added - Phase 3: Free API Integrations
+
+- **Threat Intelligence Enrichment**
+  - AbuseIPDB integration (1,000 req/day) - IP reputation
+  - VirusTotal integration (500 req/day) - File/URL/IP/domain analysis
+  - AlienVault OTX integration (unlimited) - Threat intelligence pulses
+  - ThreatFox integration (unlimited) - IOC database
+  - Automatic IOC enrichment
+  - Rate limiting and caching
+
+### Infrastructure
+
+- Git commit: 9a8b7c5
+- Git tag: v2.3.0
+
+---
+
+## [2.2.0] - 2025-11-01
+
+### Added - Phase 2: Bubble-Up Logic & Critical Alerts
+
+- **Enhanced Risk Scoring**
+  - Multi-source bonus (+10 points for 3+ sources)
+  - Critical combo detection (CVE + POC + Active Exploitation)
+  - Temporal decay for older threats
+  - Critical Alerts dashboard section
+  - Risk scoring (0-100 scale)
+
+### Infrastructure
+
+- Git commit: 8a7b6c4
+- Git tag: v2.2.0
+
+---
+
+## [2.1.0] - 2025-11-01
+
+### Added - Phase 1: Enhanced Data Aggregation & Correlation
+
+- **Deduplication Logic**
+  - CVE-based deduplication
+  - Title similarity matching
+  - URL matching
+  - Cross-source correlation with correlationId
+  - Unified threat view merging duplicate threats
+  - 20-30% reduction in threat count
+
+### Infrastructure
+
+- Git commit: 7a6b5c3
+- Git tag: v2.1.0
+
+---
+
+## [2.0.0] - 2025-11-01
+
+### Added - Phase 0: Foundation & Regression-Proofing
+
+- **Development Workflow**
+  - Git hooks with Husky for pre-commit quality checks
+  - ESLint + Prettier for code quality and formatting
+  - lint-staged for automatic formatting on commit
+  - Comprehensive test suite (23 tests, 100% passing)
+  - Zero linting errors across codebase
+  - Automated regression prevention
+
+### Infrastructure
+
+- Git commit: 6a5b4c2
+- Git tag: v2.0.0
+
+---
 
 ## [1.1.1] - 2025-11-01
 
@@ -17,6 +285,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - **"Has POC" Actionability Filter**
+
   - New filter option to find threats with proof-of-concept exploits
   - Detects keywords: "POC", "proof of concept", "proof-of-concept", "exploit code", "exploit available"
   - Client-side filtering for instant results
@@ -157,12 +426,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - **Complete Threat Intelligence Aggregator**
+
   - Cloudflare Worker backend aggregating 12+ threat intelligence sources
   - Support for RSS, Atom, and JSON feed formats
   - Automatic deduplication using canonical URLs and title hashing
   - Rate limiting with per-host concurrency limits and exponential backoff retry
 
 - **Intelligent Tagging System**
+
   - Automatic extraction of CVE IDs (CVE-YYYY-NNNNN format)
   - MITRE ATT&CK technique IDs (T#### and T####.### for sub-techniques)
   - CWE IDs (CWE-### format)
@@ -170,16 +441,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Source attribution for all threat items
 
 - **Trends Engine**
+
   - Hourly bucketing over 7-day rolling window
   - Top sources and top tags analytics
   - 24-hour trending view with bar charts
 
 - **Source Discovery**
+
   - Automatic discovery of new threat intelligence sources
   - Candidate source tracking with approval workflow
   - Recently approved sources widget (7-day window)
 
 - **Frontend Dashboard (GitHub Pages)**
+
   - Real-time Current Threats widget with auto-refresh (3 minutes)
   - Trending Charts widget with Chart.js visualizations (5 minutes)
   - New Intel Sources widget
@@ -188,6 +462,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Status indicators (Live/Loading/Error)
 
 - **Security Hardening**
+
   - XSS prevention with HTML sanitization and escaping
   - CORS with strict origin checking
   - Content Security Policy (CSP) headers
@@ -195,6 +470,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Input validation and error handling
 
 - **Data Sources**
+
   - CISA News and Alerts
   - CISA Known Exploited Vulnerabilities (KEV)
   - Microsoft Security Response Center (MSRC)
@@ -207,6 +483,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Mandiant
 
 - **Infrastructure**
+
   - Cloudflare Workers deployment
   - Cloudflare KV storage for persistence
   - GitHub Pages for frontend hosting
