@@ -81,8 +81,8 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
     }
 
     .header-container {
@@ -576,6 +576,67 @@
     .fade-in {
       animation: fadeIn 0.5s ease-in-out;
     }
+
+    /* MITRE ATT&CK Coverage Section Styles */
+    .coverage-card {
+      max-width: 100%;
+      padding: 2rem;
+    }
+
+    .coverage-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .coverage-header {
+      max-width: 48rem;
+    }
+
+    .coverage-description {
+      margin-top: 0.75rem;
+    }
+
+    .coverage-button {
+      align-self: flex-start;
+    }
+
+    .coverage-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .coverage-stat-item {
+      background: var(--panel);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 1rem;
+    }
+
+    .coverage-stat-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .coverage-stat-value {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .coverage-stat-value.green {
+      color: var(--brand-alt);
+    }
+
+    .coverage-stat-value.blue {
+      color: var(--brand);
+    }
   </style>
 </head>
 <body>
@@ -700,27 +761,27 @@
     <!-- MITRE ATT&CK Coverage Section -->
     <section class="section">
       <div class="page-container">
-        <div class="stat-card" style="max-width: 100%; padding: 2rem;">
-          <div style="display: flex; flex-direction: column; gap: 1.5rem;">
-            <div style="max-width: 48rem;">
+        <div class="stat-card coverage-card">
+          <div class="coverage-content">
+            <div class="coverage-header">
               <h2 class="section-title">MITRE ATT&CK Coverage at a Glance</h2>
-              <p class="section-description" style="margin-top: 0.75rem;">Comprehensive detection coverage across MITRE ATT&CK tactics and techniques. Track detection maturity, identify coverage gaps, and prioritize detection engineering efforts.</p>
+              <p class="section-description coverage-description">Comprehensive detection coverage across MITRE ATT&CK tactics and techniques. Track detection maturity, identify coverage gaps, and prioritize detection engineering efforts.</p>
             </div>
 
-            <a href="detections.html" class="btn-secondary" style="align-self: flex-start;">View Coverage Matrix</a>
+            <a href="detections.html" class="btn-secondary coverage-button">View Coverage Matrix</a>
 
-            <dl style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
-              <div style="background: var(--panel); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 1rem;">
-                <dt style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 0.5rem;">Tactics Covered</dt>
-                <dd style="font-size: 1.125rem; font-weight: 600; color: var(--brand-alt);">14</dd>
+            <dl class="coverage-stats">
+              <div class="coverage-stat-item">
+                <dt class="coverage-stat-label">Tactics Covered</dt>
+                <dd class="coverage-stat-value green">14</dd>
               </div>
-              <div style="background: var(--panel); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 1rem;">
-                <dt style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 0.5rem;">Techniques Mapped</dt>
-                <dd style="font-size: 1.125rem; font-weight: 600; color: var(--brand);" id="techniquesCoveredFooter">-</dd>
+              <div class="coverage-stat-item">
+                <dt class="coverage-stat-label">Techniques Mapped</dt>
+                <dd class="coverage-stat-value blue" id="techniquesCoveredFooter">-</dd>
               </div>
-              <div style="background: var(--panel); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 1rem;">
-                <dt style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 0.5rem;">Detection Rules</dt>
-                <dd style="font-size: 1.125rem; font-weight: 600; color: var(--text-muted);" id="detectionsFooter">-</dd>
+              <div class="coverage-stat-item">
+                <dt class="coverage-stat-label">Detection Rules</dt>
+                <dd class="coverage-stat-value" id="detectionsFooter">-</dd>
               </div>
             </dl>
           </div>

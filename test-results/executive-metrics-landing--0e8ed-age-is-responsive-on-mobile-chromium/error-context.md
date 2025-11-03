@@ -1,0 +1,106 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - link "🔒 WatchLockAI" [ref=e5] [cursor=pointer]:
+        - /url: index.html
+        - generic [ref=e6]: 🔒
+        - generic [ref=e7]: WatchLockAI
+      - button "Toggle navigation menu" [ref=e8] [cursor=pointer]: ☰
+  - main [ref=e9]:
+    - generic [ref=e12]:
+      - generic [ref=e13]:
+        - generic [ref=e14]: Threat Intelligence Platform
+        - heading "Enterprise-grade threat intelligence, 100% free and open-source." [level=1] [ref=e15]
+        - paragraph [ref=e16]: WatchLockAI provides security analysts with comprehensive visibility into Advanced Persistent Threats (APTs), ransomware campaigns, and dark web activity. Built on the MITRE ATT&CK framework.
+        - generic [ref=e17]:
+          - link "Browse APT Profiles" [ref=e18] [cursor=pointer]:
+            - /url: apt-profiles.html
+          - link "View Dark Web Intel" [ref=e19] [cursor=pointer]:
+            - /url: dark-web-intel.html
+      - generic [ref=e20]:
+        - generic [ref=e21]:
+          - paragraph [ref=e22]: APT Groups Tracked
+          - paragraph [ref=e23]: "8"
+          - paragraph [ref=e24]: Latest update Nov 3, 2025
+        - generic [ref=e25]:
+          - paragraph [ref=e26]: Detection Rules
+          - paragraph [ref=e27]: "15"
+          - paragraph [ref=e28]: Mapped to MITRE ATT&CK
+        - generic [ref=e29]:
+          - paragraph [ref=e30]: MITRE Techniques
+          - paragraph [ref=e31]: "22"
+          - paragraph [ref=e32]: Full coverage across tactics
+    - generic [ref=e34]:
+      - generic [ref=e35]:
+        - generic [ref=e36]:
+          - heading "Latest Features" [level=2] [ref=e37]
+          - paragraph [ref=e38]: Comprehensive threat intelligence capabilities for modern security operations.
+        - link "View all" [ref=e39] [cursor=pointer]:
+          - /url: apt-profiles.html
+      - generic [ref=e40]:
+        - link "CRITICAL Active Dark Web Intelligence Feed Monitor ransomware leak sites, track victim organizations, and analyze breach timelines with comprehensive IOC tracking and early warning alerts. Real-time Updated Nov 3, 2025" [ref=e41] [cursor=pointer]:
+          - /url: dark-web-intel.html
+          - generic [ref=e42]:
+            - generic [ref=e43]: CRITICAL
+            - generic [ref=e44]: Active
+          - heading "Dark Web Intelligence Feed" [level=3] [ref=e45]
+          - paragraph [ref=e46]: Monitor ransomware leak sites, track victim organizations, and analyze breach timelines with comprehensive IOC tracking and early warning alerts.
+          - generic [ref=e47]:
+            - generic [ref=e48]: Real-time
+            - generic [ref=e49]: Updated Nov 3, 2025
+        - link "HIGH Active Modern APT Overview Dashboard Comprehensive APT threat actor profiles with MITRE ATT&CK technique mapping, malware arsenal tracking, and risk scoring across 8+ APT groups. MITRE ATT&CK Updated Nov 3, 2025" [ref=e50] [cursor=pointer]:
+          - /url: modern-apt-overview.html
+          - generic [ref=e51]:
+            - generic [ref=e52]: HIGH
+            - generic [ref=e53]: Active
+          - heading "Modern APT Overview Dashboard" [level=3] [ref=e54]
+          - paragraph [ref=e55]: Comprehensive APT threat actor profiles with MITRE ATT&CK technique mapping, malware arsenal tracking, and risk scoring across 8+ APT groups.
+          - generic [ref=e56]:
+            - generic [ref=e57]: MITRE ATT&CK
+            - generic [ref=e58]: Updated Nov 3, 2025
+        - link "HIGH Active Analytics Dashboard Detection trend analysis, severity distribution, platform coverage metrics, and top triggered detections with time range filtering capabilities. Analytics Updated Nov 3, 2025" [ref=e59] [cursor=pointer]:
+          - /url: analytics.html
+          - generic [ref=e60]:
+            - generic [ref=e61]: HIGH
+            - generic [ref=e62]: Active
+          - heading "Analytics Dashboard" [level=3] [ref=e63]
+          - paragraph [ref=e64]: Detection trend analysis, severity distribution, platform coverage metrics, and top triggered detections with time range filtering capabilities.
+          - generic [ref=e65]:
+            - generic [ref=e66]: Analytics
+            - generic [ref=e67]: Updated Nov 3, 2025
+    - generic [ref=e71]:
+      - generic [ref=e72]:
+        - heading "MITRE ATT&CK Coverage at a Glance" [level=2] [ref=e73]
+        - paragraph [ref=e74]: Comprehensive detection coverage across MITRE ATT&CK tactics and techniques. Track detection maturity, identify coverage gaps, and prioritize detection engineering efforts.
+      - link "View Coverage Matrix" [ref=e75] [cursor=pointer]:
+        - /url: detections.html
+      - generic [ref=e76]:
+        - generic [ref=e77]:
+          - term [ref=e78]: Tactics Covered
+          - definition [ref=e79]: "14"
+        - generic [ref=e80]:
+          - term [ref=e81]: Techniques Mapped
+          - definition [ref=e82]: "22"
+        - generic [ref=e83]:
+          - term [ref=e84]: Detection Rules
+          - definition [ref=e85]: "15"
+  - contentinfo [ref=e86]:
+    - generic [ref=e87]:
+      - generic [ref=e88]:
+        - paragraph [ref=e89]: WatchLockAI
+        - paragraph [ref=e90]: Enterprise-grade, open-source threat intelligence platform for security operations centers, threat intelligence teams, and incident response professionals.
+      - generic [ref=e91]:
+        - link "GitHub" [ref=e92] [cursor=pointer]:
+          - /url: https://github.com/tweakn74/APT-Tracker-MITRE-AIQ-Intel
+        - link "APT Profiles" [ref=e93] [cursor=pointer]:
+          - /url: apt-profiles.html
+        - link "Detections" [ref=e94] [cursor=pointer]:
+          - /url: detections.html
+        - link "Dark Web Intel" [ref=e95] [cursor=pointer]:
+          - /url: dark-web-intel.html
+```
