@@ -7,6 +7,186 @@
 
 ---
 
+## 📖 Project Overview
+
+### What is WatchLockAI?
+
+**WatchLockAI** is an enterprise-grade, open-source threat intelligence platform that provides security analysts with comprehensive visibility into Advanced Persistent Threats (APTs), ransomware campaigns, and dark web activity. Built on the MITRE ATT&CK framework, WatchLockAI aggregates threat data from multiple sources to deliver actionable intelligence for proactive defense.
+
+### 🎯 Mission
+
+Democratize enterprise-level threat intelligence by providing a **100% free, open-source platform** that rivals commercial solutions like Recorded Future, CrowdStrike Falcon Intelligence, and Mandiant Threat Intelligence—without paywalls, subscriptions, or feature limitations.
+
+### 🏗️ Architecture
+
+**Frontend:**
+
+- Static HTML/CSS/JavaScript (no framework dependencies)
+- Hosted on GitHub Pages (free, global CDN)
+- Versedetect dark theme design system
+- Fully responsive (desktop, tablet, mobile)
+
+**Backend:**
+
+- Cloudflare Workers (serverless edge computing)
+- Cloudflare KV (key-value storage)
+- MITRE ATT&CK API integration
+- Dark web monitoring (Tor2Web proxies)
+
+**Testing:**
+
+- Playwright E2E tests (168 tests, 100% passing)
+- Visual regression testing
+- Accessibility compliance (WCAG 2.1 AA)
+- CI/CD with GitHub Actions
+
+### 🚀 Key Features
+
+**1. APT Threat Actor Profiling**
+
+- 8+ APT groups with detailed profiles (APT28, APT29, Lazarus Group, etc.)
+- Country attribution with geopolitical context
+- Sophistication levels (Advanced, High, Medium, Low)
+- Motivation tracking (Espionage, Financial, Destructive)
+- MITRE ATT&CK technique mapping
+- Malware arsenal and tool tracking
+- Risk scoring (0-100 scale)
+- Timeline visualization (first seen, last activity)
+
+**2. Detection Engineering**
+
+- 15+ detection rules mapped to MITRE ATT&CK
+- Severity classification (Critical, High, Medium, Low)
+- Platform coverage (Splunk, Elastic, Sigma, KQL, etc.)
+- Status tracking (Stable, Preview, Experimental)
+- MITRE ATT&CK coverage matrix
+- Technique-to-detection mapping
+- Search and filter capabilities
+
+**3. Dark Web Intelligence**
+
+- Ransomware leak site monitoring (LockBit, BlackCat, Cl0p)
+- Victim organization tracking
+- Breach timeline visualization
+- Indicators of Compromise (IOCs)
+- Industry and severity analysis
+- Early warning alerts (NEW badge for recent victims)
+- Comprehensive filtering (ransomware group, industry, severity, date range)
+
+**4. Analytics Dashboard**
+
+- Detection trend analysis (line charts)
+- Severity distribution (donut charts)
+- Platform coverage (bar charts)
+- Top triggered detections (tables)
+- Time range filtering (7, 30, 90 days, All Time)
+- Real-time statistics
+
+**5. Executive Metrics**
+
+- APT Groups count
+- Active Threat Actors count
+- Detection Rules count
+- MITRE Techniques covered
+- Quick Stats Widget (embedded on all pages)
+- One-click navigation to detailed views
+
+### 🎨 Design Philosophy
+
+1. **Simplicity First** - Clean, uncluttered UI optimized for analyst workflows
+2. **Analyst-Centric** - Features designed by analysts, for analysts
+3. **Performance** - Fast page loads (<2s), smooth interactions, no bloat
+4. **Accessibility** - WCAG 2.1 AA compliant, keyboard navigation, screen reader support
+5. **Consistency** - Unified design system (Versedetect color scheme)
+6. **Free & Open** - 100% free, no paywalls, fully open-source (MIT License)
+
+### 🌐 Use Cases
+
+**Security Operations Centers (SOCs)**
+
+- Monitor emerging APT campaigns
+- Track ransomware victim trends
+- Assess detection coverage gaps
+- Prioritize threat hunting activities
+
+**Threat Intelligence Teams**
+
+- Research APT actor TTPs (Tactics, Techniques, Procedures)
+- Analyze geopolitical threat landscape
+- Track dark web breach disclosures
+- Generate executive threat reports
+
+**Incident Response Teams**
+
+- Identify IOCs from recent breaches
+- Correlate attacks to known APT groups
+- Validate detection rule effectiveness
+- Assess organizational risk exposure
+
+**Security Researchers**
+
+- Study APT evolution and trends
+- Analyze MITRE ATT&CK technique usage
+- Research ransomware group behaviors
+- Contribute to open-source threat intelligence
+
+### 📊 Data Sources
+
+- **MITRE ATT&CK Framework** - Tactics, techniques, and procedures
+- **APT Group Profiles** - Curated threat actor intelligence
+- **Detection Rules** - Community-contributed detection logic
+- **Dark Web Monitoring** - Ransomware leak sites (via Tor2Web)
+- **Geopolitical Context** - Country-level threat assessments
+
+### 🔒 Privacy & Security
+
+- **No User Tracking** - Zero analytics, no cookies, no telemetry
+- **Client-Side Processing** - All filtering/search happens in browser
+- **No Data Collection** - No user data stored or transmitted
+- **Open Source** - Full transparency, audit the code yourself
+- **Static Hosting** - No server-side vulnerabilities
+
+### 🎓 Evolution History
+
+**Origin:** APT-Tracker-MITRE-AIQ-Intel repository
+**Transformation:** 7-phase enhancement plan (v2.0.0 - v2.15.0)
+
+**Phase 0:** Foundation & Setup (v2.0.0)
+**Phase 1:** Data Aggregation (v2.1.0)
+**Phase 2:** Threat Actor Profiling (v2.2.0)
+**Phase 3:** Site Merges (v2.3.0)
+**Phase 4:** Geopolitical Context (v2.4.0)
+**Phase 5:** Dark Web Intelligence (v2.5.0)
+**Phase 6:** Detection Engineering (v2.6.0)
+**Phase 7:** MITRE ATT&CK Integration (v2.7.0)
+**Phase 8:** Dashboard Implementation (v2.8.0 - v2.15.0) - **IN PROGRESS**
+
+### 🏆 Project Goals
+
+**Short-Term (Current Phase)**
+
+- ✅ Complete 7/9 dashboard implementations (78% done)
+- ⏳ Implement Geopolitical Map (Dashboard 3)
+- ⏳ Implement Coverage Heatmap (Dashboard 6)
+- ⏳ Achieve 100% test coverage (currently 168/168 tests passing)
+
+**Mid-Term (Next 3 months)**
+
+- Deploy to production (Cloudflare Workers + GitHub Pages)
+- Integrate live threat feeds (API-based updates)
+- Add export functionality (CSV, JSON, PDF reports)
+- Implement user preferences (dark/light theme, layout options)
+
+**Long-Term (6-12 months)**
+
+- Community contribution platform (submit APT profiles, detection rules)
+- Real-time alerting system (email, Slack, webhooks)
+- Advanced analytics (ML-based threat prediction)
+- Mobile app (iOS/Android)
+- API for third-party integrations
+
+---
+
 ## 🎯 Current Status
 
 ### ✅ Completed Dashboards (7/9)
