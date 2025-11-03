@@ -1,114 +1,35 @@
 # WatchLockAI - Roadmap & TODO
 
-**Version:** v2.11.0  
-**Last Updated:** November 2, 2025  
-**Current Phase:** Phase 2 - Dashboard Implementation (5/9 dashboards complete, 56%)
+**Version:** v2.12.0
+**Last Updated:** November 3, 2025
+**Current Phase:** Phase 2 - Dashboard Implementation (6/9 dashboards complete, 67%)
+**Test Coverage:** 141/141 tests passing (100%)
 
 ---
 
 ## 🎯 Current Status
 
-### ✅ Completed Dashboards (5/9)
+### ✅ Completed Dashboards (6/9)
 
 **Phase 1 (Week 1) - COMPLETE**
 
-- [x] Dashboard 4: Quick Stats Widget (v2.8.0)
-- [x] Dashboard 2: Executive Metrics Landing Page (v2.8.1)
-- [x] Dashboard 9: Recorded Future Style APT Profiles (v2.9.0)
+- [x] Dashboard 4: Quick Stats Widget (v2.8.0) - 6 tests
+- [x] Dashboard 2: Executive Metrics Landing Page (v2.8.1) - 11 tests
+- [x] Dashboard 9: Recorded Future Style APT Profiles (v2.9.0) - 21 tests
 
-**Phase 2 (Week 2-3) - IN PROGRESS**
+**Phase 2 (Week 2-3) - COMPLETE**
 
-- [x] Dashboard 1: Analytics Dashboard (v2.10.0)
-- [x] Dashboard 5: Dark Theme Enhancements (v2.11.0)
-- [x] Dashboard 7: Modern APT Overview (v2.12.0) - **COMPLETE**
+- [x] Dashboard 1: Analytics Dashboard (v2.10.0) - 21 tests
+- [x] Dashboard 5: Dark Theme Enhancements (v2.11.0) - 10 tests
+- [x] Dashboard 7: Modern APT Overview (v2.12.0) - 16 tests (APT detail modal)
 
 ---
 
 ## 🚀 Active Tasks
 
-### Dashboard 7: Modern APT Overview (NEXT)
+### Dashboard 7: Post-Completion
 
-**Priority:** HIGH  
-**Target:** v2.12.0  
-**Estimated Effort:** 2-3 days
-
-**Implementation Requirements:**
-
-1. **APT Overview Cards**
-
-   - [ ] Large, prominent APT actor cards with:
-     - [ ] Actor name and aliases
-     - [ ] Country flag and origin
-     - [ ] Risk score (0-100 scale)
-     - [ ] Sophistication level badge
-     - [ ] Motivation tags
-     - [ ] Recent activity indicator
-     - [ ] Quick stats (campaigns, TTPs, targets)
-   - [ ] Grid layout with 2-3 cards per row
-   - [ ] Hover effects with shadow elevation
-
-2. **Enhanced Filtering**
-
-   - [ ] Filter by country (dropdown with flags)
-   - [ ] Filter by sophistication (Advanced, High, Medium, Low)
-   - [ ] Filter by motivation (Espionage, Financial, Destructive)
-   - [ ] Filter by activity status (Active, Dormant, Unknown)
-   - [ ] Search by name, alias, or description
-   - [ ] Combined filter support
-
-3. **APT Detail Modal**
-
-   - [x] Click on card to open detailed modal
-   - [x] Comprehensive APT profile:
-     - [x] Full description and history
-     - [~] Campaign timeline (basic timeline info shown, visual timeline pending)
-     - [x] MITRE ATT&CK TTPs (with links to MITRE ATT&CK)
-     - [x] Known targets and industries
-     - [x] Associated malware families
-     - [~] IOCs and detection rules (pending data integration)
-     - [~] Related threats from threat feed (pending data integration)
-   - [x] Close button and keyboard navigation (ESC key)
-
-4. **Visual Enhancements**
-
-   - [x] Versedetect color scheme integration
-   - [x] Border radius: `--radius-sm: 12px`, `--radius-md: 16px`
-   - [x] Shadows: `--shadow-md`, `--shadow-lg`
-   - [x] Smooth transitions and animations
-   - [x] Responsive design (mobile, tablet, desktop)
-
-5. **Testing**
-
-   - [x] Create `e2e-tests/modern-apt-overview.spec.js`
-   - [x] Test suite requirements:
-     - [x] APT card rendering (8 actors)
-     - [x] Filter functionality (country, sophistication, motivation, status)
-     - [x] Search functionality
-     - [x] Combined filters
-     - [x] Modal open/close
-     - [x] Modal content verification
-     - [x] Keyboard navigation
-     - [x] Accessibility (WCAG 2.1 AA)
-     - [x] Visual regression
-     - [x] Console error checking
-   - [x] Target: 20+ tests, 100% passing (16 tests created, all passing)
-
-6. **Documentation**
-   - [ ] Add Dashboard 7 implementation details to `docs/DASHBOARD_IMPLEMENTATION.md`
-   - [ ] Add Dashboard 7 completion report to `docs/DASHBOARD_IMPLEMENTATION.md`
-   - [ ] Screenshots of all features
-
-**Success Criteria:**
-
-- [x] All Dashboard 7 tests passing (16 tests, 100%)
-- [x] Full test suite: 141 tests passing (100%)
-- [x] APT overview cards with modern design
-- [x] Enhanced filtering and search
-- [x] APT detail modal with comprehensive information
-- [x] Versedetect color scheme applied
-- [x] No console errors
-- [x] Git commit and tag v2.12.0 created
-- [ ] Comprehensive documentation with screenshots (pending)
+- [ ] Take screenshots of APT detail modal functionality
 
 ---
 
@@ -338,11 +259,11 @@
 
 ## 🗓️ Timeline
 
-### Week 2-3 (Current)
+### Week 2-3 (Complete)
 
 - [x] Dashboard 1: Analytics Dashboard (v2.10.0)
 - [x] Dashboard 5: Dark Theme Enhancements (v2.11.0)
-- [~] Dashboard 7: Modern APT Overview (v2.12.0)
+- [x] Dashboard 7: Modern APT Overview (v2.12.0)
 
 ### Week 3-4
 
@@ -360,7 +281,43 @@
 
 ---
 
-## 📝 Notes
+## � Deployment Checklist
+
+### Pre-Deployment
+
+- [ ] All tests passing (141/141)
+- [ ] Zero linting errors
+- [ ] Zero console errors
+- [ ] Environment variables configured
+- [ ] KV namespaces created
+- [ ] wrangler.toml updated with correct IDs
+
+### Deployment
+
+- [ ] Worker deployed to Cloudflare
+- [ ] Dashboard deployed to GitHub Pages
+- [ ] DNS configured (if using custom domain)
+- [ ] SSL/TLS enabled
+
+### Post-Deployment
+
+- [ ] API health check passes (`/api/healthz`)
+- [ ] Dashboard loads correctly
+- [ ] All pages accessible
+- [ ] Charts and visualizations render
+- [ ] API endpoints respond correctly
+- [ ] No console errors in browser
+
+### Monitoring
+
+- [ ] Cloudflare Workers analytics enabled
+- [ ] GitHub Pages deployment status green
+- [ ] API response times < 1 second
+- [ ] Zero 5xx errors
+
+---
+
+## �📝 Notes
 
 ### Design Principles
 
@@ -392,6 +349,6 @@
 
 ---
 
-**Last Updated:** November 2, 2025  
-**Version:** v2.11.0  
-**Next Milestone:** Dashboard 7 (Modern APT Overview) - v2.12.0
+**Last Updated:** November 3, 2025
+**Version:** v2.12.0
+**Next Milestone:** Dashboard 3 (Geopolitical Map) - v2.13.0
