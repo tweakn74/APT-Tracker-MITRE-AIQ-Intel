@@ -626,6 +626,172 @@
     .stat-red { border-left: 4px solid var(--danger); }
     .stat-orange { border-left: 4px solid var(--warn); }
     .stat-cyan { border-left: 4px solid var(--brand); }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      overflow: auto;
+      animation: fadeIn 0.2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal-content {
+      background: var(--panel);
+      margin: 40px auto;
+      padding: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      max-width: 900px;
+      box-shadow: var(--shadow-lg);
+      animation: slideIn 0.3s ease-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .modal-header {
+      padding: 30px;
+      padding-right: 70px; /* Extra padding to avoid close button overlap */
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .modal-body {
+      padding: 30px;
+      max-height: calc(100vh - 200px);
+      overflow-y: auto;
+    }
+
+    .close {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      color: var(--text-muted);
+      font-size: 32px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: color 0.2s;
+      line-height: 1;
+      z-index: 1000;
+      pointer-events: auto;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: var(--text-primary);
+    }
+
+    .modal-title {
+      font-size: 2rem;
+      color: var(--text-primary);
+      margin: 0 0 10px 0;
+    }
+
+    .modal-subtitle {
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin: 0;
+    }
+
+    .modal-section {
+      margin-bottom: 30px;
+    }
+
+    .modal-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .modal-section-title {
+      font-size: 1.25rem;
+      color: var(--text-primary);
+      margin: 0 0 15px 0;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .modal-section-content {
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .timeline-item {
+      padding: 15px;
+      background: var(--panel-soft);
+      border-left: 3px solid var(--brand);
+      border-radius: var(--radius-sm);
+      margin-bottom: 15px;
+    }
+
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .timeline-date {
+      color: var(--brand);
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .timeline-event {
+      color: var(--text-primary);
+    }
+
+    .ioc-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .ioc-item {
+      padding: 12px;
+      background: var(--panel-soft);
+      border-radius: var(--radius-sm);
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      color: var(--brand);
+      word-break: break-all;
+    }
+
+    .related-threat {
+      padding: 15px;
+      background: var(--panel-soft);
+      border-radius: var(--radius-sm);
+      margin-bottom: 10px;
+      border-left: 3px solid var(--warn);
+    }
+
+    .related-threat:last-child {
+      margin-bottom: 0;
+    }
+
+    .related-threat-title {
+      color: var(--text-primary);
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .related-threat-desc {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
   </style>
 </head>
 <body>
@@ -886,6 +1052,17 @@
     function renderAPTCards(groups) {
       const grid = document.getElementById('aptGrid');
       grid.innerHTML = groups.map(apt => createAPTCard(apt)).join('');
+
+      // Add click handlers to cards
+      document.querySelectorAll('.apt-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const aptId = card.dataset.id;
+          const apt = aptData.find(a => a.id === aptId);
+          if (apt) {
+            showAPTModal(apt);
+          }
+        });
+      });
     }
 
     function createAPTCard(apt) {
@@ -920,7 +1097,7 @@
       else if (daysSinceActivity < 365) timelineClass = 'moderate';
 
       return `
-        <div class="apt-card ${riskClass}">
+        <div class="apt-card ${riskClass}" data-id="${apt.id}" style="cursor: pointer;">
           <!-- Risk Score Badge -->
           <div class="risk-score-badge">
             <div class="score-number">${apt.riskScore}</div>
@@ -1016,6 +1193,133 @@
       `;
     }
 
+    function showAPTModal(apt) {
+      const modal = document.getElementById('aptModal');
+      const modalHeader = document.getElementById('modalHeader');
+      const modalBody = document.getElementById('modalBody');
+
+      // Get country flag
+      const countryFlags = {
+        'Russia': '🇷🇺',
+        'China': '🇨🇳',
+        'North Korea': '🇰🇵',
+        'Iran': '🇮🇷',
+        'Unknown': '🏴'
+      };
+      const flag = countryFlags[apt.country] || '🏴';
+
+      // Modal Header
+      modalHeader.innerHTML = `
+        <h2 class="modal-title">${apt.name}</h2>
+        <p class="modal-subtitle">${apt.aliases.join(' • ')}</p>
+        <div style="margin-top: 15px;">
+          <span class="country-badge">${flag} ${apt.country}</span>
+          <span class="sophistication-badge soph-${apt.sophistication}">${apt.sophistication.toUpperCase()}</span>
+          <span class="risk-score-badge" style="display: inline-block; padding: 5px 12px; background: var(--danger); border-radius: var(--radius-sm); color: white; font-weight: 600;">Risk: ${apt.riskScore}/100</span>
+        </div>
+      `;
+
+      // Modal Body
+      modalBody.innerHTML = `
+        <!-- Description -->
+        <div class="modal-section">
+          <h3 class="modal-section-title">📋 Overview</h3>
+          <div class="modal-section-content">
+            <p>${apt.description}</p>
+            <div style="margin-top: 15px;">
+              <strong>First Seen:</strong> ${new Date(apt.firstSeen).toLocaleDateString()}<br>
+              <strong>Last Activity:</strong> ${new Date(apt.lastActivity).toLocaleDateString()}<br>
+              <strong>Activity Status:</strong> <span style="color: ${apt.activityStatus === 'active' ? 'var(--brand-alt)' : 'var(--text-muted)'};">${apt.activityStatus.toUpperCase()}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Motivation -->
+        <div class="modal-section">
+          <h3 class="modal-section-title">🎯 Motivation</h3>
+          <div class="modal-section-content">
+            <div class="motivation-tags">
+              ${apt.motivation.map(m => `<span class="motivation-tag motivation-${m}">${m.charAt(0).toUpperCase() + m.slice(1)}</span>`).join('')}
+            </div>
+          </div>
+        </div>
+
+        <!-- Targeted Sectors -->
+        <div class="modal-section">
+          <h3 class="modal-section-title">🏢 Targeted Sectors (${apt.targetedSectors.length})</h3>
+          <div class="modal-section-content">
+            <div class="sector-tags">
+              ${apt.targetedSectors.map(sector => `<span class="sector-tag">${sector}</span>`).join('')}
+            </div>
+          </div>
+        </div>
+
+        <!-- Targeted Countries -->
+        <div class="modal-section">
+          <h3 class="modal-section-title">🌍 Targeted Countries (${apt.targetedCountries.length})</h3>
+          <div class="modal-section-content">
+            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+              ${apt.targetedCountries.map(country => `<span style="padding: 6px 12px; background: var(--panel-soft); border-radius: var(--radius-sm); color: var(--text-primary);">${country}</span>`).join('')}
+            </div>
+          </div>
+        </div>
+
+        <!-- MITRE ATT&CK Techniques -->
+        <div class="modal-section">
+          <h3 class="modal-section-title">⚔️ MITRE ATT&CK Techniques (${apt.techniques.length})</h3>
+          <div class="modal-section-content">
+            <div class="technique-tags">
+              ${apt.techniques.map(t => `
+                <a href="https://attack.mitre.org/techniques/${t.id}/" target="_blank" class="technique-tag" style="text-decoration: none;">
+                  ${t.id}: ${t.name}
+                </a>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+
+        <!-- Malware Arsenal -->
+        <div class="modal-section">
+          <h3 class="modal-section-title">🛡️ Malware Arsenal (${apt.malware.length})</h3>
+          <div class="modal-section-content">
+            <div class="malware-list">
+              ${apt.malware.map(m => `
+                <div style="padding: 12px; background: var(--panel-soft); border-radius: var(--radius-sm); margin-bottom: 10px;">
+                  <strong style="color: var(--brand);">${m.name}</strong>
+                  <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">${m.description}</p>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+
+        <!-- Tools -->
+        ${apt.tools && apt.tools.length > 0 ? `
+          <div class="modal-section">
+            <h3 class="modal-section-title">🔧 Tools (${apt.tools.length})</h3>
+            <div class="modal-section-content">
+              <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                ${apt.tools.map(tool => `<span style="padding: 6px 12px; background: var(--panel-soft); border-radius: var(--radius-sm); color: var(--text-primary); font-family: monospace;">${tool}</span>`).join('')}
+              </div>
+            </div>
+          </div>
+        ` : ''}
+
+        <!-- MITRE ATT&CK Reference -->
+        <div class="modal-section">
+          <h3 class="modal-section-title">🔗 External References</h3>
+          <div class="modal-section-content">
+            <a href="https://attack.mitre.org/groups/${apt.mitreAttackId}/" target="_blank" class="mitre-link" style="color: var(--brand); text-decoration: none; font-weight: 600;">
+              📖 View ${apt.name} on MITRE ATT&CK (${apt.mitreAttackId})
+            </a>
+          </div>
+        </div>
+      `;
+
+      // Show modal
+      modal.style.display = 'block';
+    }
+
     function sortAPTGroups(groups) {
       const sortBy = document.getElementById('sortBy').value;
       const sorted = [...groups];
@@ -1090,9 +1394,45 @@
     document.getElementById('activityFilter').addEventListener('change', filterAPTs);
     document.getElementById('sortBy').addEventListener('change', filterAPTs);
 
+    // Modal event listeners
+    const modal = document.getElementById('aptModal');
+    const closeBtn = document.querySelector('.close');
+
+    // Close button
+    closeBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+
+    // Click outside modal
+    window.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+
+    // ESC key
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && modal.style.display === 'block') {
+        modal.style.display = 'none';
+      }
+    });
+
     // Load data on page load
     loadAPTProfiles();
   </script>
+
+  <!-- APT Detail Modal -->
+  <div id="aptModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close">&times;</span>
+        <div id="modalHeader"></div>
+      </div>
+      <div class="modal-body">
+        <div id="modalBody"></div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
 
