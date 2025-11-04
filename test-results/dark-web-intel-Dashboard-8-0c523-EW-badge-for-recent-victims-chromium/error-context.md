@@ -1,0 +1,153 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - link "🔒 WatchLockAI" [ref=e5] [cursor=pointer]:
+        - /url: index.html
+        - generic [ref=e6]: 🔒
+        - generic [ref=e7]: WatchLockAI
+      - navigation [ref=e8]:
+        - link "Home" [ref=e9] [cursor=pointer]:
+          - /url: index.html
+        - link "APT Profiles" [ref=e10] [cursor=pointer]:
+          - /url: apt-profiles.html
+        - link "Analytics" [ref=e11] [cursor=pointer]:
+          - /url: analytics.html
+        - link "Dark Web Intel" [ref=e12] [cursor=pointer]:
+          - /url: dark-web-intel.html
+        - link "APT Overview" [ref=e13] [cursor=pointer]:
+          - /url: modern-apt-overview.html
+        - link "Metrics" [ref=e14] [cursor=pointer]:
+          - /url: executive-metrics.html
+        - link "Detections" [ref=e15] [cursor=pointer]:
+          - /url: detections.html
+  - main [ref=e16]:
+    - generic [ref=e17]:
+      - generic [ref=e18]:
+        - generic [ref=e19]:
+          - generic [ref=e20]: Search
+          - textbox "Search by organization name or domain..." [ref=e21]
+        - generic [ref=e22]:
+          - generic [ref=e23]: Ransomware Group
+          - combobox "Ransomware Group" [ref=e24]:
+            - option "All Groups" [selected]
+            - option "BlackCat (ALPHV)"
+            - option "Cl0p"
+            - option "LockBit 3.0"
+        - generic [ref=e25]:
+          - generic [ref=e26]: Industry
+          - combobox "Industry" [ref=e27]:
+            - option "All Industries" [selected]
+            - option "Healthcare"
+            - option "Manufacturing"
+            - option "Technology"
+        - generic [ref=e28]:
+          - generic [ref=e29]: Severity
+          - combobox "Severity" [ref=e30]:
+            - option "All Severities" [selected]
+            - option "Critical"
+            - option "High"
+            - option "Medium"
+        - generic [ref=e31]:
+          - generic [ref=e32]: Date Range
+          - combobox "Date Range" [ref=e33]:
+            - option "All Time" [selected]
+            - option "Last 7 Days"
+            - option "Last 30 Days"
+            - option "Last 90 Days"
+      - generic [ref=e34]:
+        - generic [ref=e35]:
+          - generic [ref=e36]: 🚨
+          - generic [ref=e37]: "3"
+          - generic [ref=e38]: Total Victims
+        - generic [ref=e39]:
+          - generic [ref=e40]: 🔥
+          - generic [ref=e41]: "3"
+          - generic [ref=e42]: Active Groups
+        - generic [ref=e43]:
+          - generic [ref=e44]: 🏢
+          - generic [ref=e45]: "3"
+          - generic [ref=e46]: Industries
+        - generic [ref=e47]:
+          - generic [ref=e48]: 📅
+          - generic [ref=e49]: "3"
+          - generic [ref=e50]: Last 30 Days
+      - generic [ref=e51]:
+        - generic [ref=e52] [cursor=pointer]:
+          - generic [ref=e53]:
+            - generic [ref=e54]:
+              - generic [ref=e55]: Acme Corporation
+              - generic [ref=e56]: acme-corp.com
+            - generic [ref=e57]:
+              - generic [ref=e58]: critical
+              - generic [ref=e59]: NEW
+          - generic [ref=e60]:
+            - generic [ref=e61]:
+              - generic [ref=e62]: 🏢
+              - generic [ref=e63]: Manufacturing
+            - generic [ref=e64]:
+              - generic [ref=e65]: 📊
+              - generic [ref=e66]: High - 50,000+ customer records
+          - generic [ref=e67]: Global manufacturing company with operations in 45 countries. Breach affects customer data and proprietary manufacturing processes.
+          - generic [ref=e68]:
+            - generic [ref=e69]:
+              - generic [ref=e70]: 🦠
+              - generic [ref=e71]: LockBit 3.0
+            - generic [ref=e72]: "Posted: Oct 27, 2025"
+        - generic [ref=e73] [cursor=pointer]:
+          - generic [ref=e74]:
+            - generic [ref=e75]:
+              - generic [ref=e76]: TechStart Solutions
+              - generic [ref=e77]: techstart.io
+            - generic [ref=e79]: high
+          - generic [ref=e80]:
+            - generic [ref=e81]:
+              - generic [ref=e82]: 🏢
+              - generic [ref=e83]: Technology
+            - generic [ref=e84]:
+              - generic [ref=e85]: 📊
+              - generic [ref=e86]: Medium - 10,000+ records
+          - generic [ref=e87]: Cloud services provider serving 200+ enterprise clients. Potential exposure of client infrastructure credentials.
+          - generic [ref=e88]:
+            - generic [ref=e89]:
+              - generic [ref=e90]: 🦠
+              - generic [ref=e91]: BlackCat (ALPHV)
+            - generic [ref=e92]: "Posted: Oct 24, 2025"
+        - generic [ref=e93] [cursor=pointer]:
+          - generic [ref=e94]:
+            - generic [ref=e95]:
+              - generic [ref=e96]: HealthCare Plus
+              - generic [ref=e97]: healthcareplus.com
+            - generic [ref=e99]: critical
+          - generic [ref=e100]:
+            - generic [ref=e101]:
+              - generic [ref=e102]: 🏢
+              - generic [ref=e103]: Healthcare
+            - generic [ref=e104]:
+              - generic [ref=e105]: 📊
+              - generic [ref=e106]: Critical - 500,000+ patient records
+          - generic [ref=e107]: Regional healthcare provider with 15 hospitals. HIPAA-protected patient data compromised.
+          - generic [ref=e108]:
+            - generic [ref=e109]:
+              - generic [ref=e110]: 🦠
+              - generic [ref=e111]: Cl0p
+            - generic [ref=e112]: "Posted: Oct 19, 2025"
+  - contentinfo [ref=e113]:
+    - generic [ref=e114]:
+      - generic [ref=e115]:
+        - paragraph [ref=e116]: WatchLockAI
+        - paragraph [ref=e117]: Enterprise-grade, open-source threat intelligence platform for security operations centers, threat intelligence teams, and incident response professionals.
+      - generic [ref=e118]:
+        - link "GitHub" [ref=e119] [cursor=pointer]:
+          - /url: https://github.com/tweakn74/APT-Tracker-MITRE-AIQ-Intel
+        - link "APT Profiles" [ref=e120] [cursor=pointer]:
+          - /url: apt-profiles.html
+        - link "Detections" [ref=e121] [cursor=pointer]:
+          - /url: detections.html
+        - link "Dark Web Intel" [ref=e122] [cursor=pointer]:
+          - /url: dark-web-intel.html
+```

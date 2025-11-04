@@ -50,17 +50,136 @@
       --shadow-lg: 0 22px 45px rgba(0, 0, 0, 0.45);
     }
 
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
       background: var(--bg);
       color: var(--text-primary);
       line-height: 1.6;
+      min-height: 100vh;
       margin: 0;
-      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     h1, h2, h3, h4, h5, h6 {
       color: var(--text-primary);
+    }
+
+    /* Skip to content link for accessibility */
+    .skip-to-content {
+      position: absolute;
+      left: -9999px;
+      z-index: 999;
+      padding: 1rem;
+      background: var(--brand);
+      color: #000;
+      text-decoration: none;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+    }
+
+    .skip-to-content:focus {
+      left: 1rem;
+      top: 1rem;
+    }
+
+    /* Header Navigation */
+    .site-header {
+      background: var(--bg);
+      border-bottom: 1px solid var(--border-subtle);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .site-logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.2s;
+    }
+
+    .site-logo:hover {
+      color: var(--brand);
+    }
+
+    .site-logo-icon {
+      font-size: 1.5rem;
+    }
+
+    /* Mobile menu toggle */
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      padding: 0.5rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 1.25rem;
+      transition: all 0.2s;
+    }
+
+    .mobile-menu-toggle:hover {
+      border-color: var(--brand);
+      color: var(--brand);
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      list-style: none;
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.2s;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--brand);
+      background: rgba(90, 169, 255, 0.1);
+    }
+
+    .nav-link:focus {
+      outline: 2px solid var(--brand);
+      outline-offset: 2px;
+    }
+
+    /* Main Content */
+    .main-content {
+      flex: 1;
     }
 
     .detection-grid {
@@ -891,26 +1010,121 @@
     .stat-red { border-left: 4px solid #ef4444; }
     .stat-orange { border-left: 4px solid #f59e0b; }
     .stat-cyan { border-left: 4px solid #06b6d4; }
+
+    /* Mobile Responsive Styles */
+    @media (max-width: 768px) {
+      .mobile-menu-toggle {
+        display: block;
+      }
+
+      .nav-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--panel);
+        border-bottom: 1px solid var(--border-subtle);
+        flex-direction: column;
+        padding: 1rem;
+        gap: 0.5rem;
+      }
+
+      .nav-menu.active {
+        display: flex;
+      }
+
+      .nav-link {
+        width: 100%;
+        text-align: left;
+      }
+
+      .detection-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Footer Styles */
+    .site-footer {
+      background: var(--panel);
+      border-top: 1px solid var(--border-subtle);
+      padding: 2rem 0;
+      margin-top: 4rem;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-brand {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-description {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      max-width: 32rem;
+      line-height: 1.6;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s;
+    }
+
+    .footer-link:hover {
+      color: var(--brand);
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header class="header">
-      <div class="header-content">
-        <h1 class="logo">
-          <span class="logo-icon">🔒</span>
-          WatchLockAI - Detection Engineering
-        </h1>
-        <p class="tagline">SOC-Ready Detection Rules Mapped to MITRE ATT&CK</p>
-      </div>
-    </header>
+  <a href="#main" class="skip-to-content">Skip to content</a>
 
-    <div class="main-content">
-      <nav class="nav-menu nav-menu-spaced">
-        <a href="/" class="nav-link">Dashboard</a>
-        <a href="/apt-profiles.html" class="nav-link">APT Profiles</a>
-        <a href="/detections.html" class="nav-link active">Detection Engineering</a>
+  <!-- Header Navigation -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="site-logo">
+        <span class="site-logo-icon">🔒</span>
+        <span>WatchLockAI</span>
+      </a>
+
+      <button type="button" class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu">
+        ☰
+      </button>
+
+      <nav class="nav-menu" id="navMenu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="apt-profiles.html" class="nav-link">APT Profiles</a>
+        <a href="analytics.html" class="nav-link">Analytics</a>
+        <a href="dark-web-intel.html" class="nav-link">Dark Web Intel</a>
+        <a href="modern-apt-overview.html" class="nav-link">APT Overview</a>
+        <a href="executive-metrics.html" class="nav-link">Metrics</a>
+        <a href="detections.html" class="nav-link active">Detections</a>
       </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main" class="main-content">
+    <div class="container">
 
       <!-- Quick Stats Widget -->
       <div class="quick-stats-grid">
@@ -1107,7 +1321,23 @@
         </div>
       </div>
     </div>
-  </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div>
+        <p class="footer-brand">WatchLockAI</p>
+        <p class="footer-description">Enterprise-grade, open-source threat intelligence platform for security operations centers, threat intelligence teams, and incident response professionals.</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/tweakn74/APT-Tracker-MITRE-AIQ-Intel" class="footer-link">GitHub</a>
+        <a href="apt-profiles.html" class="footer-link">APT Profiles</a>
+        <a href="detections.html" class="footer-link">Detections</a>
+        <a href="dark-web-intel.html" class="footer-link">Dark Web Intel</a>
+      </div>
+    </div>
+  </footer>
 
   <!-- Detection Detail Modal -->
   <div id="detectionModal" class="modal">
@@ -1118,6 +1348,15 @@
   </div>
 
   <script type="module" src="/src/detections.js"></script>
+  <script>
+    // Mobile menu toggle
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const navMenu = document.getElementById('navMenu');
+
+    mobileMenuToggle.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+  </script>
 </body>
 </html>
 
