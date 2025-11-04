@@ -15,423 +15,417 @@
           - /url: index.html
         - link "APT Profiles" [ref=e10] [cursor=pointer]:
           - /url: apt-profiles.html
-        - link "Analytics" [ref=e11] [cursor=pointer]:
-          - /url: analytics.html
-        - link "Dark Web Intel" [ref=e12] [cursor=pointer]:
+        - link "Dark Web Intel" [ref=e11] [cursor=pointer]:
           - /url: dark-web-intel.html
-        - link "APT Overview" [ref=e13] [cursor=pointer]:
-          - /url: modern-apt-overview.html
-        - link "Metrics" [ref=e14] [cursor=pointer]:
-          - /url: executive-metrics.html
-        - link "Detections" [ref=e15] [cursor=pointer]:
+        - link "Detections" [ref=e12] [cursor=pointer]:
           - /url: detections.html
-  - main [ref=e16]:
-    - generic [ref=e17]:
-      - generic [ref=e18]:
-        - generic [ref=e19] [cursor=pointer]:
-          - generic [ref=e20]: 🎯
-          - generic [ref=e21]: "8"
-          - generic [ref=e22]: APT Groups
-        - generic [ref=e23] [cursor=pointer]:
-          - generic [ref=e24]: 🌍
-          - generic [ref=e25]: "6"
-          - generic [ref=e26]: Countries
-        - generic [ref=e27] [cursor=pointer]:
-          - generic [ref=e28]: 🛡️
-          - generic [ref=e29]: "15"
-          - generic [ref=e30]: Detections
-        - generic [ref=e31] [cursor=pointer]:
-          - generic [ref=e32]: 🔴
-          - generic [ref=e33]: "5"
-          - generic [ref=e34]: Critical
-        - generic [ref=e35] [cursor=pointer]:
-          - generic [ref=e36]: 🟠
-          - generic [ref=e37]: "9"
-          - generic [ref=e38]: High
-        - generic [ref=e39] [cursor=pointer]:
-          - generic [ref=e40]: 📊
-          - generic [ref=e41]: "22"
-          - generic [ref=e42]: Techniques
-      - generic [ref=e43]:
-        - generic [ref=e44]:
-          - generic [ref=e45]:
-            - generic [ref=e46]: 📊
+  - main [ref=e13]:
+    - generic [ref=e14]:
+      - generic [ref=e15]:
+        - generic [ref=e16] [cursor=pointer]:
+          - generic [ref=e17]: 🎯
+          - generic [ref=e18]: "8"
+          - generic [ref=e19]: APT Groups
+        - generic [ref=e20] [cursor=pointer]:
+          - generic [ref=e21]: 🌍
+          - generic [ref=e22]: "6"
+          - generic [ref=e23]: Countries
+        - generic [ref=e24] [cursor=pointer]:
+          - generic [ref=e25]: 🛡️
+          - generic [ref=e26]: "15"
+          - generic [ref=e27]: Detections
+        - generic [ref=e28] [cursor=pointer]:
+          - generic [ref=e29]: 🔴
+          - generic [ref=e30]: "5"
+          - generic [ref=e31]: Critical
+        - generic [ref=e32] [cursor=pointer]:
+          - generic [ref=e33]: 🟠
+          - generic [ref=e34]: "9"
+          - generic [ref=e35]: High
+        - generic [ref=e36] [cursor=pointer]:
+          - generic [ref=e37]: 📊
+          - generic [ref=e38]: "22"
+          - generic [ref=e39]: Techniques
+      - generic [ref=e40]:
+        - generic [ref=e41]:
+          - generic [ref=e42]:
+            - generic [ref=e43]: 📊
             - text: Analytics Dashboard
-          - generic [ref=e47]:
-            - button "7 Days" [ref=e48] [cursor=pointer]
-            - button "30 Days" [ref=e49] [cursor=pointer]
-            - button "90 Days" [ref=e50] [cursor=pointer]
-        - generic [ref=e51]:
-          - generic [ref=e52]:
-            - generic [ref=e54]:
-              - generic [ref=e55]: 📈 Detection Trends
-              - generic [ref=e56]: Detections triggered over time
-            - img [ref=e58]:
-              - generic [ref=e59]: "23"
-              - generic [ref=e60]: "18"
-              - generic [ref=e61]: "14"
-              - generic [ref=e62]: "9"
-              - generic [ref=e63]: "5"
-              - generic [ref=e64]: "0"
-              - generic [ref=e158]: Oct 5
-              - generic [ref=e159]: Oct 10
-              - generic [ref=e160]: Oct 15
-              - generic [ref=e161]: Oct 20
-              - generic [ref=e162]: Oct 25
-              - generic [ref=e163]: Oct 30
-              - generic [ref=e164]: Nov 3
-          - generic [ref=e165]:
-            - generic [ref=e167]:
-              - generic [ref=e168]: 🎯 Severity Distribution
-              - generic [ref=e169]: Detections by severity level
-            - generic [ref=e171]:
-              - generic [ref=e172]:
-                - img [ref=e173]
-                - generic [ref=e177]:
-                  - generic [ref=e178]: "15"
-                  - generic [ref=e179]: Total
-              - generic [ref=e180]:
-                - generic [ref=e181] [cursor=pointer]:
-                  - generic [ref=e183]: Critical
-                  - generic [ref=e184]: 5 (33.3%)
-                - generic [ref=e185] [cursor=pointer]:
-                  - generic [ref=e187]: High
-                  - generic [ref=e188]: 9 (60.0%)
-                - generic [ref=e189] [cursor=pointer]:
-                  - generic [ref=e191]: Medium
-                  - generic [ref=e192]: 1 (6.7%)
-          - generic [ref=e193]:
-            - generic [ref=e195]:
-              - generic [ref=e196]: 💻 Platform Coverage
-              - generic [ref=e197]: Detections by platform
-            - generic [ref=e200]:
-              - generic [ref=e201]: Splunk
-              - generic [ref=e204]: "15"
-          - generic [ref=e205]:
-            - generic [ref=e207]:
-              - generic [ref=e208]: 🔥 Top Triggered Detections
-              - generic [ref=e209]: Most active rules (last 30 days)
-            - table [ref=e211]:
-              - rowgroup [ref=e212]:
-                - row "Detection Triggers Severity Last Triggered" [ref=e213]:
-                  - cell "Detection" [ref=e214]
-                  - cell "Triggers" [ref=e215]
-                  - cell "Severity" [ref=e216]
-                  - cell "Last Triggered" [ref=e217]
-              - rowgroup [ref=e218]:
-                - row "Suspicious Scheduled Task Creation 516 HIGH Oct 22" [ref=e219]:
-                  - cell "Suspicious Scheduled Task Creation" [ref=e220]
-                  - cell "516" [ref=e221]
-                  - cell "HIGH" [ref=e222]
-                  - cell "Oct 22" [ref=e223]
-                - row "Impossible Travel Alert Risk Fusion 499 HIGH Oct 13" [ref=e224]:
-                  - cell "Impossible Travel Alert Risk Fusion" [ref=e225]
-                  - cell "499" [ref=e226]
-                  - cell "HIGH" [ref=e227]
-                  - cell "Oct 13" [ref=e228]
-                - row "Suspicious Registry Run Key Modification 444 MEDIUM Oct 25" [ref=e229]:
-                  - cell "Suspicious Registry Run Key Modification" [ref=e230]
-                  - cell "444" [ref=e231]
-                  - cell "MEDIUM" [ref=e232]
-                  - cell "Oct 25" [ref=e233]
-                - row "Kerberoasting Attack Detection 435 HIGH Oct 25" [ref=e234]:
-                  - cell "Kerberoasting Attack Detection" [ref=e235]
-                  - cell "435" [ref=e236]
-                  - cell "HIGH" [ref=e237]
-                  - cell "Oct 25" [ref=e238]
-                - row "Suspicious WMI Event Subscription Persistence 422 HIGH 5 days ago" [ref=e239]:
-                  - cell "Suspicious WMI Event Subscription Persistence" [ref=e240]
-                  - cell "422" [ref=e241]
-                  - cell "HIGH" [ref=e242]
-                  - cell "5 days ago" [ref=e243]
-      - generic [ref=e244]:
+          - generic [ref=e44]:
+            - button "7 Days" [ref=e45] [cursor=pointer]
+            - button "30 Days" [ref=e46] [cursor=pointer]
+            - button "90 Days" [ref=e47] [cursor=pointer]
+        - generic [ref=e48]:
+          - generic [ref=e49]:
+            - generic [ref=e51]:
+              - generic [ref=e52]: 📈 Detection Trends
+              - generic [ref=e53]: Detections triggered over time
+            - img [ref=e55]:
+              - generic [ref=e56]: "24"
+              - generic [ref=e57]: "19"
+              - generic [ref=e58]: "14"
+              - generic [ref=e59]: "10"
+              - generic [ref=e60]: "5"
+              - generic [ref=e61]: "0"
+              - generic [ref=e155]: Oct 5
+              - generic [ref=e156]: Oct 10
+              - generic [ref=e157]: Oct 15
+              - generic [ref=e158]: Oct 20
+              - generic [ref=e159]: Oct 25
+              - generic [ref=e160]: Oct 30
+              - generic [ref=e161]: Nov 3
+          - generic [ref=e162]:
+            - generic [ref=e164]:
+              - generic [ref=e165]: 🎯 Severity Distribution
+              - generic [ref=e166]: Detections by severity level
+            - generic [ref=e168]:
+              - generic [ref=e169]:
+                - img [ref=e170]
+                - generic [ref=e174]:
+                  - generic [ref=e175]: "15"
+                  - generic [ref=e176]: Total
+              - generic [ref=e177]:
+                - generic [ref=e178] [cursor=pointer]:
+                  - generic [ref=e180]: Critical
+                  - generic [ref=e181]: 5 (33.3%)
+                - generic [ref=e182] [cursor=pointer]:
+                  - generic [ref=e184]: High
+                  - generic [ref=e185]: 9 (60.0%)
+                - generic [ref=e186] [cursor=pointer]:
+                  - generic [ref=e188]: Medium
+                  - generic [ref=e189]: 1 (6.7%)
+          - generic [ref=e190]:
+            - generic [ref=e192]:
+              - generic [ref=e193]: 💻 Platform Coverage
+              - generic [ref=e194]: Detections by platform
+            - generic [ref=e197]:
+              - generic [ref=e198]: Splunk
+              - generic [ref=e201]: "15"
+          - generic [ref=e202]:
+            - generic [ref=e204]:
+              - generic [ref=e205]: 🔥 Top Triggered Detections
+              - generic [ref=e206]: Most active rules (last 30 days)
+            - table [ref=e208]:
+              - rowgroup [ref=e209]:
+                - row "Detection Triggers Severity Last Triggered" [ref=e210]:
+                  - cell "Detection" [ref=e211]
+                  - cell "Triggers" [ref=e212]
+                  - cell "Severity" [ref=e213]
+                  - cell "Last Triggered" [ref=e214]
+              - rowgroup [ref=e215]:
+                - row "PowerShell Empire C2 Beacon Detection 526 CRITICAL Oct 19" [ref=e216]:
+                  - cell "PowerShell Empire C2 Beacon Detection" [ref=e217]
+                  - cell "526" [ref=e218]
+                  - cell "CRITICAL" [ref=e219]
+                  - cell "Oct 19" [ref=e220]
+                - row "Mailbox Forwarding Rule Exfiltration Detector 513 CRITICAL Oct 11" [ref=e221]:
+                  - cell "Mailbox Forwarding Rule Exfiltration Detector" [ref=e222]
+                  - cell "513" [ref=e223]
+                  - cell "CRITICAL" [ref=e224]
+                  - cell "Oct 11" [ref=e225]
+                - row "Mimikatz Credential Dumping Detection 440 CRITICAL Yesterday" [ref=e226]:
+                  - cell "Mimikatz Credential Dumping Detection" [ref=e227]
+                  - cell "440" [ref=e228]
+                  - cell "CRITICAL" [ref=e229]
+                  - cell "Yesterday" [ref=e230]
+                - row "Suspicious RDP Lateral Movement 302 HIGH 5 days ago" [ref=e231]:
+                  - cell "Suspicious RDP Lateral Movement" [ref=e232]
+                  - cell "302" [ref=e233]
+                  - cell "HIGH" [ref=e234]
+                  - cell "5 days ago" [ref=e235]
+                - row "Suspicious OAuth Application Consent 302 HIGH Oct 17" [ref=e236]:
+                  - cell "Suspicious OAuth Application Consent" [ref=e237]
+                  - cell "302" [ref=e238]
+                  - cell "HIGH" [ref=e239]
+                  - cell "Oct 17" [ref=e240]
+      - generic [ref=e241]:
+        - generic [ref=e242]:
+          - button "Detection Catalog" [ref=e243] [cursor=pointer]
+          - button "MITRE Coverage" [ref=e244] [cursor=pointer]
         - generic [ref=e245]:
-          - button "Detection Catalog" [ref=e246] [cursor=pointer]
-          - button "MITRE Coverage" [ref=e247] [cursor=pointer]
-        - generic [ref=e248]:
-          - generic [ref=e249]:
+          - generic [ref=e246]:
+            - generic [ref=e247] [cursor=pointer]:
+              - generic [ref=e248]: "15"
+              - generic [ref=e249]: Total Detections
             - generic [ref=e250] [cursor=pointer]:
-              - generic [ref=e251]: "15"
-              - generic [ref=e252]: Total Detections
+              - generic [ref=e251]: "5"
+              - generic [ref=e252]: Critical
             - generic [ref=e253] [cursor=pointer]:
-              - generic [ref=e254]: "5"
-              - generic [ref=e255]: Critical
+              - generic [ref=e254]: "9"
+              - generic [ref=e255]: High
             - generic [ref=e256] [cursor=pointer]:
-              - generic [ref=e257]: "9"
-              - generic [ref=e258]: High
-            - generic [ref=e259] [cursor=pointer]:
-              - generic [ref=e260]: "22"
-              - generic [ref=e261]: Techniques Covered
-          - generic [ref=e262]:
+              - generic [ref=e257]: "22"
+              - generic [ref=e258]: Techniques Covered
+          - generic [ref=e259]:
+            - generic [ref=e260]:
+              - generic [ref=e261]: Search
+              - textbox "Search detections..." [ref=e262]
             - generic [ref=e263]:
-              - generic [ref=e264]: Search
-              - textbox "Search detections..." [ref=e265]
-            - generic [ref=e266]:
-              - generic [ref=e267]: Severity
-              - combobox "Severity" [ref=e268]:
+              - generic [ref=e264]: Severity
+              - combobox "Severity" [ref=e265]:
                 - option "All Severities" [selected]
                 - option "Critical"
                 - option "High"
                 - option "Medium"
                 - option "Low"
-            - generic [ref=e269]:
-              - generic [ref=e270]: Status
-              - combobox "Status" [ref=e271]:
+            - generic [ref=e266]:
+              - generic [ref=e267]: Status
+              - combobox "Status" [ref=e268]:
                 - option "All Status" [selected]
                 - option "Stable"
                 - option "Preview"
                 - option "Experimental"
-            - generic [ref=e272]:
-              - generic [ref=e273]: Platform
-              - combobox "Platform" [ref=e274]:
+            - generic [ref=e269]:
+              - generic [ref=e270]: Platform
+              - combobox "Platform" [ref=e271]:
                 - option "All Platforms" [selected]
                 - option "Splunk"
-          - generic [ref=e275]:
-            - generic [ref=e276] [cursor=pointer]:
-              - generic [ref=e277]:
-                - generic [ref=e278]:
-                  - generic [ref=e279]: Mailbox Forwarding Rule Exfiltration Detector
-                  - generic [ref=e280]: DET-0001
-                - generic [ref=e281]: CRITICAL
-              - generic [ref=e282]:
-                - generic [ref=e284]: stable
-                - generic [ref=e286]: Splunk
-                - generic [ref=e288]: "FP: low"
-              - generic [ref=e289]: Detects creation of mailbox forwarding rules that redirect emails to external domains. This is a common data exfiltration technique used by attackers after compromising an account.
-              - generic [ref=e290]:
-                - generic [ref=e291]: 🎯 MITRE ATT&CK Techniques
-                - generic [ref=e292]:
-                  - generic "Email Forwarding Rule - Collection" [ref=e293]: T1114.003
-                  - generic "Exfiltration Over Unencrypted/Obfuscated Non-C2 Protocol - Exfiltration" [ref=e294]: T1048.003
-            - generic [ref=e295] [cursor=pointer]:
-              - generic [ref=e296]:
-                - generic [ref=e297]:
-                  - generic [ref=e298]: Impossible Travel Alert Risk Fusion
-                  - generic [ref=e299]: DET-0002
-                - generic [ref=e300]: HIGH
-              - generic [ref=e301]:
-                - generic [ref=e303]: stable
-                - generic [ref=e305]: Splunk
-                - generic [ref=e307]: "FP: medium"
-              - generic [ref=e308]: Detects impossible travel scenarios where a user authenticates from two geographically distant locations in a timeframe that would require physically impossible travel speeds (>500 mph).
-              - generic [ref=e309]:
-                - generic [ref=e310]: 🎯 MITRE ATT&CK Techniques
-                - generic [ref=e311]:
-                  - generic "Valid Accounts - Initial Access" [ref=e312]: T1078
-                  - generic "Cloud Accounts - Persistence" [ref=e313]: T1078.004
-            - generic [ref=e314] [cursor=pointer]:
-              - generic [ref=e315]:
-                - generic [ref=e316]:
-                  - generic [ref=e317]: PowerShell Empire C2 Beacon Detection
-                  - generic [ref=e318]: DET-0003
-                - generic [ref=e319]: CRITICAL
-              - generic [ref=e320]:
-                - generic [ref=e322]: stable
-                - generic [ref=e324]: Splunk
-                - generic [ref=e326]: "FP: low"
-              - generic [ref=e327]: Detects PowerShell Empire command and control beaconing activity by identifying suspicious PowerShell script block patterns commonly used by Empire agents.
-              - generic [ref=e328]:
-                - generic [ref=e329]: 🎯 MITRE ATT&CK Techniques
-                - generic [ref=e330]:
-                  - generic "PowerShell - Execution" [ref=e331]: T1059.001
-                  - generic "Web Protocols - Command and Control" [ref=e332]: T1071.001
-                  - generic "Obfuscated Files or Information - Defense Evasion" [ref=e333]: T1027
-            - generic [ref=e334] [cursor=pointer]:
-              - generic [ref=e335]:
-                - generic [ref=e336]:
-                  - generic [ref=e337]: Mimikatz Credential Dumping Detection
-                  - generic [ref=e338]: DET-0004
-                - generic [ref=e339]: CRITICAL
-              - generic [ref=e340]:
-                - generic [ref=e342]: stable
-                - generic [ref=e344]: Splunk
-                - generic [ref=e346]: "FP: low"
-              - generic [ref=e347]: Detects attempts to access LSASS process memory, a strong indicator of credential dumping tools like Mimikatz being used to extract passwords and hashes.
-              - generic [ref=e348]:
-                - generic [ref=e349]: 🎯 MITRE ATT&CK Techniques
-                - generic [ref=e350]:
-                  - generic "LSASS Memory - Credential Access" [ref=e351]: T1003.001
-                  - generic "OS Credential Dumping - Credential Access" [ref=e352]: T1003
-            - generic [ref=e353] [cursor=pointer]:
-              - generic [ref=e354]:
-                - generic [ref=e355]:
-                  - generic [ref=e356]: Suspicious Scheduled Task Creation
-                  - generic [ref=e357]: DET-0005
-                - generic [ref=e358]: HIGH
-              - generic [ref=e359]:
-                - generic [ref=e361]: stable
-                - generic [ref=e363]: Splunk
-                - generic [ref=e365]: "FP: medium"
-              - generic [ref=e366]: Detects creation of scheduled tasks that execute suspicious binaries commonly abused for persistence and execution, such as PowerShell, cmd.exe, or script interpreters.
-              - generic [ref=e367]:
-                - generic [ref=e368]: 🎯 MITRE ATT&CK Techniques
-                - generic [ref=e369]:
-                  - generic "Scheduled Task - Persistence" [ref=e370]: T1053.005
-                  - generic "Scheduled Task - Execution" [ref=e371]: T1053.005
-            - generic [ref=e372] [cursor=pointer]:
-              - generic [ref=e373]:
-                - generic [ref=e374]:
-                  - generic [ref=e375]: Ransomware File Encryption Activity
-                  - generic [ref=e376]: DET-0006
-                - generic [ref=e377]: CRITICAL
-              - generic [ref=e378]:
-                - generic [ref=e380]: stable
-                - generic [ref=e382]: Splunk
-                - generic [ref=e384]: "FP: low"
-              - generic [ref=e385]: Detects mass file encryption activity characteristic of ransomware by monitoring for rapid creation of files with suspicious extensions or ransom note filenames.
-              - generic [ref=e386]:
-                - generic [ref=e387]: 🎯 MITRE ATT&CK Techniques
-                - generic [ref=e388]:
-                  - generic "Data Encrypted for Impact - Impact" [ref=e389]: T1486
-                  - generic "Inhibit System Recovery - Impact" [ref=e390]: T1490
-            - generic [ref=e391] [cursor=pointer]:
-              - generic [ref=e392]:
-                - generic [ref=e393]:
-                  - generic [ref=e394]: Suspicious DNS Tunneling Activity
-                  - generic [ref=e395]: DET-0007
-                - generic [ref=e396]: HIGH
-              - generic [ref=e397]:
-                - generic [ref=e399]: stable
-                - generic [ref=e401]: Splunk
-                - generic [ref=e403]: "FP: medium"
-              - generic [ref=e404]: Detects DNS tunneling used for command and control or data exfiltration by identifying abnormally long DNS queries with high frequency from the same source.
-              - generic [ref=e405]:
-                - generic [ref=e406]: 🎯 MITRE ATT&CK Techniques
-                - generic [ref=e407]:
-                  - generic "DNS - Command and Control" [ref=e408]: T1071.004
-                  - generic "Exfiltration Over Unencrypted/Obfuscated Non-C2 Protocol - Exfiltration" [ref=e409]: T1048.003
-            - generic [ref=e410] [cursor=pointer]:
-              - generic [ref=e411]:
-                - generic [ref=e412]:
-                  - generic [ref=e413]: Kerberoasting Attack Detection
-                  - generic [ref=e414]: DET-0008
-                - generic [ref=e415]: HIGH
-              - generic [ref=e416]:
-                - generic [ref=e418]: stable
-                - generic [ref=e420]: Splunk
-                - generic [ref=e422]: "FP: low"
-              - generic [ref=e423]: Detects Kerberoasting attacks where adversaries request service tickets for accounts with SPNs to crack offline and obtain plaintext passwords.
-              - generic [ref=e424]:
-                - generic [ref=e425]: 🎯 MITRE ATT&CK Techniques
-                - generic "Kerberoasting - Credential Access" [ref=e427]: T1558.003
-            - generic [ref=e428] [cursor=pointer]:
-              - generic [ref=e429]:
-                - generic [ref=e430]:
-                  - generic [ref=e431]: Suspicious Process Injection via CreateRemoteThread
-                  - generic [ref=e432]: DET-0009
-                - generic [ref=e433]: HIGH
-              - generic [ref=e434]:
-                - generic [ref=e436]: stable
-                - generic [ref=e438]: Splunk
-                - generic [ref=e440]: "FP: medium"
-              - generic [ref=e441]: Detects process injection techniques using CreateRemoteThread API, commonly used by malware to inject code into legitimate processes for evasion.
-              - generic [ref=e442]:
-                - generic [ref=e443]: 🎯 MITRE ATT&CK Techniques
-                - generic [ref=e444]:
-                  - generic "Dynamic-link Library Injection - Defense Evasion" [ref=e445]: T1055.001
-                  - generic "Process Injection - Privilege Escalation" [ref=e446]: T1055
-            - generic [ref=e447] [cursor=pointer]:
-              - generic [ref=e448]:
-                - generic [ref=e449]:
-                  - generic [ref=e450]: Suspicious WMI Event Subscription Persistence
-                  - generic [ref=e451]: DET-0010
-                - generic [ref=e452]: HIGH
-              - generic [ref=e453]:
-                - generic [ref=e455]: stable
-                - generic [ref=e457]: Splunk
-                - generic [ref=e459]: "FP: low"
-              - generic [ref=e460]: Detects creation of WMI event subscriptions used for persistence, a technique that allows malware to execute code when specific system events occur.
-              - generic [ref=e461]:
-                - generic [ref=e462]: 🎯 MITRE ATT&CK Techniques
-                - generic [ref=e463]:
-                  - generic "Windows Management Instrumentation Event Subscription - Persistence" [ref=e464]: T1546.003
-                  - generic "Windows Management Instrumentation - Execution" [ref=e465]: T1047
-            - generic [ref=e466] [cursor=pointer]:
-              - generic [ref=e467]:
-                - generic [ref=e468]:
-                  - generic [ref=e469]: Suspicious RDP Lateral Movement
-                  - generic [ref=e470]: DET-0011
-                - generic [ref=e471]: HIGH
-              - generic [ref=e472]:
-                - generic [ref=e474]: stable
-                - generic [ref=e476]: Splunk
-                - generic [ref=e478]: "FP: medium"
-              - generic [ref=e479]: Detects lateral movement via RDP by identifying accounts authenticating to multiple systems in a short time period, indicative of adversary reconnaissance or spread.
-              - generic [ref=e480]:
-                - generic [ref=e481]: 🎯 MITRE ATT&CK Techniques
-                - generic "Remote Desktop Protocol - Lateral Movement" [ref=e483]: T1021.001
-            - generic [ref=e484] [cursor=pointer]:
-              - generic [ref=e485]:
-                - generic [ref=e486]:
-                  - generic [ref=e487]: Shadow Copy Deletion - Ransomware Indicator
-                  - generic [ref=e488]: DET-0012
-                - generic [ref=e489]: CRITICAL
-              - generic [ref=e490]:
-                - generic [ref=e492]: stable
-                - generic [ref=e494]: Splunk
-                - generic [ref=e496]: "FP: low"
-              - generic [ref=e497]: Detects deletion of Volume Shadow Copies, a common ransomware technique to prevent file recovery and maximize impact.
-              - generic [ref=e498]:
-                - generic [ref=e499]: 🎯 MITRE ATT&CK Techniques
-                - generic "Inhibit System Recovery - Impact" [ref=e501]: T1490
-            - generic [ref=e502] [cursor=pointer]:
-              - generic [ref=e503]:
-                - generic [ref=e504]:
-                  - generic [ref=e505]: Suspicious OAuth Application Consent
-                  - generic [ref=e506]: DET-0013
-                - generic [ref=e507]: HIGH
-              - generic [ref=e508]:
-                - generic [ref=e510]: stable
-                - generic [ref=e512]: Splunk
-                - generic [ref=e514]: "FP: medium"
-              - generic [ref=e515]: Detects users granting OAuth consent to applications with high-risk permissions, which could be used for data exfiltration or persistence.
-              - generic [ref=e516]:
-                - generic [ref=e517]: 🎯 MITRE ATT&CK Techniques
-                - generic [ref=e518]:
-                  - generic "Steal Application Access Token - Credential Access" [ref=e519]: T1528
-                  - generic "Cloud Accounts - Persistence" [ref=e520]: T1078.004
-            - generic [ref=e521] [cursor=pointer]:
-              - generic [ref=e522]:
-                - generic [ref=e523]:
-                  - generic [ref=e524]: Suspicious Service Installation
-                  - generic [ref=e525]: DET-0014
-                - generic [ref=e526]: HIGH
-              - generic [ref=e527]:
-                - generic [ref=e529]: stable
-                - generic [ref=e531]: Splunk
-                - generic [ref=e533]: "FP: medium"
-              - generic [ref=e534]: Detects installation of Windows services from suspicious locations or with generic names, often used by malware for persistence.
-              - generic [ref=e535]:
-                - generic [ref=e536]: 🎯 MITRE ATT&CK Techniques
-                - generic [ref=e537]:
-                  - generic "Windows Service - Persistence" [ref=e538]: T1543.003
-                  - generic "Windows Service - Privilege Escalation" [ref=e539]: T1543.003
-            - generic [ref=e540] [cursor=pointer]:
-              - generic [ref=e541]:
-                - generic [ref=e542]:
-                  - generic [ref=e543]: Suspicious Registry Run Key Modification
-                  - generic [ref=e544]: DET-0015
-                - generic [ref=e545]: MEDIUM
-              - generic [ref=e546]:
-                - generic [ref=e548]: stable
-                - generic [ref=e550]: Splunk
-                - generic [ref=e552]: "FP: medium"
-              - generic [ref=e553]: Detects modifications to Windows Run/RunOnce registry keys that execute suspicious binaries, a common persistence technique.
-              - generic [ref=e554]:
-                - generic [ref=e555]: 🎯 MITRE ATT&CK Techniques
-                - generic "Registry Run Keys / Startup Folder - Persistence" [ref=e557]: T1547.001
-  - contentinfo [ref=e558]:
-    - generic [ref=e559]:
+          - generic [ref=e272]:
+            - generic [ref=e273] [cursor=pointer]:
+              - generic [ref=e274]:
+                - generic [ref=e275]:
+                  - generic [ref=e276]: Mailbox Forwarding Rule Exfiltration Detector
+                  - generic [ref=e277]: DET-0001
+                - generic [ref=e278]: CRITICAL
+              - generic [ref=e279]:
+                - generic [ref=e281]: stable
+                - generic [ref=e283]: Splunk
+                - generic [ref=e285]: "FP: low"
+              - generic [ref=e286]: Detects creation of mailbox forwarding rules that redirect emails to external domains. This is a common data exfiltration technique used by attackers after compromising an account.
+              - generic [ref=e287]:
+                - generic [ref=e288]: 🎯 MITRE ATT&CK Techniques
+                - generic [ref=e289]:
+                  - generic "Email Forwarding Rule - Collection" [ref=e290]: T1114.003
+                  - generic "Exfiltration Over Unencrypted/Obfuscated Non-C2 Protocol - Exfiltration" [ref=e291]: T1048.003
+            - generic [ref=e292] [cursor=pointer]:
+              - generic [ref=e293]:
+                - generic [ref=e294]:
+                  - generic [ref=e295]: Impossible Travel Alert Risk Fusion
+                  - generic [ref=e296]: DET-0002
+                - generic [ref=e297]: HIGH
+              - generic [ref=e298]:
+                - generic [ref=e300]: stable
+                - generic [ref=e302]: Splunk
+                - generic [ref=e304]: "FP: medium"
+              - generic [ref=e305]: Detects impossible travel scenarios where a user authenticates from two geographically distant locations in a timeframe that would require physically impossible travel speeds (>500 mph).
+              - generic [ref=e306]:
+                - generic [ref=e307]: 🎯 MITRE ATT&CK Techniques
+                - generic [ref=e308]:
+                  - generic "Valid Accounts - Initial Access" [ref=e309]: T1078
+                  - generic "Cloud Accounts - Persistence" [ref=e310]: T1078.004
+            - generic [ref=e311] [cursor=pointer]:
+              - generic [ref=e312]:
+                - generic [ref=e313]:
+                  - generic [ref=e314]: PowerShell Empire C2 Beacon Detection
+                  - generic [ref=e315]: DET-0003
+                - generic [ref=e316]: CRITICAL
+              - generic [ref=e317]:
+                - generic [ref=e319]: stable
+                - generic [ref=e321]: Splunk
+                - generic [ref=e323]: "FP: low"
+              - generic [ref=e324]: Detects PowerShell Empire command and control beaconing activity by identifying suspicious PowerShell script block patterns commonly used by Empire agents.
+              - generic [ref=e325]:
+                - generic [ref=e326]: 🎯 MITRE ATT&CK Techniques
+                - generic [ref=e327]:
+                  - generic "PowerShell - Execution" [ref=e328]: T1059.001
+                  - generic "Web Protocols - Command and Control" [ref=e329]: T1071.001
+                  - generic "Obfuscated Files or Information - Defense Evasion" [ref=e330]: T1027
+            - generic [ref=e331] [cursor=pointer]:
+              - generic [ref=e332]:
+                - generic [ref=e333]:
+                  - generic [ref=e334]: Mimikatz Credential Dumping Detection
+                  - generic [ref=e335]: DET-0004
+                - generic [ref=e336]: CRITICAL
+              - generic [ref=e337]:
+                - generic [ref=e339]: stable
+                - generic [ref=e341]: Splunk
+                - generic [ref=e343]: "FP: low"
+              - generic [ref=e344]: Detects attempts to access LSASS process memory, a strong indicator of credential dumping tools like Mimikatz being used to extract passwords and hashes.
+              - generic [ref=e345]:
+                - generic [ref=e346]: 🎯 MITRE ATT&CK Techniques
+                - generic [ref=e347]:
+                  - generic "LSASS Memory - Credential Access" [ref=e348]: T1003.001
+                  - generic "OS Credential Dumping - Credential Access" [ref=e349]: T1003
+            - generic [ref=e350] [cursor=pointer]:
+              - generic [ref=e351]:
+                - generic [ref=e352]:
+                  - generic [ref=e353]: Suspicious Scheduled Task Creation
+                  - generic [ref=e354]: DET-0005
+                - generic [ref=e355]: HIGH
+              - generic [ref=e356]:
+                - generic [ref=e358]: stable
+                - generic [ref=e360]: Splunk
+                - generic [ref=e362]: "FP: medium"
+              - generic [ref=e363]: Detects creation of scheduled tasks that execute suspicious binaries commonly abused for persistence and execution, such as PowerShell, cmd.exe, or script interpreters.
+              - generic [ref=e364]:
+                - generic [ref=e365]: 🎯 MITRE ATT&CK Techniques
+                - generic [ref=e366]:
+                  - generic "Scheduled Task - Persistence" [ref=e367]: T1053.005
+                  - generic "Scheduled Task - Execution" [ref=e368]: T1053.005
+            - generic [ref=e369] [cursor=pointer]:
+              - generic [ref=e370]:
+                - generic [ref=e371]:
+                  - generic [ref=e372]: Ransomware File Encryption Activity
+                  - generic [ref=e373]: DET-0006
+                - generic [ref=e374]: CRITICAL
+              - generic [ref=e375]:
+                - generic [ref=e377]: stable
+                - generic [ref=e379]: Splunk
+                - generic [ref=e381]: "FP: low"
+              - generic [ref=e382]: Detects mass file encryption activity characteristic of ransomware by monitoring for rapid creation of files with suspicious extensions or ransom note filenames.
+              - generic [ref=e383]:
+                - generic [ref=e384]: 🎯 MITRE ATT&CK Techniques
+                - generic [ref=e385]:
+                  - generic "Data Encrypted for Impact - Impact" [ref=e386]: T1486
+                  - generic "Inhibit System Recovery - Impact" [ref=e387]: T1490
+            - generic [ref=e388] [cursor=pointer]:
+              - generic [ref=e389]:
+                - generic [ref=e390]:
+                  - generic [ref=e391]: Suspicious DNS Tunneling Activity
+                  - generic [ref=e392]: DET-0007
+                - generic [ref=e393]: HIGH
+              - generic [ref=e394]:
+                - generic [ref=e396]: stable
+                - generic [ref=e398]: Splunk
+                - generic [ref=e400]: "FP: medium"
+              - generic [ref=e401]: Detects DNS tunneling used for command and control or data exfiltration by identifying abnormally long DNS queries with high frequency from the same source.
+              - generic [ref=e402]:
+                - generic [ref=e403]: 🎯 MITRE ATT&CK Techniques
+                - generic [ref=e404]:
+                  - generic "DNS - Command and Control" [ref=e405]: T1071.004
+                  - generic "Exfiltration Over Unencrypted/Obfuscated Non-C2 Protocol - Exfiltration" [ref=e406]: T1048.003
+            - generic [ref=e407] [cursor=pointer]:
+              - generic [ref=e408]:
+                - generic [ref=e409]:
+                  - generic [ref=e410]: Kerberoasting Attack Detection
+                  - generic [ref=e411]: DET-0008
+                - generic [ref=e412]: HIGH
+              - generic [ref=e413]:
+                - generic [ref=e415]: stable
+                - generic [ref=e417]: Splunk
+                - generic [ref=e419]: "FP: low"
+              - generic [ref=e420]: Detects Kerberoasting attacks where adversaries request service tickets for accounts with SPNs to crack offline and obtain plaintext passwords.
+              - generic [ref=e421]:
+                - generic [ref=e422]: 🎯 MITRE ATT&CK Techniques
+                - generic "Kerberoasting - Credential Access" [ref=e424]: T1558.003
+            - generic [ref=e425] [cursor=pointer]:
+              - generic [ref=e426]:
+                - generic [ref=e427]:
+                  - generic [ref=e428]: Suspicious Process Injection via CreateRemoteThread
+                  - generic [ref=e429]: DET-0009
+                - generic [ref=e430]: HIGH
+              - generic [ref=e431]:
+                - generic [ref=e433]: stable
+                - generic [ref=e435]: Splunk
+                - generic [ref=e437]: "FP: medium"
+              - generic [ref=e438]: Detects process injection techniques using CreateRemoteThread API, commonly used by malware to inject code into legitimate processes for evasion.
+              - generic [ref=e439]:
+                - generic [ref=e440]: 🎯 MITRE ATT&CK Techniques
+                - generic [ref=e441]:
+                  - generic "Dynamic-link Library Injection - Defense Evasion" [ref=e442]: T1055.001
+                  - generic "Process Injection - Privilege Escalation" [ref=e443]: T1055
+            - generic [ref=e444] [cursor=pointer]:
+              - generic [ref=e445]:
+                - generic [ref=e446]:
+                  - generic [ref=e447]: Suspicious WMI Event Subscription Persistence
+                  - generic [ref=e448]: DET-0010
+                - generic [ref=e449]: HIGH
+              - generic [ref=e450]:
+                - generic [ref=e452]: stable
+                - generic [ref=e454]: Splunk
+                - generic [ref=e456]: "FP: low"
+              - generic [ref=e457]: Detects creation of WMI event subscriptions used for persistence, a technique that allows malware to execute code when specific system events occur.
+              - generic [ref=e458]:
+                - generic [ref=e459]: 🎯 MITRE ATT&CK Techniques
+                - generic [ref=e460]:
+                  - generic "Windows Management Instrumentation Event Subscription - Persistence" [ref=e461]: T1546.003
+                  - generic "Windows Management Instrumentation - Execution" [ref=e462]: T1047
+            - generic [ref=e463] [cursor=pointer]:
+              - generic [ref=e464]:
+                - generic [ref=e465]:
+                  - generic [ref=e466]: Suspicious RDP Lateral Movement
+                  - generic [ref=e467]: DET-0011
+                - generic [ref=e468]: HIGH
+              - generic [ref=e469]:
+                - generic [ref=e471]: stable
+                - generic [ref=e473]: Splunk
+                - generic [ref=e475]: "FP: medium"
+              - generic [ref=e476]: Detects lateral movement via RDP by identifying accounts authenticating to multiple systems in a short time period, indicative of adversary reconnaissance or spread.
+              - generic [ref=e477]:
+                - generic [ref=e478]: 🎯 MITRE ATT&CK Techniques
+                - generic "Remote Desktop Protocol - Lateral Movement" [ref=e480]: T1021.001
+            - generic [ref=e481] [cursor=pointer]:
+              - generic [ref=e482]:
+                - generic [ref=e483]:
+                  - generic [ref=e484]: Shadow Copy Deletion - Ransomware Indicator
+                  - generic [ref=e485]: DET-0012
+                - generic [ref=e486]: CRITICAL
+              - generic [ref=e487]:
+                - generic [ref=e489]: stable
+                - generic [ref=e491]: Splunk
+                - generic [ref=e493]: "FP: low"
+              - generic [ref=e494]: Detects deletion of Volume Shadow Copies, a common ransomware technique to prevent file recovery and maximize impact.
+              - generic [ref=e495]:
+                - generic [ref=e496]: 🎯 MITRE ATT&CK Techniques
+                - generic "Inhibit System Recovery - Impact" [ref=e498]: T1490
+            - generic [ref=e499] [cursor=pointer]:
+              - generic [ref=e500]:
+                - generic [ref=e501]:
+                  - generic [ref=e502]: Suspicious OAuth Application Consent
+                  - generic [ref=e503]: DET-0013
+                - generic [ref=e504]: HIGH
+              - generic [ref=e505]:
+                - generic [ref=e507]: stable
+                - generic [ref=e509]: Splunk
+                - generic [ref=e511]: "FP: medium"
+              - generic [ref=e512]: Detects users granting OAuth consent to applications with high-risk permissions, which could be used for data exfiltration or persistence.
+              - generic [ref=e513]:
+                - generic [ref=e514]: 🎯 MITRE ATT&CK Techniques
+                - generic [ref=e515]:
+                  - generic "Steal Application Access Token - Credential Access" [ref=e516]: T1528
+                  - generic "Cloud Accounts - Persistence" [ref=e517]: T1078.004
+            - generic [ref=e518] [cursor=pointer]:
+              - generic [ref=e519]:
+                - generic [ref=e520]:
+                  - generic [ref=e521]: Suspicious Service Installation
+                  - generic [ref=e522]: DET-0014
+                - generic [ref=e523]: HIGH
+              - generic [ref=e524]:
+                - generic [ref=e526]: stable
+                - generic [ref=e528]: Splunk
+                - generic [ref=e530]: "FP: medium"
+              - generic [ref=e531]: Detects installation of Windows services from suspicious locations or with generic names, often used by malware for persistence.
+              - generic [ref=e532]:
+                - generic [ref=e533]: 🎯 MITRE ATT&CK Techniques
+                - generic [ref=e534]:
+                  - generic "Windows Service - Persistence" [ref=e535]: T1543.003
+                  - generic "Windows Service - Privilege Escalation" [ref=e536]: T1543.003
+            - generic [ref=e537] [cursor=pointer]:
+              - generic [ref=e538]:
+                - generic [ref=e539]:
+                  - generic [ref=e540]: Suspicious Registry Run Key Modification
+                  - generic [ref=e541]: DET-0015
+                - generic [ref=e542]: MEDIUM
+              - generic [ref=e543]:
+                - generic [ref=e545]: stable
+                - generic [ref=e547]: Splunk
+                - generic [ref=e549]: "FP: medium"
+              - generic [ref=e550]: Detects modifications to Windows Run/RunOnce registry keys that execute suspicious binaries, a common persistence technique.
+              - generic [ref=e551]:
+                - generic [ref=e552]: 🎯 MITRE ATT&CK Techniques
+                - generic "Registry Run Keys / Startup Folder - Persistence" [ref=e554]: T1547.001
+  - contentinfo [ref=e555]:
+    - generic [ref=e556]:
+      - generic [ref=e557]:
+        - paragraph [ref=e558]: WatchLockAI
+        - paragraph [ref=e559]: Enterprise-grade, open-source threat intelligence platform for security operations centers, threat intelligence teams, and incident response professionals.
       - generic [ref=e560]:
-        - paragraph [ref=e561]: WatchLockAI
-        - paragraph [ref=e562]: Enterprise-grade, open-source threat intelligence platform for security operations centers, threat intelligence teams, and incident response professionals.
-      - generic [ref=e563]:
-        - link "GitHub" [ref=e564] [cursor=pointer]:
+        - link "GitHub" [ref=e561] [cursor=pointer]:
           - /url: https://github.com/tweakn74/APT-Tracker-MITRE-AIQ-Intel
-        - link "APT Profiles" [ref=e565] [cursor=pointer]:
+        - link "APT Profiles" [ref=e562] [cursor=pointer]:
           - /url: apt-profiles.html
-        - link "Detections" [ref=e566] [cursor=pointer]:
+        - link "Detections" [ref=e563] [cursor=pointer]:
           - /url: detections.html
-        - link "Dark Web Intel" [ref=e567] [cursor=pointer]:
+        - link "Dark Web Intel" [ref=e564] [cursor=pointer]:
           - /url: dark-web-intel.html
 ```
